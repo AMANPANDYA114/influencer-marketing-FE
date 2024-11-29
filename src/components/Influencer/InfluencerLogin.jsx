@@ -86,7 +86,7 @@ const InfluencerLogin = () => {
 
     // console.log("Hello");
     try {
-      const res = await axios.post('/influencer/influencerlogin', {
+      const res = await axios.post('https://server-side-influencer-1.onrender.com/influencer/influencerlogin', {
         ...values
       });
       const data = res.data;

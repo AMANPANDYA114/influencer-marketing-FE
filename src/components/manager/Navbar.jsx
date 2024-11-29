@@ -22,7 +22,7 @@ const Navbar = () => {
     const logout = async () => {
         try {
 
-            const res = await axios.get('/logout')
+            const res = await axios.get('https://server-side-influencer-1.onrender.com/logout')
             console.log(res.data);
             if (res.data.success == true) {
                 navigate('/');
