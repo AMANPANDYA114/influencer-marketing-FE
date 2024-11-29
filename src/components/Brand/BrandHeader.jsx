@@ -64,6 +64,7 @@ import logo from "../../Images/brand1.jpg";
 import { FiSettings } from "react-icons/fi";
 import { toast } from "react-toastify";
 
+
 const BrandHeader = (props) => {
   const navigate = useNavigate();
   
@@ -80,7 +81,7 @@ const BrandHeader = (props) => {
       uname: "Brand Name", // Dummy username
     });
   }, []);
-
+  
   return (
     <div className="h-20 flex items-center border-b-2 justify-between mx-20 w-[screen]">
       <nav className="">

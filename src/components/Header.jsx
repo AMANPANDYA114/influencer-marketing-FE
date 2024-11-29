@@ -14,9 +14,15 @@ const Header = () => {
         <div className=' h-20 justify-center flex font-black '>
             <div className='header-new w-5/6 bg-white-50 flex'>
                 <div className='logo' >
-                    <NavLink to="/">
-                        <img src={logo} className='h-20 pr-10'></img>
-                    </NavLink>
+                <NavLink to="/">
+                <img 
+  src="https://i.postimg.cc/dtNHgnZh/Litadzmedia-logoblack.webp" 
+  className="h-20 pr-10" 
+  alt="Logo" 
+  style={{ width: "120px", height:"40px" ,marginTop: "15px" }}  // Custom width in pixels
+/>
+
+</NavLink>
 
                 </div>
                 <nav className='menubar my-auto '>
