@@ -18,6 +18,7 @@ const InfluencerHome = () => {
     try {
       setloading(true);
       const res = await axios.get(`https://server-side-influencer-1.onrender.com/brand/getAllbrand${window.location.search}`);
+
       const data = res.data;
       // console.log(data)
       // if (data.success != true) {
