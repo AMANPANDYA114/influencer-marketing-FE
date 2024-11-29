@@ -24,7 +24,7 @@ const Navbar = () => {
     ];
 
     const getInfluencerData = async () => {
-        const res = await axios.get("influencer/getInfluencer");
+        const res = await axios.get("https://server-side-influencer-1.onrender.com/influencer/getInfluencer");
         const data = res.data;
         setuserdata(data.data);
     }

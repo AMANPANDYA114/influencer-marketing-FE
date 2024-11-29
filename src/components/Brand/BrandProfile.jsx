@@ -28,7 +28,7 @@ const BrandProfile = () => {
     console.log();
     try {
       setLoading(true)
-      const res = await axios.post('influencer/getconnectedinf', { id: brandData._id });
+      const res = await axios.post('https://server-side-influencer-1.onrender.com/influencer/getconnectedinf', { id: brandData._id });
       const data = res.data;
       console.log(data);
       setInfluencerData(data.data);
@@ -41,7 +41,7 @@ const BrandProfile = () => {
   const getBrandData = async () => {
     try {
 
-      const { data } = await axios.get("/brand/getBrandData");
+      const { data } = await axios.get("https://server-side-influencer-1.onrender.com/brand/getBrandData");
       // const data = res.data;
       // console.log(data);
       setbrandData(data.data);
@@ -64,7 +64,7 @@ const BrandProfile = () => {
     getConnectedInf();
   }, [brandData._id])
   const editprofile = () => {
-    navigate('/BrandProfileEdit', { state: brandData })
+    navigate('https://server-side-influencer-1.onrender.com/BrandProfileEdit', { state: brandData })
   }
 
   const images = brandData.images;

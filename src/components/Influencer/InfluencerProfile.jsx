@@ -29,7 +29,7 @@ const InfluencerProfile = () => {
 
   const getInfluencerData = async () => {
 
-    const res = await axios.get("influencer/getInfluencer");
+    const res = await axios.get("https://server-side-influencer-1.onrender.com/influencer/getInfluencer");
     const data = res.data;
     //   console.log("Logged in user is:- ");
     setuserdata(data.data)
@@ -41,7 +41,7 @@ const InfluencerProfile = () => {
     // console.log(userdata._id);
     try {
       setLoading(true)
-      const res = await axios.post('brand/getconnectedbrand', { id: userdata._id });
+      const res = await axios.post('https://server-side-influencer-1.onrender.com/brand/getconnectedbrand', { id: userdata._id });
       const data = res.data;
       console.log(data);
       setbrandData(data.data);
@@ -162,7 +162,7 @@ const InfluencerProfile = () => {
                         e.preventDefault();
                         console.log(adrequired);
                         try {
-                          const res = await axios.put('influencer/adsrequiredremove', userdata.email)
+                          const res = await axios.put('https://server-side-influencer-1.onrender.com/influencer/adsrequiredremove', userdata.email)
                           console.log(res);
                           const data = res.data;
                           if (data.success === true) {

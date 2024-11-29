@@ -72,7 +72,7 @@ const InfluencerProfileEdit = () => {
   const imagestore = async () => {
     try {
       setuserdata({ ...userdata, profile: url });
-      const res = await axios.put("/influencer/imageupload", {
+      const res = await axios.put("https://server-side-influencer-1.onrender.com/influencer/imageupload", {
         profile: url,
         type: 1,
       });
@@ -93,7 +93,7 @@ const InfluencerProfileEdit = () => {
   const dimagestore = async () => {
     try {
       setuserdata({ ...userdata, photo: durl });
-      const res = await axios.put("/influencer/imageupload", {
+      const res = await axios.put("https://server-side-influencer-1.onrender.com/influencer/imageupload", {
         photo: durl,
         type: 2,
       });
@@ -129,7 +129,7 @@ const InfluencerProfileEdit = () => {
     console.log(url);
 
     try {
-      const res = await axios.put("influencer/updateprofile", userdata);
+      const res = await axios.put("https://server-side-influencer-1.onrender.com/influencer/updateprofile", userdata);
       const data = res.data;
       // console.log(data);
       if (data.success == true) {

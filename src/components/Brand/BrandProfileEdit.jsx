@@ -90,7 +90,7 @@ const BrandProfileEdit = () => {
     console.log(url);
 
     try {
-      const res = await axios.put("brand/updateprofile", brandData);
+      const res = await axios.put("https://server-side-influencer-1.onrender.com/brand/updateprofile", brandData);
       const data = res.data;
       // console.log(data);
       if (data.success == true) {
@@ -109,7 +109,7 @@ const BrandProfileEdit = () => {
   const logostore = async () => {
     try {
       setbrandData({ ...brandData, logo: logourl });
-      const res = await axios.put("/brand/logoupload", {
+      const res = await axios.put("https://server-side-influencer-1.onrender.com/brand/logoupload", {
         logo: logourl,
         type: 1,
       });
@@ -130,7 +130,7 @@ const BrandProfileEdit = () => {
 
   const imagestore = async () => {
     try {
-      const res = await axios.put("/brand/imageuplaod", { image: url });
+      const res = await axios.put("https://server-side-influencer-1.onrender.com/brand/imageuplaod", { image: url });
       console.log(res.data);
       const data = res.data;
       // console.log(data);
@@ -149,7 +149,7 @@ const BrandProfileEdit = () => {
   const dimagestore = async () => {
     try {
       setbrandData({ ...brandData, photo1: durl });
-      const res = await axios.put("/brand/logoupload", {
+      const res = await axios.put("https://server-side-influencer-1.onrender.com/brand/logoupload", {
         photo1: durl,
         type: 2,
       });

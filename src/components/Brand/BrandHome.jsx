@@ -28,7 +28,7 @@ const BrandHome = () => {
   const callgetInfluencerPage = async () => {
     try {
      setloading(true)
-      const res = await axios.get(`influencer/getAllInfluencer${window.location.search}`);
+      const res = await axios.get(`https://server-side-influencer-1.onrender.com/influencer/getAllInfluencer${window.location.search}`);
 
       const data = res.data;
       // console.log(data)

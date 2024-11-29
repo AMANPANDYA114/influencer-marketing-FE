@@ -56,7 +56,7 @@ const BrandDetails = () => {
     // console.log(brandId);
     try {
 
-      const res = await axios.post("consignment/sendrequesttobrand", { brandId: brandData._id, email: email })
+      const res = await axios.post("https://server-side-influencer-1.onrender.com/consignment/sendrequesttobrand", { brandId: brandData._id, email: email })
       const data = res.data;
       console.log(data);
       console.log(data.status);
@@ -81,7 +81,7 @@ const BrandDetails = () => {
     console.log(id);
     try {
       setLoading(true)
-      const res = await axios.post('influencer/getconnectedinf', { id });
+      const res = await axios.post('https://server-side-influencer-1.onrender.com/influencer/getconnectedinf', { id });
       const data = res.data;
       // console.log(data);
       setInfluencerData(data.data);

@@ -19,7 +19,7 @@ const InfluencerConsignments = () => {
   const getconsignmets = async () => {
     try {
       setloading(true)
-      const res = await axios.get("consignment/getinfluencerconsignments");
+      const res = await axios.get("https://server-side-influencer-1.onrender.com/consignment/getinfluencerconsignments");
       const data = res.data;
       // console.log(data.cons);
       setprofilecard(data.data);

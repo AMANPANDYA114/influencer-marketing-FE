@@ -27,7 +27,7 @@ function ReqArrivalCard({ item, onData }) {
   } = item;
  
   const branddetailpage = () => {
-    navigate("/BrandDetails", { state: item });
+    navigate("https://server-side-influencer-1.onrender.com/BrandDetails", { state: item });
   };
 
   return (

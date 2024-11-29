@@ -21,7 +21,7 @@ const BrandArrivalRequest = () => {
   const getBrandRequest = async () => {
     try {
       setloading(true);
-      const res = await axios.get("consignment/getinfluencerreq");
+      const res = await axios.get("https://server-side-influencer-1.onrender.com/consignment/getinfluencerreq");
       const data = res.data;
       console.log(data.data);
       setprofilecard(data.data);
