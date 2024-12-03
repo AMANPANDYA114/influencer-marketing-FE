@@ -46,18 +46,44 @@ const Navbar = () => {
     ];
 
     // Logout function
+    // const logout = async () => {
+    //     try {
+    //         const res = await axios.get('https://server-side-influencer-1.onrender.com/logout');
+    //         console.log(res.data);
+    //         if (res.data.success === true) {
+    //             navigate('/');
+    //         }
+    //     } catch (err) {
+    //         console.log(err);
+    //     }
+    // };
+
+
     const logout = async () => {
         try {
+            // Make an API call to the server to logout the user
             const res = await axios.get('https://server-side-influencer-1.onrender.com/logout');
             console.log(res.data);
+    
             if (res.data.success === true) {
-                navigate('/');
+                // Clear localStorage and sessionStorage to remove any saved data
+                localStorage.clear();
+                sessionStorage.clear();
+    
+                // Optionally, clear specific data if you're saving some key-values:
+                // localStorage.removeItem("user_data");  // Example of specific removal
+    
+                // Remove any session-related state in the frontend (e.g., logged in user data)
+                // Reset any React state or context as needed
+    
+                // Redirect user to the login page (or home page)
+                navigate('/');  // Or you could redirect to a login page like navigate('/login')
             }
         } catch (err) {
             console.log(err);
         }
     };
-
+    
     const [open, setOpen] = useState(true);
 
     return (

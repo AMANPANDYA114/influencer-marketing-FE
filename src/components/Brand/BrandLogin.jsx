@@ -1,7 +1,6 @@
 
 
 
-
 import axios from 'axios';
 import { Formik } from 'formik';
 import React, { useState } from 'react';
@@ -65,7 +64,11 @@ const BrandLogin = () => {
       }),
     })
 
-    const data = await res.json();
+    const data = await res.json()
+console.log("brand id is ",data.brandId)
+    
+      console.log("brand id is ", data.brandId);  // Check if brandId exists
+      localStorage.setItem("brandID", data.brandId);
     console.log(data)
     if (res.status == 200) {
       toast.success(data.message);
@@ -88,6 +91,8 @@ const BrandLogin = () => {
         ...values
       });
       const data = res.data;
+      console.log("brand id is ", data.brandId);  // Check if brandId exists
+      localStorage.setItem("brandID", data.brandId);
       console.log(data)
       if (res.status == 200) {
         toast.success(data.message);
