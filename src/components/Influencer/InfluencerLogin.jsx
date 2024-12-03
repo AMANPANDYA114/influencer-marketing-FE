@@ -1,13 +1,13 @@
 
 
+import axios from 'axios';
+import { Formik } from 'formik';
 import React, { useState } from 'react';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
-import { Formik } from 'formik';
 import * as Yup from 'yup';
-import axios from 'axios';
 
 const InfluencerLogin = () => {
   const navigate = useNavigate();
@@ -32,6 +32,13 @@ const InfluencerLogin = () => {
         ...values
       });
       const data = res.data;
+      console.log("Session Influencer ID: ", data.user.influencerId);
+      if (data.user.influencerId) {
+        localStorage.setItem("influencerID", data.user.influencerId);
+        console.log("Influencer ID stored in localStorage.");
+      } else {
+        console.log("No influencerId found in session data.");
+      }
       
       if (res.status === 200) {
         // Store sessionId in sessionStorage after successful login
