@@ -1,10 +1,10 @@
 
 
-import React, { useState, useEffect } from "react";
-import Navbar from "./Navbar"; // Import the Navbar component
+import React, { useEffect, useState } from "react";
+import { FaTrashAlt } from "react-icons/fa"; // Import trash icon for delete button
 import { toast, ToastContainer } from "react-toastify"; // Import Toastify
 import "react-toastify/dist/ReactToastify.css"; // Import the toast CSS
-import { FaTrashAlt } from "react-icons/fa"; // Import trash icon for delete button
+import Navbar from "./Navbar"; // Import the Navbar component
 const CreateCampaign = () => {
   const [campaignData, setCampaignData] = useState({
     brandName: "",
@@ -178,7 +178,7 @@ const CreateCampaign = () => {
 
     try {
       // Sending POST request to the backend API with brandId as part of the URL
-      const response = await fetch(`http://localhost:8000/brand/createCampaign/${storedBrandId}`, {
+      const response = await fetch(`https://server-side-influencer-1.onrender.com/brand/createCampaign/${storedBrandId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json", // Ensure to send JSON data
