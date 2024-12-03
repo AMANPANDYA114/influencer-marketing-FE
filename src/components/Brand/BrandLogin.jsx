@@ -2,15 +2,14 @@
 
 
 
-import React, { useState } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
-import BrandHome from './BrandHome'
+import axios from 'axios';
+import { Formik } from 'formik';
+import React, { useState } from 'react';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
-import { Formik } from 'formik'
 import * as Yup from 'yup';
-import axios from 'axios';
 
 const BrandLogin = () => {
   const navigate = useNavigate();
@@ -55,7 +54,7 @@ const BrandLogin = () => {
       toast.error("Invalid Email");
       return;
     }
-    const res = await fetch("/brand/brandlogin", {
+    const res = await fetch("https://server-side-influencer-1.onrender.com/brand/brandlogin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -85,7 +84,7 @@ const BrandLogin = () => {
 
     // console.log("Hello");
     try {
-      const res = await axios.post('/brand/brandlogin', {
+      const res = await axios.post('https://server-side-influencer-1.onrender.com/brand/brandlogin', {
         ...values
       });
       const data = res.data;
