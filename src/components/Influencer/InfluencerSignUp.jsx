@@ -1,6 +1,7 @@
 
 
 
+
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -8,9 +9,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const InfluencerSignUp = () => {
   const [userdata, setuserdata] = useState({
-    fname: "", lname: "", phone: "", email: "", city: "", state: "", country: "", password: "",
-    gender: "", age: "", instagram: "", instagramURL: "", instagramFollowers: "", instagramEngagementRate: "",
-    facebook: "", facebookURL: "", facebookFollowers: "", facebookEngagementRate: "",
+    fullname: "", phone: "", email: "", password: "",
+    instagramURL: "", facebookURL: "", twitterURL: ""
   });
   const [cpass, setcpass] = useState(""); // Confirm password
   const [passwordType, setPasswordType] = useState("password");
@@ -43,17 +43,17 @@ const InfluencerSignUp = () => {
   const postData = async (e) => {
     e.preventDefault();
 
-    const { fname, phone, lname, email, city, state, country, gender, password, age, instagram, instagramURL, instagramFollowers, instagramEngagementRate, facebook, facebookURL, facebookFollowers, facebookEngagementRate } = userdata;
+    const { fullname, phone, email, password, instagramURL, facebookURL, twitterURL } = userdata;
 
     if (password === cpass) {
       try {
-        const res = await fetch("https://server-side-influencer-1.onrender.com/influencer/signup", {
+        const res = await fetch("https://server-side-influencer-1.onrender.com/influencer/signup", {  
           method: 'POST',
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            fname, phone, lname, email, city, state, country, gender, password, age, instagram, instagramURL, instagramFollowers, instagramEngagementRate, facebook, facebookURL, facebookFollowers, facebookEngagementRate
+            fullname, phone, email, password, instagramURL, facebookURL, twitterURL
           }),
         });
 
@@ -80,29 +80,23 @@ const InfluencerSignUp = () => {
       <div className="grid md:grid-cols-2 items-center gap-y-8 bg-white max-w-7xl w-full shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md overflow-hidden">
         <div className="max-md:order-1 flex flex-col justify-center sm:p-8 p-4 bg-gradient-to-r from-blue-600 to-blue-700 w-full h-full">
           <div className="max-w-md space-y-12 mx-auto">
-          <div>
-              <h4 className="text-white text-2xl font-semibold mt-4 text-center "  style={{ fontSize: "40px" }} >Create Your Account</h4> {/* Increased font size */}
-              <p className="text-lg text-white text-center mt-3"  style={{ fontSize: "20px" }}>Welcome to our registration page! Get started by creating your account.</p> {/* Increased font size */}
+            <div>
+              <h4 className="text-white text-2xl font-semibold mt-4 text-center " style={{ fontSize: "40px" }}>Create Your Account</h4> {/* Increased font size */}
+              <p className="text-lg text-white text-center mt-3" style={{ fontSize: "20px" }}>Welcome to our registration page! Get started by creating your account.</p> {/* Increased font size */}
             </div>
           </div>
         </div>
 
         <form className="sm:p-8 p-4 w-full overflow-y-auto max-h-[80vh]" onSubmit={postData}>
           <div className="mb-12">
-            <h3 className="text-blue-500 text-3xl font-extrabold max-md:text-center">Register As influencer</h3>
+            <h3 className="text-blue-500 text-3xl font-extrabold max-md:text-center">Register As Influencer</h3>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-6">
-            {/* First Name */}
+            {/* Full Name */}
             <div>
-              <label className="text-gray-800 text-sm mb-1 block">First Name</label>
-              <input name="fname" type="text" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-2 rounded-md outline-blue-500" placeholder="Enter first name" value={userdata.fname} onChange={handleInput} />
-            </div>
-
-            {/* Last Name */}
-            <div>
-              <label className="text-gray-800 text-sm mb-1 block">Last Name</label>
-              <input name="lname" type="text" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-2 rounded-md outline-blue-500" placeholder="Enter last name" value={userdata.lname} onChange={handleInput} />
+              <label className="text-gray-800 text-sm mb-1 block">Full Name</label>
+              <input name="fullname" type="text" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-2 rounded-md outline-blue-500" placeholder="Enter full name" value={userdata.fullname} onChange={handleInput} />
             </div>
 
             {/* Contact Number */}
@@ -117,77 +111,46 @@ const InfluencerSignUp = () => {
               <input name="email" type="email" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-2 rounded-md outline-blue-500" placeholder="Enter email" value={userdata.email} onChange={handleInput} />
             </div>
 
-            {/* City */}
-            <div>
-              <label className="text-gray-800 text-sm mb-1 block">City</label>
-              <input name="city" type="text" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-2 rounded-md outline-blue-500" placeholder="Enter city" value={userdata.city} onChange={handleInput} />
-            </div>
-
-            {/* State */}
-            <div>
-              <label className="text-gray-800 text-sm mb-1 block">State</label>
-              <input name="state" type="text" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-2 rounded-md outline-blue-500" placeholder="Enter state" value={userdata.state} onChange={handleInput} />
-            </div>
-
-            {/* Country */}
-            <div>
-              <label className="text-gray-800 text-sm mb-1 block">Country</label>
-              <input name="country" type="text" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-2 rounded-md outline-blue-500" placeholder="Enter country" value={userdata.country} onChange={handleInput} />
-            </div>
-
-            {/* Gender */}
-            <div>
-              <label className="text-gray-800 text-sm mb-1 block">Gender</label>
-              <div className="flex space-x-4">
-                <label>
-                  <input type="radio" name="gender" value="Male" checked={userdata.gender === "Male"} onChange={handleInput} />
-                  Male
-                </label>
-                <label>
-                  <input type="radio" name="gender" value="Female" checked={userdata.gender === "Female"} onChange={handleInput} />
-                  Female
-                </label>
-              </div>
-            </div>
-
-            {/* Age */}
-            <div>
-              <label className="text-gray-800 text-sm mb-1 block">Age</label>
-              <input name="age" type="number" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-2 rounded-md outline-blue-500" placeholder="Enter age" value={userdata.age} onChange={handleInput} />
-            </div>
-
-            {/* Instagram Handle */}
-            <div>
-              <label className="text-gray-800 text-sm mb-1 block">Instagram Handle</label>
-              <input name="instagram" type="text" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-2 rounded-md outline-blue-500" placeholder="Instagram Handle" value={userdata.instagram} onChange={handleInput} />
-            </div>
-
             {/* Instagram URL */}
             <div>
               <label className="text-gray-800 text-sm mb-1 block">Instagram URL</label>
               <input name="instagramURL" type="url" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-2 rounded-md outline-blue-500" placeholder="Instagram URL" value={userdata.instagramURL} onChange={handleInput} />
             </div>
 
-            {/* Instagram Followers */}
+            {/* Facebook URL */}
             <div>
-              <label className="text-gray-800 text-sm mb-1 block">Instagram Followers</label>
-              <input name="instagramFollowers" type="number" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-2 rounded-md outline-blue-500" placeholder="Instagram Followers Count" value={userdata.instagramFollowers} onChange={handleInput} />
+              <label className="text-gray-800 text-sm mb-1 block">Facebook URL</label>
+              <input name="facebookURL" type="url" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-2 rounded-md outline-blue-500" placeholder="Facebook URL" value={userdata.facebookURL} onChange={handleInput} />
             </div>
 
-            {/* Instagram Engagement Rate */}
+            {/* Twitter URL */}
             <div>
-              <label className="text-gray-800 text-sm mb-1 block">Instagram Engagement Rate</label>
-              <input name="instagramEngagementRate" type="text" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-2 rounded-md outline-blue-500" placeholder="Instagram Engagement Rate" value={userdata.instagramEngagementRate} onChange={handleInput} />
+              <label className="text-gray-800 text-sm mb-1 block">Twitter URL</label>
+              <input name="twitterURL" type="url" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-2 rounded-md outline-blue-500" placeholder="Twitter URL" value={userdata.twitterURL} onChange={handleInput} />
             </div>
 
-            {/* Submit Button */}
-            <div className="col-span-2">
-              <button type="submit" className="bg-blue-500 text-white text-sm px-6 py-3 rounded-md w-full">Sign Up</button>
+            {/* Password */}
+            <div className="mb-4">
+              <label className="text-gray-800 text-sm mb-1 block">Password</label>
+              <input name="password" type={passwordType} className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-2 rounded-md outline-blue-500" placeholder="Enter password" value={userdata.password} onChange={handleInput} />
+              <button type="button" onClick={togglePassword} className="text-blue-500 text-sm">Show Password</button>
             </div>
-          </div>
 
-          <div className="text-center mt-4">
-            <p>Already have an account? <Link to="/InfluencerLogin" className="text-blue-500">Log in here</Link></p>
+            {/* Confirm Password */}
+            <div className="mb-4">
+              <label className="text-gray-800 text-sm mb-1 block">Confirm Password</label>
+              <input name="cpass" type={passwordConfirmType} className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-2 rounded-md outline-blue-500" placeholder="Confirm password" value={cpass} onChange={handleConfirmPassword} />
+              <button type="button" onClick={toggleConfirmPassword} className="text-blue-500 text-sm">Show Password</button>
+            </div>
+
+            {/* Register Button */}
+            <div className="w-full flex justify-center">
+              <button type="submit" className="w-full md:w-auto text-white py-3 px-6 rounded-md bg-blue-600 hover:bg-blue-500 transition">Register</button>
+            </div>
+
+            <p className="text-sm text-gray-500 text-center mt-4">
+              Already have an account? <Link to="/InfluencerLogin" className="text-blue-500">Login here</Link>
+            </p>
           </div>
         </form>
       </div>
@@ -197,4 +160,3 @@ const InfluencerSignUp = () => {
 };
 
 export default InfluencerSignUp;
-
