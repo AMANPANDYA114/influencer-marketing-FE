@@ -57,7 +57,11 @@ const ManagerLogin = () => {
     })
 
     const data = await res.json();
-    console.log(data)
+
+    console.log("token is at manager ",data.token)
+    localStorage.setItem("mangertoken",data.token)
+   let a=  localStorage.getItem("mangertoken");
+   console.log("get manafer",a)
     if (res.status == 200) {
       toast.success(data.message);
       await sleep(1000)

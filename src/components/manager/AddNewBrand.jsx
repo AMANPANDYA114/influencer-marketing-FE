@@ -1,65 +1,80 @@
+
+
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import ManagerHeader from "./ManagerHeader";
 import Card from "./Card";
-import { Link, NavLink } from "react-router-dom";
 import Navbar from "./Navbar";
 
 const AddNewBrand = () => {
-
-  const [profilecard, setprofilecard] = useState([])
+  const [profilecard, setProfilecard] = useState([]);
   const navigate = useNavigate();
-  const sleep = ms => new Promise(r => setTimeout(r, ms));
 
   const callgetInfluencerPage = async () => {
+    // Retrieve the manager token from localStorage
+    const token = localStorage.getItem("mangertoken");
+
+    if (!token) {
+      // If no token found, redirect to login page
+      navigate("/ManagerLogin");
+      return;
+    }
 
     try {
+      // Fetch data with Authorization header containing the token
       const res = await fetch("https://server-side-influencer-1.onrender.com/manager/getunverifiedbrand", {
         method: "GET",
         headers: {
-          Accept: "application/json",
+          "Authorization": `Bearer ${token}`,  // Send the token as Bearer token
+          "Accept": "application/json",
           "Content-Type": "application/json",
         }
-        , credentials: "include"
       });
 
       const data = await res.json();
-      // console.log(data.data)
-      setprofilecard(data.data);
-      console.log(profilecard)
+      console.log(data);
+
+      if (data.success === false) {
+        // If the response indicates failure (e.g., invalid token), redirect to login
+        navigate("/ManagerLogin");
+      } else {
+        setProfilecard(data.data);  // Update the state with the response data
+      }
+
     } catch (err) {
-      //navigate("/BrandLogin");
-      console.log(err)
+      console.log("Error fetching data:", err);
+      navigate("/ManagerLogin");  // Redirect if there's an error (e.g., network issues)
     }
-  }
+  };
 
-
+  // Fetch data when the component mounts
   useEffect(() => {
     callgetInfluencerPage();
-  }, [])
-const removebrand=(id)=>{
-const updatedItems = profilecard.filter(item => item._id !== id);
-setprofilecard(updatedItems)
-}
+  }, []);
+
+  const removeBrand = (id) => {
+    const updatedItems = profilecard.filter(item => item._id !== id);
+    setProfilecard(updatedItems);  // Remove the brand from the state
+  };
+
   return (
     <div className="h-[screen] flex">
       <Navbar />
       <div className="ml-14 w-screen max-sm:ml-0">
         <ManagerHeader page="Add Brand" />
-       
         <div className="grid mt-10 px-10 grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {profilecard.length ==0 ?<h1 className="text-center text-3xl font-bold mt-10">No New Request </h1>:
+          {profilecard.length === 0 ? (
+            <h1 className="text-center text-3xl font-bold mt-10">No New Request</h1>
+          ) : (
             profilecard.map((item) => (
-
-              <Card item={item} onData={removebrand} />
-
-            ))}
+              <Card item={item} onData={removeBrand} key={item._id} />
+            ))
+          )}
         </div>
       </div>
-
-     
     </div>
   );
 };
 
 export default AddNewBrand;
+
