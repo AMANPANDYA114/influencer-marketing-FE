@@ -1,66 +1,49 @@
-// import axios from "axios";
-// import React, { useEffect, useState } from "react";
-// import { NavLink, useNavigate } from "react-router-dom";
-// import { FiSettings } from "react-icons/fi";
-
-// const InfluencerHeader = (props) => {
-//   const navigate = useNavigate();
-//   const [userdata, setuserdata] = useState([]);
-
-//   const getInfluencerData = async () => {
-//     const res = await axios.get("influencer/getInfluencer");
-//     const data = res.data;
-//     setuserdata(data.data)
-//     // console.log(userdata);
-//   }
-//   useEffect(() => {
-//     getInfluencerData()
-//   }, [])
-
-
-
-//   return (
-//     <div className="h-20 flex items-center justify-between mx-20 max-sm:mx-2 w-[screen] border-b-2 ">
-//       <nav className="">
-//         <p className="font-bold">Influencer  &gt; {props.page}</p>
-//       </nav>
-//       <div className="flex items-center">
-//         {/* <div className="flex mx-5">
-//           <FiSettings />
-//         </div> */}
-//         <NavLink to='/InfluencerProfile'>
-//           <div class="flex items-center space-x-4">
-//             <div className="">
-
-//               <img class="w-10 h-10 rounded-full group" src={userdata.profile} alt="" />
-//             </div>
-//             <div className="font-medium hover:text-blue-700 cursor-pointer ">
-//               <div>Hi,{userdata.fname}</div>
-//             </div>
-//           </div>
-//         </NavLink>
-//       </div>
-//     </div >
-//   );
-// };
-
-// export default InfluencerHeader;
-
-
-
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
 
 const InfluencerHeader = (props) => {
-  // Static mock data
-  const [userdata, setuserdata] = useState({
-    profile: "https://via.placeholder.com/150", // Placeholder image
-    fname: "John Doe", // Static first name
-  });
+  const navigate = useNavigate();
+  const [userdata, setuserdata] = useState([]);
+
+  // const getInfluencerData = async () => {
+  //   const res = await axios.get("influencer/getInfluencer");
+  //   const data = res.data;
+  //   setuserdata(data.data)
+  //   // console.log(userdata);
+  // }
+
+  const getInfluencerData = () => {
+    const influencerId = localStorage.getItem("influencerID");
+  
+    if (!influencerId) {
+      console.log("No influencer ID found in localStorage.");
+      return;
+    }
+  
+    // API call to fetch influencer data
+    fetch(`https://server-side-influencer-1.onrender.com/influencer/getInfluencer/${influencerId}`)
+      .then(response => response.json())
+      .then(data => {
+        setuserdata(data.data);
+        console.log("Logged in influencer data is:", data.data);
+      })
+      .catch(err => {
+        console.error("Error fetching influencer data:", err);
+      });
+  };
+  
+
+
+  useEffect(() => {
+    getInfluencerData()
+  }, [])
+
+
 
   return (
-    <div className="h-20 flex items-center justify-between mx-20 max-sm:mx-2 w-[screen] border-b-2">
+    <div className="h-20 flex items-center justify-between mx-20 max-sm:mx-2 w-[screen] border-b-2 ">
       <nav className="">
         <p className="font-bold">Influencer  &gt; {props.page}</p>
       </nav>
@@ -69,18 +52,21 @@ const InfluencerHeader = (props) => {
           <FiSettings />
         </div> */}
         <NavLink to='/InfluencerProfile'>
-          <div className="flex items-center space-x-4">
+          <div class="flex items-center space-x-4">
             <div className="">
-              <img className="w-10 h-10 rounded-full group" src={userdata.profile} alt="profile" />
+
+              <img class="w-10 h-10 rounded-full group" src={userdata.profile} alt="" />
             </div>
-            <div className="font-medium hover:text-blue-700 cursor-pointer">
-              <div>Hi, {userdata.fname}</div>
+            <div className="font-medium hover:text-blue-700 cursor-pointer ">
+              <div>Hi,{userdata.fname}</div>
             </div>
           </div>
         </NavLink>
       </div>
-    </div>
+    </div >
   );
 };
 
 export default InfluencerHeader;
+
+

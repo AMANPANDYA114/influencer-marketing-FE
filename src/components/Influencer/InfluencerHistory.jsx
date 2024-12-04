@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import Navbar from "./Navbar";
 import loader from "../../Images/loader.gif";
-
+import InfluencerHeader from "./InfluencerHeader";
 const InfluencerHistory = () => {
   const [campaigns, setCampaigns] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -108,7 +108,9 @@ const InfluencerHistory = () => {
   return (
     <div className="flex h-screen">
       <Navbar />
+   
       <div className="h-screen ml-14 max-sm:ml-0 w-screen">
+      <InfluencerHeader page="Profile" />
         <p className="text-center font-bold text-2xl">Join Campaigns</p>
 
         {loading ? (
