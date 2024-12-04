@@ -54,7 +54,7 @@ const InfluencerSignUp = () => {
     e.preventDefault();
     const { fname, phone, lname, email, city, state, gender, country, password, age, instagram, instagramURL, instagramFollowers, instagramEngagementRate, facebook, facebookURL, facebookFollowers, facebookEngagementRate, twitter, twitterURL, twitterFollowers, twitterEngagementRate } = userdata;
     if (cpass == password) {
-      const res = await fetch("/influencer/signup", {
+      const res = await fetch("https://server-side-influencer-1.onrender.com/influencer/signup", {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",

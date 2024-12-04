@@ -48,7 +48,7 @@ const ManagerSignUp = () => {
     e.preventDefault();
     const { name, email, password, phone } = userdata;
     if (password == cpass) {
-      const res = await fetch("/manager/signup", {
+      const res = await fetch("https://server-side-influencer-1.onrender.com/manager/signup", {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",

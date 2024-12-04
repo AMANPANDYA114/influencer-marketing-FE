@@ -46,7 +46,7 @@ const AddNewInfluencer = () => {
   const callgetInfluencerPage = async () => {
 
     try {
-      const res = await fetch("manager/getunverifiendInfluencer", {
+      const res = await fetch("https://server-side-influencer-1.onrender.com/manager/getunverifiedbrand/manager/getunverifiendInfluencer", {
         method: "GET",
         headers: {
           Accept: "application/json",

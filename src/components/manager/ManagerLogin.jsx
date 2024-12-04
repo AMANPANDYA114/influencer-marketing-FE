@@ -45,7 +45,7 @@ const ManagerLogin = () => {
       toast.error("Invalid Email");
       return;
     }
-    const res = await fetch("/manager/managerlogin", {
+    const res = await fetch("https://server-side-influencer-1.onrender.com/manager/managerlogin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -50,7 +50,7 @@ const BrandSignUp = () => {
     const { uname, shopName, brandType, phone, email, city, state, country,
       address, location, password,facebookUrl,instagramUrl } = userdata;
     if (password == cpass) {
-      const res = await fetch("/brand/signup", {
+      const res = await fetch("https://server-side-influencer-1.onrender.com/brand/signup", {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
