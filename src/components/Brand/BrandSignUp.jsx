@@ -3,6 +3,7 @@
 
 
 
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -85,8 +86,8 @@ const BrandSignUp = () => {
         <div className="max-md:order-1 flex flex-col justify-center sm:p-8 p-4 bg-gradient-to-r from-blue-600 to-blue-700 w-full h-full">
           <div className="max-w-md space-y-12 mx-auto">
             <div>
-              <h4 className="text-white text-2xl font-semibold">Create Your Account</h4> {/* Increased font size */}
-              <p className="text-lg text-white mt-2">Welcome to our registration page! Get started by creating your account.</p> {/* Increased font size */}
+              <h4 className="text-white text-2xl font-semibold mt-4 text-center "  style={{ fontSize: "40px" }} >Create Your Account</h4> {/* Increased font size */}
+              <p className="text-lg text-white text-center mt-3"  style={{ fontSize: "20px" }}>Welcome to our registration page! Get started by creating your account.</p> {/* Increased font size */}
             </div>
           </div>
         </div>
