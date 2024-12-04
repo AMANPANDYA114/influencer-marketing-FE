@@ -94,7 +94,7 @@ const BrandSignUp = () => {
 
         <form className="sm:p-8 p-4 w-full overflow-y-auto max-h-[80vh]" onSubmit={postData}>
           <div className="mb-12">
-            <h3 className="text-blue-500 text-3xl font-extrabold max-md:text-center">Register</h3>
+            <h3 className="text-blue-500 text-3xl font-extrabold max-md:text-center">Register As brand</h3>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-6">

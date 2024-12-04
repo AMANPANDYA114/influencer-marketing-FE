@@ -2,10 +2,9 @@
 
 
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link } from 'react-router-dom';
 
 const InfluencerSignUp = () => {
   const [userdata, setuserdata] = useState({
@@ -81,16 +80,16 @@ const InfluencerSignUp = () => {
       <div className="grid md:grid-cols-2 items-center gap-y-8 bg-white max-w-7xl w-full shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md overflow-hidden">
         <div className="max-md:order-1 flex flex-col justify-center sm:p-8 p-4 bg-gradient-to-r from-blue-600 to-blue-700 w-full h-full">
           <div className="max-w-md space-y-12 mx-auto">
-            <div>
-              <h4 className="text-white text-2xl font-semibold text-cente mb-3 mt-4" style={{ fontSize: "40px" }} >Create Your Account</h4>
-              <p className="text-lg text-white text-center mt-2"  style={{ fontSize: "20px" }}>Welcome to our registration page! Get started by creating your account.</p>
+          <div>
+              <h4 className="text-white text-2xl font-semibold mt-4 text-center "  style={{ fontSize: "40px" }} >Create Your Account</h4> {/* Increased font size */}
+              <p className="text-lg text-white text-center mt-3"  style={{ fontSize: "20px" }}>Welcome to our registration page! Get started by creating your account.</p> {/* Increased font size */}
             </div>
           </div>
         </div>
 
         <form className="sm:p-8 p-4 w-full overflow-y-auto max-h-[80vh]" onSubmit={postData}>
           <div className="mb-12">
-            <h3 className="text-blue-500 text-3xl font-extrabold max-md:text-center">Register</h3>
+            <h3 className="text-blue-500 text-3xl font-extrabold max-md:text-center">Register As influencer</h3>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-6">
