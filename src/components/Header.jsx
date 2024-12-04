@@ -1,6 +1,5 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import logo from '../Images/adcosign.png'
 const Header = () => {
     const langages = [
         'En1️⃣',
@@ -58,7 +57,7 @@ const Header = () => {
                                     <ul
                                         class="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute transition duration-150 ease-in-out origin-top min-w-32"
                                     >
-                                        <NavLink to='/ManagerSignUp'>
+                                        <NavLink to='/ManagerLogin'>
 
                                             <li class={menuitemCommoncss}>Work as manager</li>
                                         </NavLink>
