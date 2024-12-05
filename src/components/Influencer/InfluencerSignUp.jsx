@@ -2,6 +2,9 @@
 
 
 
+
+
+
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -10,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const InfluencerSignUp = () => {
   const [userdata, setuserdata] = useState({
     fullname: "", phone: "", email: "", password: "",
-    instagramURL: "", facebookURL: "", twitterURL: ""
+    instagramURL: "", facebookURL: "", twitterURL: "", city: "", state: "", country: ""
   });
   const [cpass, setcpass] = useState(""); // Confirm password
   const [passwordType, setPasswordType] = useState("password");
@@ -43,7 +46,7 @@ const InfluencerSignUp = () => {
   const postData = async (e) => {
     e.preventDefault();
 
-    const { fullname, phone, email, password, instagramURL, facebookURL, twitterURL } = userdata;
+    const { fullname, phone, email, password, instagramURL, facebookURL, twitterURL, city, state, country } = userdata;
 
     if (password === cpass) {
       try {
@@ -53,7 +56,7 @@ const InfluencerSignUp = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            fullname, phone, email, password, instagramURL, facebookURL, twitterURL
+            fullname, phone, email, password, instagramURL, facebookURL, twitterURL, city, state, country
           }),
         });
 
@@ -81,18 +84,18 @@ const InfluencerSignUp = () => {
         <div className="max-md:order-1 flex flex-col justify-center sm:p-8 p-4 bg-gradient-to-r from-blue-600 to-blue-700 w-full h-full">
           <div className="max-w-md space-y-12 mx-auto">
             <div>
-              <h4 className="text-white text-2xl font-semibold mt-4 text-center " style={{ fontSize: "40px" }}>Create Your Account</h4> {/* Increased font size */}
-              <p className="text-lg text-white text-center mt-3" style={{ fontSize: "20px" }}>Welcome to our registration page! Get started by creating your account.</p> {/* Increased font size */}
+              <h4 className="text-white text-2xl font-semibold mt-4 text-center " style={{ fontSize: "40px" }}>Create Your Account</h4>
+              <p className="text-lg text-white text-center mt-3" style={{ fontSize: "20px" }}>Welcome to our registration page! Get started by creating your account.</p>
             </div>
           </div>
         </div>
 
         <form className="sm:p-8 p-4 w-full overflow-y-auto max-h-[80vh]" onSubmit={postData}>
-          <div className="mb-12">
+          <div className="mb-8">
             <h3 className="text-blue-500 text-3xl font-extrabold max-md:text-center">Register As Influencer</h3>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-6">
+          <div className="grid lg:grid-cols-2 gap-4">
             {/* Full Name */}
             <div>
               <label className="text-gray-800 text-sm mb-1 block">Full Name</label>
@@ -129,23 +132,46 @@ const InfluencerSignUp = () => {
               <input name="twitterURL" type="url" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-2 rounded-md outline-blue-500" placeholder="Twitter URL" value={userdata.twitterURL} onChange={handleInput} />
             </div>
 
+            {/* City */}
+            <div>
+              <label className="text-gray-800 text-sm mb-1 block">City</label>
+              <input name="city" type="text" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-2 rounded-md outline-blue-500" placeholder="Enter city" value={userdata.city} onChange={handleInput} />
+            </div>
+
+            {/* State */}
+            <div>
+              <label className="text-gray-800 text-sm mb-1 block">State</label>
+              <input name="state" type="text" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-2 rounded-md outline-blue-500" placeholder="Enter state" value={userdata.state} onChange={handleInput} />
+            </div>
+
+            {/* Country */}
+            <div>
+              <label className="text-gray-800 text-sm mb-1 block">Country</label>
+              <input name="country" type="text" className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-2 rounded-md outline-blue-500" placeholder="Enter country" value={userdata.country} onChange={handleInput} />
+            </div>
+
             {/* Password */}
-            <div className="mb-4">
+            <div>
               <label className="text-gray-800 text-sm mb-1 block">Password</label>
               <input name="password" type={passwordType} className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-2 rounded-md outline-blue-500" placeholder="Enter password" value={userdata.password} onChange={handleInput} />
-              <button type="button" onClick={togglePassword} className="text-blue-500 text-sm">Show Password</button>
+              {/* <button type="button" onClick={togglePassword} className="text-blue-500 text-sm">Show Password</button> */}
             </div>
 
             {/* Confirm Password */}
-            <div className="mb-4">
+            <div>
               <label className="text-gray-800 text-sm mb-1 block">Confirm Password</label>
               <input name="cpass" type={passwordConfirmType} className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-2 rounded-md outline-blue-500" placeholder="Confirm password" value={cpass} onChange={handleConfirmPassword} />
-              <button type="button" onClick={toggleConfirmPassword} className="text-blue-500 text-sm">Show Password</button>
+              {/* <button type="button" onClick={toggleConfirmPassword} className="text-blue-500 text-sm">Show Password</button> */}
             </div>
 
             {/* Register Button */}
-            <div className="w-full flex justify-center">
-              <button type="submit" className="w-full md:w-auto text-white py-3 px-6 rounded-md bg-blue-600 hover:bg-blue-500 transition">Register</button>
+            <div className="flex justify-center mt-4">
+              <button 
+                type="submit" 
+                className="w-full sm:w-auto text-white py-3 px-8 sm:px-6 rounded-md bg-blue-600 hover:bg-blue-500 transition-all ease-in-out duration-300"
+                style={{ width: '100%', height: '50px' }} >
+                Register
+              </button>
             </div>
 
             <p className="text-sm text-gray-500 text-center mt-4">
