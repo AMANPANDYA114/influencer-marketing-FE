@@ -105,6 +105,7 @@
 
 
 
+
 import React, { useState } from "react";
 import { HiMenuAlt1 } from 'react-icons/hi';
 import { FaUserCircle, FaHome } from 'react-icons/fa';
@@ -125,18 +126,28 @@ const Navbar = () => {
     ];
 
     const [open, setOpen] = useState(true);
+
     const logout = async () => {
         try {
+            // Send logout request to server
             const res = await axios.get('https://server-side-influencer-1.onrender.com/logout');
             console.log(res.data);
             if (res.data.success === true) {
+                // Clear localStorage and sessionStorage
+                localStorage.clear();   // Clears all data stored in localStorage
+                sessionStorage.clear(); // Clears all data stored in sessionStorage
+                
+                // Navigate to the homepage or login page after logout
                 navigate('/');
             }
         } catch (err) {
             console.log(err);
+            // If there's an error, clear the storage and navigate anyway
+            localStorage.clear();
+            sessionStorage.clear();
             navigate('/');
         }
-    }
+    };
 
     return (
         <>
@@ -180,7 +191,13 @@ const Navbar = () => {
                     <div
                         className={`group flex items-center cursor-pointer text-sm gap-3.5 font-medium p-0 my-2 rounded-md hover:text-blue-700`}
                     >
-                        <div><BiLogOut size={25} className="my-10 mx-auto hover:text-blue-700 cursor-pointer" onClick={logout} /></div>
+                        <div>
+                            <BiLogOut 
+                                size={25} 
+                                className="my-10 mx-auto hover:text-blue-700 cursor-pointer" 
+                                onClick={logout} 
+                            />
+                        </div>
                         <h2
                             style={{
                                 transitionDelay: `${13}00ms`,
