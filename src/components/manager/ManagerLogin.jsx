@@ -250,7 +250,7 @@ const ManagerLogin = () => {
       toast.success(data.message);
       localStorage.setItem('managerID', data.user.managerId); // Store manager ID
       sessionStorage.setItem('sessionId', data.sessionId); // Store session ID
-      navigate("/ManagerHome");
+      navigate("/BrandIntro");
 
     } else {
       toast.error(data.error);
