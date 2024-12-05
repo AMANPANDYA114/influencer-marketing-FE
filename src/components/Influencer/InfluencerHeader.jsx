@@ -58,7 +58,7 @@ const InfluencerHeader = (props) => {
               <img class="w-10 h-10 rounded-full group" src={userdata.profile} alt="" />
             </div>
             <div className="font-medium hover:text-blue-700 cursor-pointer ">
-              <div>Hi,{userdata.fname}</div>
+              <div>Hi,{userdata.fullname}</div>
             </div>
           </div>
         </NavLink>

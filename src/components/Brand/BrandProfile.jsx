@@ -404,12 +404,9 @@ import { useNavigate } from "react-router-dom";
 import BrandHeader from "./BrandHeader";
 import Navbar from "./Navbar";
 
-import Slider from "react-slick";
 import "react-slideshow-image/dist/styles.css";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-import styled from "styled-components";
-import loader from "../../Images/loader.gif";
 
 const BrandProfile = () => {
   const navigate = useNavigate();

@@ -90,8 +90,9 @@ const BrandProfileEdit = () => {
     console.log(url);
 
     try {
-      const res = await axios.put("brand/updateprofile", brandData);
-      const data = res.data;
+      const brandId = localStorage.getItem("brandID");
+      const res = await axios.put(`http://localhost:8000/brand/${brandId}/updateprofile`, brandData);
+      const data = res.data
       // console.log(data);
       if (data.success == true) {
         toast.success(data.message);
@@ -108,8 +109,9 @@ const BrandProfileEdit = () => {
 
   const logostore = async () => {
     try {
+      const brandId = localStorage.getItem("brandID");
       setbrandData({ ...brandData, logo: logourl });
-      const res = await axios.put("/brand/logoupload", {
+      const res = await axios.put(`http://localhost:8000/brand/${brandId}/logoupload`, {
         logo: logourl,
         type: 1,
       });
@@ -128,45 +130,136 @@ const BrandProfileEdit = () => {
     }
   };
 
+  // const imagestore = async () => {
+  //   try {
+  //     const res = await axios.put("http://localhost:8000/brand/ : brandid/imageupload", { image: url });
+  //     console.log("uploade image at brand ", res.data);
+  //     const data = res.data;
+  //     // console.log(data);
+  //     if (data.success == true) {
+  //       toast.success(data.message);
+  //       await sleep(1500);
+  //       setUrl("");
+  //       // window.location.reload();
+  //       // navigate("/BrandProfile")
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+
+
   const imagestore = async () => {
+    const brandId = localStorage.getItem("brandID"); // Retrieve brandID from localStorage
+  
+    if (!brandId) {
+      toast.error("Brand ID not found in localStorage");
+      return;
+    }
+  
     try {
-      const res = await axios.put("https://server-side-influencer-1.onrender.com/brand/imageupload", { image: url });
-      console.log("uploade image at brand ", res.data);
-      const data = res.data;
-      // console.log(data);
-      if (data.success == true) {
+      // Prepare the data to be sent in the request
+      const requestData = {
+        image: url, // Send the image URL
+      };
+  console.log("reqjjjdjd image",requestData)
+      // Use fetch to make the API call
+      const response = await fetch(`http://localhost:8000/brand/${brandId}/imageupload`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      });
+  
+      const data = await response.json(); // Parse the JSON response
+      console.log("i sucess image upload brand ".data)
+  
+      if (data.success) {
         toast.success(data.message);
-        await sleep(1500);
-        setUrl("");
-        // window.location.reload();
-        // navigate("/BrandProfile")
+        setUrl(""); // Clear the image URL after successful upload
+      } else {
+        toast.error(data.message || "Image upload failed");
       }
     } catch (err) {
-      console.log(err);
+      console.error("Error uploading image:", err);
+      toast.error("Error uploading image");
     }
   };
+  
+
+  // const dimagestore = async () => {
+  //   try {
+  //     const brandId = localStorage.getItem("brandID"); // Retrieve brandID from localStorage
+  
+  //     setbrandData({ ...brandData, photo1: durl });
+  //     const res = await axios.put(`http://localhost:8000/brand/${brandId}/imageupload`, {
+  //       photo1: durl,
+  //       type: 2,
+  //     });
+  //     console.log("upload display image ", res)
+  //     console.log( "uploaded logo for btrand " ,res.data);
+  //     const data = res.data;
+  //     // console.log(data);
+  //     if (data.success == true) {
+  //       toast.success(data.message);
+  //       await sleep(1500);
+  //       setDUrl("");
+  //       navigate("/BrandProfile");
+  //       window.location.reload();
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
 
 
 
   const dimagestore = async () => {
     try {
-      setbrandData({ ...brandData, photo1: durl });
-      const res = await axios.put("/brand/logoupload", {
-        photo1: durl,
-        type: 2,
-      });
-      console.log( "uploaded logo for btrand " ,res.data);
-      const data = res.data;
-      // console.log(data);
-      if (data.success == true) {
-        toast.success(data.message);
-        await sleep(1500);
-        setDUrl("");
-        navigate("/BrandProfile");
-        window.location.reload();
+      const brandId = localStorage.getItem("brandID"); // Retrieve brandID from localStorage
+  
+      // Ensure durl is defined before making the API call
+      if (!durl) {
+        console.log("Display image URL is not set!");
+        return; // Prevent the API call if durl is undefined
       }
+  
+      setbrandData({ ...brandData, photo1: durl }); // Set photo1 with the correct URL
+  
+      // Use fetch instead of axios for the API call
+      fetch(`http://localhost:8000/brand/${brandId}/logoupload`, {
+        method: 'PUT', // PUT method for updating
+        headers: {
+          'Content-Type': 'application/json', // Specify content type as JSON
+        },
+        body: JSON.stringify({
+          photo1: durl, // Pass the photo1 field with the image URL
+          type: 2, // Set type to 2 for updating photo1
+        }),
+      })
+        .then((response) => response.json()) // Parse the JSON response
+        .then((data) => {
+          console.log("Uploaded display image:", data);
+          console.log("Uploaded logo for brand:", data);
+  
+          // Check if the upload was successful
+          if (data.success === true) {
+            toast.success(data.message); // Show success toast
+            setTimeout(() => {
+              setDUrl(""); // Clear the durl value
+              navigate("/BrandProfile"); // Navigate to the brand profile page
+              window.location.reload(); // Reload the page after successful upload
+            }, 1500);
+          }
+        })
+        .catch((error) => {
+          console.error("Error uploading image:", error); // Handle errors
+        });
     } catch (err) {
-      console.log(err);
+      console.error("Unexpected error:", err); // Catch any other unexpected errors
     }
   };
   useEffect(() => {

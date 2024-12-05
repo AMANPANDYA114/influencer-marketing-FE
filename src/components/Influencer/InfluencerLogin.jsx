@@ -39,6 +39,8 @@ const InfluencerLogin = () => {
     });
 
     const data = await res.json();
+    console.log("token for inlfuer",data.token)
+    localStorage.setItem("influcertoken",data.token)
     if (res.status === 200) {
       toast.success(data.message);
       localStorage.setItem('influencerID', data.user.influencerId); // Store influencer ID

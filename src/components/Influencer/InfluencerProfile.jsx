@@ -370,20 +370,20 @@
 
 
 
-
-
-
-
-
 import React, { useEffect, useState } from "react";
 import { AiFillTwitterCircle } from "react-icons/ai";
 import { BsFacebook, BsInstagram } from "react-icons/bs";
-import { FaUserEdit } from "react-icons/fa";
+import { FaInstagram, FaUserEdit } from "react-icons/fa";
+import { FiTwitter } from "react-icons/fi";
+import { RiFacebookBoxLine } from "react-icons/ri";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import InfluencerHeader from "./InfluencerHeader";
-import Navbar from "./Navbar";
+
+import axios from "axios";
+import { NavLink, useLocation } from "react-router-dom";
 import loader from "../../Images/loader.gif";
+import Navbar from "./Navbar";
 
 const InfluencerProfile = () => {
   const [userdata, setuserdata] = useState({});
@@ -432,7 +432,7 @@ const InfluencerProfile = () => {
                 src={userdata.profile}
                 className="w-40 h-40 border-4 border-white bg-gray-50 rounded-full" />
               <div className="flex items-center space-x-2 mt-2">
-                <p className="text-2xl">{userdata.fname + " " + userdata.lname}</p>
+                <p className="text-2xl">{userdata.fullname}</p>
                 <span className="bg-blue-500 rounded-full p-1" title="Verified">
                   <svg xmlns="http://www.w3.org/2000/svg" className="text-gray-100 h-2.5 w-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7"></path>
@@ -444,10 +444,18 @@ const InfluencerProfile = () => {
             </div>
             <div className="flex-1 flex flex-col items-center lg:items-end justify-end px-8 mt-2">
               <div className="flex items-center space-x-4 mt-2">
-                <button className="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+                {/* <button className="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
                   <FaUserEdit size={17} />
                   <span>Edit Profile</span>
-                </button>
+                </button> */}
+
+<NavLink to='/InfluencerProfileEdit' state={userdata}>
+
+              <button class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+              <FaUserEdit size={17} />
+                   <span>Edit Profile</span>
+                  </button>
+          </NavLink>
                 {
                   adrequired === false ?
                     <button
@@ -504,12 +512,9 @@ const InfluencerProfile = () => {
                 <ul className="mt-2 text-gray-700">
                   <li className="flex border-y py-2">
                     <span className="font-bold w-24">Full name:</span>
-                    <span className="text-gray-700">{userdata.fname + " " + userdata.lname}</span>
+                    <span className="text-gray-700">{userdata.fullname}</span>
                   </li>
-                  <li className="flex border-b py-2">
-                    <span className="font-bold w-24">Age:</span>
-                    <span className="text-gray-700">{userdata.age}</span>
-                  </li>
+                
                   <li className="flex border-b py-2">
                     <span className="font-bold w-24">Mobile:</span>
                     <span className="text-gray-700">{userdata.phone}</span>
