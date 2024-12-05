@@ -246,8 +246,10 @@ const ManagerLogin = () => {
     });
 
     const data = await res.json();
+    console.log("maber data ", data.token)
     if (res.status === 200) {
       toast.success(data.message);
+      localStorage.setItem('mangertoken', data.token);
       localStorage.setItem('managerID', data.user.managerId); // Store manager ID
       sessionStorage.setItem('sessionId', data.sessionId); // Store session ID
       navigate("/ManagerHome");
