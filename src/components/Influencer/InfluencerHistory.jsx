@@ -453,7 +453,7 @@ const InfluencerHistory = () => {
 
         <div className="mx-10 mb-5 mt-2">
   <form className="flex justify-center items-center space-x-2 w-full">
-    <div className="relative w-[52%] ml-5"> {/* 55% width and 20px left margin */}
+    <div className="relative w-[69%] ml-5"> {/* 55% width and 20px left margin */}
       <input
         type="search"
         id="search-dropdown"
