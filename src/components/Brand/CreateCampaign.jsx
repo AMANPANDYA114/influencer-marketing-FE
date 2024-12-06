@@ -534,7 +534,7 @@ const CreateCampaign = () => {
         return;
       }
 
-      const response = await fetch(`https://server-side-influencer-1.onrender.com/brand/getBrandData/${brandId}`);
+      const response = await fetch(`https://server-side-influencer.vercel.app/brand/getBrandData/${brandId}`);
       const data = await response.json();
 
       setBrandData(data.data);
@@ -565,7 +565,7 @@ const CreateCampaign = () => {
 
         // If brandID is stored in localStorage, use it to fetch campaigns
         if (storedBrandId) {
-          const response = await fetch(`https://server-side-influencer-1.onrender.com/brand/getMyCampaigns/${storedBrandId}`, {
+          const response = await fetch(`https://server-side-influencer.vercel.app/brand/getMyCampaigns/${storedBrandId}`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json", // Ensure to send JSON data
@@ -652,7 +652,7 @@ const CreateCampaign = () => {
   const handleDeleteCampaign = async (id) => {
     try {
       const brandId = localStorage.getItem("brandID");
-      const response = await fetch(`https://server-side-influencer-1.onrender.com/brand/deleteCampaign/${brandId}/${id}`, {
+      const response = await fetch(`https://server-side-influencer.vercel.app/brand/deleteCampaign/${brandId}/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -719,7 +719,7 @@ const CreateCampaign = () => {
     };
 
     try {
-      const response = await fetch(`https://server-side-influencer-1.onrender.com/brand/createCampaign/${storedBrandId}`, {
+      const response = await fetch(`https://server-side-influencer.vercel.app/brand/createCampaign/${storedBrandId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

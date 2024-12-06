@@ -229,7 +229,7 @@ const ManagerSignUp = () => {
 
     if (password === cpass) {
       try {
-        const res = await fetch("https://server-side-influencer-1.onrender.com/manager/signup", {  
+        const res = await fetch("https://server-side-influencer.vercel.app/manager/signup", {  
           method: 'POST',
           headers: {
             "Content-Type": "application/json",

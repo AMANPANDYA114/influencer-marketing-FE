@@ -325,7 +325,7 @@ const InfluencerHistory = () => {
     const getCampaigns = async () => {
       try {
         setLoading(true);
-        const response = await axios.get("https://server-side-influencer-1.onrender.com/brand/getAllCampaigns");
+        const response = await axios.get("https://server-side-influencer.vercel.app/brand/getAllCampaigns");
         const data = response.data.data;
         setCampaigns(data);  // Set campaigns data
         setLoading(false);
@@ -413,7 +413,7 @@ const InfluencerHistory = () => {
     const applicationData = { ...formData, campaignId: selectedCampaignId };
   
     try {
-      const response = await axios.post("https://server-side-influencer-1.onrender.com/brand/applyToCampaign", applicationData);
+      const response = await axios.post("https://server-side-influencer.vercel.app/brand/applyToCampaign", applicationData);
   
       // Check if the response indicates a success
       if (response.data.success) {

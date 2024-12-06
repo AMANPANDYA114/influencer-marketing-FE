@@ -91,7 +91,7 @@ const BrandProfileEdit = () => {
 
     try {
       const brandId = localStorage.getItem("brandID");
-      const res = await axios.put(`https://server-side-influencer-1.onrender.com/brand/${brandId}/updateprofile`, brandData);
+      const res = await axios.put(`https://server-side-influencer.vercel.app/brand/${brandId}/updateprofile`, brandData);
       const data = res.data
       // console.log(data);
       if (data.success == true) {
@@ -111,7 +111,7 @@ const BrandProfileEdit = () => {
     try {
       const brandId = localStorage.getItem("brandID");
       setbrandData({ ...brandData, logo: logourl });
-      const res = await axios.put(`https://server-side-influencer-1.onrender.com/brand/${brandId}/logoupload`, {
+      const res = await axios.put(`https://server-side-influencer.vercel.app/brand/${brandId}/logoupload`, {
         logo: logourl,
         type: 1,
       });
@@ -165,7 +165,7 @@ const BrandProfileEdit = () => {
       };
   console.log("reqjjjdjd image",requestData)
       // Use fetch to make the API call
-      const response = await fetch(`https://server-side-influencer-1.onrender.com/brand/${brandId}/imageupload`, {
+      const response = await fetch(`https://server-side-influencer.vercel.app/brand/${brandId}/imageupload`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -230,7 +230,7 @@ const BrandProfileEdit = () => {
       setbrandData({ ...brandData, photo1: durl }); // Set photo1 with the correct URL
   
       // Use fetch instead of axios for the API call
-      fetch(`https://server-side-influencer-1.onrender.com/brand/${brandId}/logoupload`, {
+      fetch(`https://server-side-influencer.vercel.app/brand/${brandId}/logoupload`, {
         method: 'PUT', // PUT method for updating
         headers: {
           'Content-Type': 'application/json', // Specify content type as JSON

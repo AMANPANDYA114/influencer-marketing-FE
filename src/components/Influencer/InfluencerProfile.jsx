@@ -400,7 +400,7 @@ const InfluencerProfile = () => {
     }
 
     // API call to fetch influencer data
-    fetch(`https://server-side-influencer-1.onrender.com/influencer/getInfluencer/${influencerId}`)
+    fetch(`https://server-side-influencer.vercel.app/influencer/getInfluencer/${influencerId}`)
       .then(response => response.json())
       .then(data => {
         setuserdata(data.data);

@@ -22,7 +22,7 @@ const ManagerHome = () => {
 
     try {
       // Fetch data with the token in the Authorization header
-      const res = await fetch("https://server-side-influencer-1.onrender.com/manager/managerhome", {
+      const res = await fetch("https://server-side-influencer.vercel.app/manager/managerhome", {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${token}`, // Send the token as Bearer token

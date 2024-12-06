@@ -424,7 +424,7 @@ const BrandProfile = () => {
       }
 
       // Make the API call with the brandId from localStorage
-      const response = await fetch(`https://server-side-influencer-1.onrender.com/brand/getBrandData/${brandId}`);
+      const response = await fetch(`https://server-side-influencer.vercel.app/brand/getBrandData/${brandId}`);
       const data = await response.json();
       
       // Set the response data to the state

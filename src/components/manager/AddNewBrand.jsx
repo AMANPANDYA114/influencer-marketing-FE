@@ -22,7 +22,7 @@ const AddNewBrand = () => {
 
     try {
       // Fetch data with Authorization header containing the token
-      const res = await fetch("https://server-side-influencer-1.onrender.com/manager/getunverifiedbrand", {
+      const res = await fetch("https://server-side-influencer.vercel.app/manager/getunverifiedbrand", {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${token}`,  // Send the token as Bearer token

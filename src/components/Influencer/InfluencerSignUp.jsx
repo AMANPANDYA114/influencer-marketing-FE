@@ -50,7 +50,7 @@ const InfluencerSignUp = () => {
 
     if (password === cpass) {
       try {
-        const res = await fetch("https://server-side-influencer-1.onrender.com/influencer/signup", {  
+        const res = await fetch("https://server-side-influencer.vercel.app/influencer/signup", {  
           method: 'POST',
           headers: {
             "Content-Type": "application/json",
