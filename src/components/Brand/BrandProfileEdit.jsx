@@ -1,8 +1,8 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import BrandHeader from "./BrandHeader";
 import Navbar from "./Navbar";
-import axios from "axios";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -91,7 +91,7 @@ const BrandProfileEdit = () => {
 
     try {
       const brandId = localStorage.getItem("brandID");
-      const res = await axios.put(`http://localhost:8000/brand/${brandId}/updateprofile`, brandData);
+      const res = await axios.put(`https://server-side-influencer-1.onrender.com/brand/${brandId}/updateprofile`, brandData);
       const data = res.data
       // console.log(data);
       if (data.success == true) {
@@ -111,7 +111,7 @@ const BrandProfileEdit = () => {
     try {
       const brandId = localStorage.getItem("brandID");
       setbrandData({ ...brandData, logo: logourl });
-      const res = await axios.put(`http://localhost:8000/brand/${brandId}/logoupload`, {
+      const res = await axios.put(`https://server-side-influencer-1.onrender.com/brand/${brandId}/logoupload`, {
         logo: logourl,
         type: 1,
       });
@@ -165,7 +165,7 @@ const BrandProfileEdit = () => {
       };
   console.log("reqjjjdjd image",requestData)
       // Use fetch to make the API call
-      const response = await fetch(`http://localhost:8000/brand/${brandId}/imageupload`, {
+      const response = await fetch(`https://server-side-influencer-1.onrender.com/brand/${brandId}/imageupload`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
