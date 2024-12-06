@@ -7,12 +7,7 @@ const InfluencerHeader = (props) => {
   const navigate = useNavigate();
   const [userdata, setuserdata] = useState([]);
 
-  // const getInfluencerData = async () => {
-  //   const res = await axios.get("influencer/getInfluencer");
-  //   const data = res.data;
-  //   setuserdata(data.data)
-  //   // console.log(userdata);
-  // }
+  
 
   const getInfluencerData = () => {
     const influencerId = localStorage.getItem("influencerID");
