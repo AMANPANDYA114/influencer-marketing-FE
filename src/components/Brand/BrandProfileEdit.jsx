@@ -230,7 +230,7 @@ const BrandProfileEdit = () => {
       setbrandData({ ...brandData, photo1: durl }); // Set photo1 with the correct URL
   
       // Use fetch instead of axios for the API call
-      fetch(`http://localhost:8000/brand/${brandId}/logoupload`, {
+      fetch(`https://server-side-influencer-1.onrender.com/brand/${brandId}/logoupload`, {
         method: 'PUT', // PUT method for updating
         headers: {
           'Content-Type': 'application/json', // Specify content type as JSON
