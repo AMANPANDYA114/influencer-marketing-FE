@@ -1,10 +1,4 @@
 
-
-
-
-
-
-
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -15,34 +9,70 @@ const InfluencerSignUp = () => {
     fullname: "", phone: "", email: "", password: "",
     instagramURL: "", facebookURL: "", twitterURL: "", city: "", state: "", country: ""
   });
-  const [cpass, setcpass] = useState(""); // Confirm password
+  const [cpass, setcpass] = useState("");
   const [passwordType, setPasswordType] = useState("password");
   const [passwordConfirmType, setPasswordConfirmType] = useState("password");
 
-  const navigate = useNavigate(); // For navigation
+  const navigate = useNavigate();
 
-  // Toggle password visibility
   const togglePassword = () => {
     setPasswordType(passwordType === "password" ? "text" : "password");
   };
 
-  // Toggle confirm password visibility
   const toggleConfirmPassword = () => {
     setPasswordConfirmType(passwordConfirmType === "password" ? "text" : "password");
   };
 
-  // Handle form field change
   const handleInput = (e) => {
     const { name, value } = e.target;
     setuserdata({ ...userdata, [name]: value });
   };
 
-  // Handle confirm password field change
   const handleConfirmPassword = (e) => {
     setcpass(e.target.value);
   };
 
-  // Post data to the backend
+
+  // Fetch Instagram stats
+const fetchInstagramStats = async (url) => {
+  try {
+    const res = await fetch(`https://server-side-influencer.vercel.app/influencer/stats?url=${encodeURIComponent(url)}`);
+    const data = await res.json();
+
+    // Log the usersCount value
+    console.log("influecer details ", data)
+    console.log("fullname",data?.data?.data?.name);
+    const fullname=data?.data?.data?.name;
+    localStorage.setItem('fullname', fullname);
+    const followersCount = data?.data?.data?.usersCount;
+    localStorage.setItem('followersCount', followersCount);
+    console.log("Followers count:", data?.data?.data?.usersCount);
+
+    if (res.ok) {
+      console.log("Instagram Stats API Response:", data.usersCount);
+      console.log("Followers countss:", data?.data?.data?.usersCount);
+
+      // Extract pctFakeFollowers value from API response
+      const fakeFollowers = data?.data?.data?.pctFakeFollowers;
+
+      // Convert the value to a percentage
+      const fakeFollowersPercentage = (fakeFollowers * 100).toFixed(2); // Format as percentage with 2 decimal places
+
+      // Log the fake followers percentage
+      console.log("Fake Followers Percentage:", fakeFollowersPercentage); // Output like 8.57%
+
+      return fakeFollowersPercentage; // Return the percentage for further checks
+    } else {
+      console.error("Error fetching Instagram stats:", data.error);
+      return null;
+    }
+  } catch (error) {
+    console.error("Error in Instagram stats API call:", error);
+    return null;
+  }
+};
+
+
   const postData = async (e) => {
     e.preventDefault();
 
@@ -50,7 +80,21 @@ const InfluencerSignUp = () => {
 
     if (password === cpass) {
       try {
-        const res = await fetch("https://server-side-influencer.vercel.app/influencer/signup", {  
+        // Fetch Instagram stats
+        const fakeFollowersPercentage = await fetchInstagramStats(instagramURL);
+        if (!fakeFollowersPercentage) {
+          toast.error("Failed to fetch Instagram stats.");
+          return;
+        }
+
+        // Check if the fake followers percentage is greater than or equal to 50%
+        if (parseFloat(fakeFollowersPercentage) >= 50) {
+          toast.error("You cannot sign up with more than 50% fake followers.");
+          return; // Prevent further form submission if fake followers percentage is high
+        }
+
+        // Submit signup data
+        const res = await fetch("https://server-side-influencer.vercel.app/influencer/signup", {
           method: 'POST',
           headers: {
             "Content-Type": "application/json",
@@ -62,7 +106,7 @@ const InfluencerSignUp = () => {
 
         const data = await res.json();
 
-        if (res.status === 200) {
+        if (res.ok) {
           toast.success(data.message);
           setTimeout(() => {
             navigate("/InfluencerLogin");
@@ -154,30 +198,27 @@ const InfluencerSignUp = () => {
             <div>
               <label className="text-gray-800 text-sm mb-1 block">Password</label>
               <input name="password" type={passwordType} className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-2 rounded-md outline-blue-500" placeholder="Enter password" value={userdata.password} onChange={handleInput} />
-              {/* <button type="button" onClick={togglePassword} className="text-blue-500 text-sm">Show Password</button> */}
             </div>
 
             {/* Confirm Password */}
             <div>
               <label className="text-gray-800 text-sm mb-1 block">Confirm Password</label>
               <input name="cpass" type={passwordConfirmType} className="bg-gray-100 w-full text-gray-800 text-sm px-4 py-2 rounded-md outline-blue-500" placeholder="Confirm password" value={cpass} onChange={handleConfirmPassword} />
-              {/* <button type="button" onClick={toggleConfirmPassword} className="text-blue-500 text-sm">Show Password</button> */}
             </div>
-
-            {/* Register Button */}
-            <div className="flex justify-center mt-4">
-              <button 
-                type="submit" 
-                className="w-full sm:w-auto text-white py-3 px-8 sm:px-6 rounded-md bg-blue-600 hover:bg-blue-500 transition-all ease-in-out duration-300"
-                style={{ width: '100%', height: '50px' }} >
-                Register
-              </button>
-            </div>
-
-            <p className="text-sm text-gray-500 text-center mt-4">
-              Already have an account? <Link to="/InfluencerLogin" className="text-blue-500">Login here</Link>
-            </p>
           </div>
+
+          <div className="flex justify-center mt-4">
+            <button
+              type="submit"
+              className="w-full sm:w-auto text-white py-3 px-8 sm:px-6 rounded-md bg-blue-600 hover:bg-blue-500 transition-all ease-in-out duration-300"
+              style={{ width: '100%', height: '50px' }} >
+              Register
+            </button>
+          </div>
+
+          <p className="text-sm text-gray-500 text-center mt-4">
+            Already have an account? <Link to="/InfluencerLogin" className="text-blue-500">Login here</Link>
+          </p>
         </form>
       </div>
       <ToastContainer />
@@ -186,3 +227,4 @@ const InfluencerSignUp = () => {
 };
 
 export default InfluencerSignUp;
+
