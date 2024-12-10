@@ -43,9 +43,9 @@ const fetchInstagramStats = async (url) => {
     console.log("influecer details ", data)
     console.log("fullname",data?.data?.data?.name);
     const fullname=data?.data?.data?.name;
-    localStorage.setItem('fullname', fullname);
-    const followersCount = data?.data?.data?.usersCount;
-    localStorage.setItem('followersCount', followersCount);
+    // localStorage.setItem('fullname', fullname);
+    // const followersCount = data?.data?.data?.usersCount;
+    // localStorage.setItem('followersCount', followersCount);
     console.log("Followers count:", data?.data?.data?.usersCount);
 
     if (res.ok) {

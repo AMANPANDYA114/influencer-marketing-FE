@@ -361,6 +361,7 @@ const InfluencerHistory = () => {
 
     // Retrieve the name (fullname) and followers count from localStorage
     const fullname = localStorage.getItem('fullname');
+    console.log("fullnae in cmapiang ",fullname)
     const followersCount = localStorage.getItem('followersCount');
     
     if (fullname) {
