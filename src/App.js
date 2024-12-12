@@ -130,6 +130,7 @@ import ManagerHeader from './components/manager/ManagerHeader';
 import AddNewInfluencer from './components/manager/AddNewInfluencer';
 import AddNewBrand from './components/manager/AddNewBrand';
 import ManagerProfile from './components/manager/ManagerProfile';
+import BrandInfluencerGetDetail from "./components/Brand/Brandinfluncergetdetails.jsx";
 
 // Import the CreateCampaign component
 import CreateCampaign from "./components/Brand/CreateCampaign";
@@ -139,6 +140,8 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+       
+        <Route path="/getdetails" element={<BrandInfluencerGetDetail/>} />
         <Route path="/BrandIntro" element={<BrandIntro />} />
         <Route path="/InfluencerIntro" element={<InfluencerIntro />} />
         <Route path="/BrandSignUp" element={<BrandSignUp />} />

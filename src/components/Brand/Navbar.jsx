@@ -35,7 +35,7 @@ const Navbar = () => {
     }, []);
 
     const menus = [
-        { name: "Home", link: "/BrandPendingRequest", icon: FaHome, data: brandData },
+        { name: "Home", link: "/BrandHome", icon: FaHome, data: brandData },
         { name: "Campaign Ideas", link: "/BrandPendingRequest", icon: MdPendingActions, data: brandData },
         { name: "Influencers Comparison", link: "/compare", icon: CgImport }, // Changed route to /compare
         { name: "Plan and List", link: "/BrandConsignments", icon: FaHandshake, data: brandData },

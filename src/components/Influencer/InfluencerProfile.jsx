@@ -369,7 +369,7 @@ const InfluencerProfile = () => {
               />
               <div className="flex items-center space-x-2 mt-2">
                 {/* Show Dummy Full Name */}
-                <p className="text-2xl">{influencerName}</p>
+                <p className="text-2xl">{userdata.fullname}</p>
                 <span className="bg-blue-500 rounded-full p-1" title="Verified">
                   <svg xmlns="http://www.w3.org/2000/svg" className="text-gray-100 h-2.5 w-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7"></path>
@@ -484,36 +484,6 @@ const InfluencerProfile = () => {
             </div>
           </div>
 
-          {/* Influencer Details Section */}
-          <div className="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
-            <div className="w-full flex flex-col 2xl:w-1/3">
-              <div className="flex-1 bg-white border-2 rounded-lg shadow-xl p-8">
-                <h4 className="text-xl text-gray-900 font-bold">Influencer Details</h4>
-                <ul className="mt-2 text-gray-700">
-                  <li className="flex border-y py-2">
-                    <span className="font-bold w-24">Followers:</span>
-                    <span className="text-gray-700">{followers}</span>
-                  </li>
-                  <li className="flex border-b py-2">
-                    <span className="font-bold w-24">Avg Likes:</span>
-                    <span className="text-gray-700">{avgLikes}</span>
-                  </li>
-                  <li className="flex border-b py-2">
-                    <span className="font-bold w-24">Avg Comments:</span>
-                    <span className="text-gray-700">{avgComments}</span>
-                  </li>
-                  <li className="flex border-b py-2">
-                    <span className="font-bold w-24">Fake Followers:</span>
-                    <span className="text-gray-700">{fakeFollowers}</span>
-                  </li>
-                  <li className="flex border-b py-2">
-                    <span className="font-bold w-24">Engagement Rate:</span>
-                    <span className="text-gray-700">{engagementRate}</span> {/* Display Engagement Rate */}
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
       <ToastContainer />
