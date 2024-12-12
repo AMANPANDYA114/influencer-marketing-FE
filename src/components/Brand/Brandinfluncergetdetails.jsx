@@ -29,7 +29,7 @@ const BrandInfluencerGetDetail = () => {
   useEffect(() => {
     // Fetch the statistics data from the provided API using the username
     if (username) {
-      fetch(`https://server-side-influencer.vercel.app/influencer/newInstagramStatisticsData/${username}`)
+      fetch(`https://server-side-influencer.onrender.com/influencer/newInstagramStatisticsData/${username}`)
         .then((response) => response.json())
         .then((data) => {
           console.log("Fetched data:", data); // Log the whole data to check structure
