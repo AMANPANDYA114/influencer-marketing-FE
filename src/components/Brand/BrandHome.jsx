@@ -38,7 +38,7 @@ const BrandHome = () => {
     setLoading(true); // Start the loading state
 
     // Make the API call using the search term
-    fetch(`https://server-side-influencer.vercel.app/influencer/searchInstagramUsers?searchTerm=${searchTerm}`)
+    fetch(`https://server-side-influencer.onrender.com/influencer/searchInstagramUsers?searchTerm=${searchTerm}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch data");
