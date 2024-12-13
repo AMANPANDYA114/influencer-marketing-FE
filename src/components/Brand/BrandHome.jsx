@@ -46,8 +46,8 @@ const BrandHome = () => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
-        console.log("fullame ",data.fullName);  // Log the response data to the console
+        console.log("data at profile",data);
+     // Log the response data to the console
         setProfileCard(data); // Set the response data into the profilecard state
         setLoading(false); // Stop the loading spinner
       })
