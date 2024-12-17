@@ -1,0 +1,231 @@
+[
+    {
+      "id": 1,
+      "name": "Jane Doe",
+      "profileTags": ["#Fashion", "#Beauty", "#Travel"],
+      "categories": ["Fashion & Beauty", "Travel"],
+      "location": "New York, USA",
+      "managedBy": "Agency XYZ",
+      "followers": 250000,
+      "bio": "Beauty enthusiast & travel blogger",
+      "contact": "+1-555-1234",
+      "email": "janedoe@email.com",
+      "socialMedia": {
+        "instagram": "@janedoe",
+        "twitter": "@janedoe_travel",
+        "youtube": "JaneDoeVlogs"
+      },
+      "subcategories": {
+        "Fashion & Beauty": ["Fashion", "Beauty"],
+        "Travel": ["Travel Destinations"]
+      },
+      "profilePicUrl": "https://i.postimg.cc/9Md1Mtxh/inluecer1.jpg"
+    },
+    {
+      "id": 2,
+      "name": "John Smith",
+      "profileTags": ["#Fitness", "#Food", "#Parenting"],
+      "categories": ["Fitness & Wellness", "Food", "Parenting"],
+      "location": "Los Angeles, USA",
+      "managedBy": "FitnessPro",
+      "followers": 500000,
+      "bio": "Dad of two, fitness junkie, and foodie",
+      "contact": "+1-555-5678",
+      "email": "johnsmith@email.com",
+      "socialMedia": {
+        "instagram": "@johnsmith_fitness",
+        "twitter": "@john_fitness",
+        "youtube": "SmithFitness"
+      },
+      "subcategories": {
+        "Fitness & Wellness": ["Fitness & Exercise", "Nutrition & Diet"],
+        "Food": ["Healthy Eating", "Recipes"],
+        "Parenting": ["Parenting Tips", "Child Development"]
+      },
+      "profilePicUrl": "https://i.postimg.cc/Bb1SHbK4/influnecr2.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Emily Chen",
+      "profileTags": ["#Home", "#Food", "#Parenting"],
+      "categories": ["Home & Decor", "Food", "Parenting"],
+      "location": "Toronto, Canada",
+      "managedBy": "HomeStyle Agency",
+      "followers": 150000,
+      "bio": "Home decor expert, food lover, mom blogger",
+      "contact": "+1-555-8765",
+      "email": "emilychen@email.com",
+      "socialMedia": {
+        "instagram": "@emilychen_home",
+        "twitter": "@emily_home",
+        "youtube": "HomeWithEmily"
+      },
+      "subcategories": {
+        "Home & Decor": ["Interior Design", "DIY Projects", "Home Styling"],
+        "Food": ["Healthy Recipes", "Family Meals"],
+        "Parenting": ["Mom Life", "Parenting Advice"]
+      },
+      "profilePicUrl": "https://i.postimg.cc/J0JymPKN/influnecr3.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Mike Johnson",
+      "profileTags": ["#Tech", "#Gaming", "#AI"],
+      "categories": ["Gaming", "AI & Machine Learning", "Software & Apps"],
+      "location": "San Francisco, USA",
+      "managedBy": "TechGuru Agency",
+      "followers": 350000,
+      "bio": "Tech expert and gamer",
+      "contact": "+1-555-4321",
+      "email": "mikejohnson@email.com",
+      "socialMedia": {
+        "instagram": "@mikej_tech",
+        "twitter": "@techmike",
+        "youtube": "MikeTechReviews"
+      },
+      "subcategories": {
+        "Gaming": ["PC Gaming", "Console Gaming", "Esports"],
+        "AI & Machine Learning": ["AI Applications", "Machine Learning Algorithms", "AI in Business"],
+        "Software & Apps": ["Productivity", "Creativity", "Business"]
+      },
+      "profilePicUrl": "https://i.postimg.cc/pd6yFg6Q/influcer4.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Sarah Lee",
+      "profileTags": ["#Fitness", "#MentalHealth", "#Wellness"],
+      "categories": ["Fitness & Wellness", "Mental Health"],
+      "location": "London, UK",
+      "managedBy": "WellnessPro",
+      "followers": 600000,
+      "bio": "Wellness coach & mental health advocate",
+      "contact": "+44-555-2345",
+      "email": "sarahlee@email.com",
+      "socialMedia": {
+        "instagram": "@sarahlee_wellness",
+        "twitter": "@sarah_lee",
+        "youtube": "SarahLeeWellness"
+      },
+      "subcategories": {
+        "Fitness & Wellness": ["Fitness & Exercise", "Nutrition & Diet"],
+        "Mental Health": ["Mental Health Advocacy", "Self-Care Tips"]
+      },
+      "profilePicUrl": "https://i.postimg.cc/9Md1Mtxh/inluecer1.jpg"
+    },
+    {
+      "id": 6,
+      "name": "David King",
+      "profileTags": ["#Finance", "#Investing", "#Cryptocurrencies"],
+      "categories": ["Investing", "Cryptocurrencies", "Personal Finance"],
+      "location": "Miami, USA",
+      "managedBy": "FinancePro Agency",
+      "followers": 400000,
+      "bio": "Investor & financial education expert",
+      "contact": "+1-555-9876",
+      "email": "davidking@email.com",
+      "socialMedia": {
+        "instagram": "@davidking_finance",
+        "twitter": "@david_finance",
+        "youtube": "DavidKingFinance"
+      },
+      "subcategories": {
+        "Investing": ["Stock Market", "Real Estate"],
+        "Cryptocurrencies": ["Bitcoin", "Ethereum", "Crypto Education"],
+        "Personal Finance": ["Budgeting", "Saving Money"]
+      },
+      "profilePicUrl": "https://i.postimg.cc/Bb1SHbK4/influnecr2.jpg"
+    },
+    {
+      "id": 7,
+      "name": "Laura Green",
+      "profileTags": ["#SocialJustice", "#Philanthropy", "#EnvironmentalAwareness"],
+      "categories": ["Social Justice", "Environmental Awareness", "Philanthropy"],
+      "location": "Vancouver, Canada",
+      "managedBy": "GreenWorld Agency",
+      "followers": 200000,
+      "bio": "Activist for social change & environmental sustainability",
+      "contact": "+1-555-3344",
+      "email": "lauragreen@email.com",
+      "socialMedia": {
+        "instagram": "@laura_green_activist",
+        "twitter": "@laura_green",
+        "youtube": "GreenActivistLaura"
+      },
+      "subcategories": {
+        "Social Justice": ["Racial Equality", "Human Rights"],
+        "Environmental Awareness": ["Climate Change", "Sustainability"],
+        "Philanthropy": ["Charity Work", "Community Development"]
+      },
+      "profilePicUrl": "https://i.postimg.cc/J0JymPKN/influnecr3.jpg"
+    },
+    {
+      "id": 8,
+      "name": "Chris Evans",
+      "profileTags": ["#Movies", "#Music", "#Comedy"],
+      "categories": ["Movies & TV", "Music", "Comedy"],
+      "location": "Los Angeles, USA",
+      "managedBy": "Entertainment Hub",
+      "followers": 1000000,
+      "bio": "Actor, comedian & musician",
+      "contact": "+1-555-3456",
+      "email": "chrisevans@email.com",
+      "socialMedia": {
+        "instagram": "@chrisevans_comedy",
+        "twitter": "@chris_evans_comedy",
+        "youtube": "ChrisEvansVibes"
+      },
+      "subcategories": {
+        "Movies & TV": ["Movie Reviews", "TV Shows"],
+        "Music": ["Music Releases", "Concerts"],
+        "Comedy": ["Stand-up Comedy", "Sketches"]
+      },
+      "profilePicUrl": "https://i.postimg.cc/pd6yFg6Q/influcer4.jpg"
+    },
+    {
+      "id": 9,
+      "name": "Anna White",
+      "profileTags": ["#Travel", "#OutdoorActivities", "#AdventureSports"],
+      "categories": ["Outdoor Activities", "Travel Destinations", "Adventure Sports"],
+      "location": "Sydney, Australia",
+      "managedBy": "Adventure Co.",
+      "followers": 300000,
+      "bio": "Explorer, adventurer & outdoor enthusiast",
+      "contact": "+61-555-8765",
+      "email": "annaoutdoor@email.com",
+      "socialMedia": {
+        "instagram": "@annaoutdoor",
+        "twitter": "@anna_travel",
+        "youtube": "AdventureWithAnna"
+      },
+      "subcategories": {
+        "Outdoor Activities": ["Hiking", "Camping", "Nature Exploration"],
+        "Travel Destinations": ["Exotic Locations", "Urban Travel"],
+        "Adventure Sports": ["Mountain Biking", "Rock Climbing"]
+      },
+      "profilePicUrl": "https://i.postimg.cc/9Md1Mtxh/inluecer1.jpg"
+    },
+    {
+      "id": 10,
+      "name": "Megan Roberts",
+      "profileTags": ["#Parenting", "#Lifestyle", "#Food"],
+      "categories": ["Parenting", "Food", "Home & Decor"],
+      "location": "Chicago, USA",
+      "managedBy": "MomsAgency",
+      "followers": 450000,
+      "bio": "Mom blogger, foodie & lifestyle expert",
+      "contact": "+1-555-1122",
+      "email": "meganroberts@email.com",
+      "socialMedia": {
+        "instagram": "@meganroberts_life",
+        "twitter": "@megan_momblog",
+        "youtube": "MeganRobertsMomLife"
+      },
+      "subcategories": {
+        "Parenting": ["Mom Life", "Parenting Hacks"],
+        "Food": ["Easy Recipes", "Family Meals"],
+        "Home & Decor": ["DIY", "Interior Design"]
+      },
+      "profilePicUrl": "https://i.postimg.cc/Bb1SHbK4/influcer2.jpg"
+    }
+  ]
+  

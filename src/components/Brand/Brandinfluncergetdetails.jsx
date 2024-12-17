@@ -158,3 +158,4 @@ const BrandInfluencerGetDetail = () => {
 };
 
 export default BrandInfluencerGetDetail;
+
