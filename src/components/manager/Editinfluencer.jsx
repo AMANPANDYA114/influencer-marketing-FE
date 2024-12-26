@@ -3,9 +3,9 @@
 
 
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';  // Import toast and ToastContainer
+import { ToastContainer, toast } from 'react-toastify'; // Import toast and ToastContainer
 import 'react-toastify/dist/ReactToastify.css'; // Import styles for Toast
 
 const EditInfluencer = ({ onSubmit }) => {
@@ -77,7 +77,7 @@ const EditInfluencer = ({ onSubmit }) => {
   
     try {
       // Make the API call to update the influencer data
-      const response = await fetch(`https://server-side-influencer.vercel.app/allinfluencer/${item.id}`, {
+      const response = await fetch(`https://server-side-influencer-1.onrender.com/allinfluencer/${item.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
