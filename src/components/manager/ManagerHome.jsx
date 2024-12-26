@@ -888,7 +888,7 @@ const safeValue = (value) => {
 
 const handleAdd = async (id) => {
   try {
-    const response = await fetch(`https://server-side-influencer.vercel.app/influencer/add/${id}`, {
+    const response = await fetch(`https://server-side-influencer-1.onrender.com/influencer/add/${id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
