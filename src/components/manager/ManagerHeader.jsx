@@ -12,7 +12,7 @@ const ManagerHeader = (props) => {
 
   const logout = async () => {
     try {
-      const res = await axios.get('/logout')
+      const res = await axios.get('https://server-side-influencer.vercel.app/logout')
       console.log(res.data);
       if (res.data.success == true) {
         navigate('/');
@@ -37,7 +37,7 @@ const ManagerHeader = (props) => {
           {/* <div className="absolute hidden group-hover:block">hello</div> */}
         </div>
           <div class="font-medium ">
-            <div>Hi,Manager</div>
+            <div>Hi,Agency</div>
           </div>
         </div>
       </div>

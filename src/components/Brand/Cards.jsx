@@ -18,7 +18,7 @@ function Card({ item }) {
 
   const navigate = useNavigate();
   const influencerdetailpage = () => {
-    navigate("https://server-side-influencer-1.onrender.com/InfluencerDetails", { state: item })
+    navigate("https://server-side-influencer.vercel.app/InfluencerDetails", { state: item })
   }
 
   return (

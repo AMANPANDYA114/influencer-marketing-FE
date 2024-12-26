@@ -2,8 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import ManagerHeader from "./ManagerHeader";
 import Card from "./Card";
+import ManagerHeader from "./ManagerHeader";
 import Navbar from "./Navbar";
 
 const AddNewBrand = () => {

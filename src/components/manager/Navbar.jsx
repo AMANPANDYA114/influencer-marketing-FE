@@ -130,7 +130,7 @@ const Navbar = () => {
     const logout = async () => {
         try {
             // Send logout request to server
-            const res = await axios.get('https://server-side-influencer-1.onrender.com/logout');
+            const res = await axios.get('https://server-side-influencer.vercel.app/logout');
             console.log(res.data);
             if (res.data.success === true) {
                 // Clear localStorage and sessionStorage

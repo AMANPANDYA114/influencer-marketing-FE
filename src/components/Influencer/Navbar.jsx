@@ -152,7 +152,7 @@ const Navbar = () => {
     ];
 
     const getInfluencerData = () => {
-        fetch("https://server-side-influencer-1.onrender.com/influencer/getInfluencer")
+        fetch("https://server-side-influencer.vercel.app/influencer/getInfluencer")
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
@@ -173,7 +173,7 @@ const Navbar = () => {
 
     const logout = async () => {
         try {
-            const res = await axios.get('https://server-side-influencer-1.onrender.com/logout');
+            const res = await axios.get('https://server-side-influencer.vercel.app/logout');
             console.log(res.data);
             if (res.data.success === true) {
                 // Clear both localStorage and sessionStorage
