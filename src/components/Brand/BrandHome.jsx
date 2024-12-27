@@ -904,9 +904,10 @@ const exportToCSV = () => {
 
 
 
-<div className="flex justify-between items-start mb-[-250px]">
+<div className="flex justify-between items-start mb-[-0px]">
   <div className="flex-1">
-    <CsvUploader  fetchData={fetchData}  /> {/* This will be on the left */}
+
+
   </div>
   <div>
     <BrandList/> {/* This will be on the right as a drawer */}
