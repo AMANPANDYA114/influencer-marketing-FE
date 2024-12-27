@@ -1,11 +1,10 @@
 
 
-
 import React, { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Ensure the CSS is imported
 
-const CsvUploader = () => {
+const CsvUploader = ({ fetchData }) => {  // Receive fetchData as a prop
   const [file, setFile] = useState(null);
 
   const handleFileChange = (event) => {
@@ -32,6 +31,9 @@ const CsvUploader = () => {
       const result = await response.json();
       if (response.ok) {
         toast.success("File uploaded successfully!");
+
+        // Call the fetchData function passed as a prop after successful upload
+        fetchData();
       } else {
         toast.error(`Error: ${result.message}`);
       }
