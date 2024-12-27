@@ -933,7 +933,7 @@ const handleDelete = async (id) => {
       
       // Show success toast once, as expected
       toast.success(`deleted successfully!`);
-
+      fetchData();
       // Remove the deleted item from the client-side (UI)
       setApiData(prevData => prevData.filter(item => item.id !== id));
 
