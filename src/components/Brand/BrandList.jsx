@@ -5,7 +5,7 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify"; // Importing toast for notifications
 import "react-toastify/dist/ReactToastify.css"; // Include this for styling
-const List = () => {
+const BrandList = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [influencers, setInfluencers] = useState([]);
   const [selectedInfluencers, setSelectedInfluencers] = useState([]);
@@ -14,14 +14,16 @@ const List = () => {
   // Fetch Influencers function
 const fetchInfluencers = async () => {
   try {
-    const managerId = localStorage.getItem('managerID');
+  
+
+    const brandId = localStorage.getItem('brandID');
     
     // Check if managerId exists in localStorage
-    if (!managerId) {
-      toast.error('Manager ID not found in localStorage');
+    if (!brandId) {
+      toast.error('brand ID not found in localStorage');
       return;
     }
-    const response = await fetch(`https://server-side-influencer-1.onrender.com/manager/influencers/${managerId}`);
+    const response = await fetch(`https://server-side-influencer-1.onrender.com/brand/getInfluencers/${brandId}`);
     const data = await response.json();
     setInfluencers(data.influencers || []); // Ensure influencers is always an array
   } catch (error) {
@@ -64,14 +66,14 @@ const fetchInfluencers = async () => {
   // Function to delete influencer
   const handleDeleteInfluencer = async (influencerId) => {
     try {
-      const managerId = localStorage.getItem('managerID');
+        const brandId = localStorage.getItem('brandID');
     
-      // Check if managerId exists in localStorage
-      if (!managerId) {
-        toast.error('Manager ID not found in localStorage');
-        return;
-      }
-      const response = await fetch(`https://server-side-influencer-1.onrender.com/manager/influencers/${managerId }/${influencerId}`, {
+        // Check if managerId exists in localStorage
+        if (!brandId) {
+          toast.error('brand ID not found in localStorage');
+          return;
+        }
+      const response = await fetch(`https://server-side-influencer-1.onrender.com/brand/deleteInfluencer/${brandId}/${influencerId}`, {
         method: "DELETE",
       });
       if (response.ok) {
@@ -263,5 +265,5 @@ const fetchInfluencers = async () => {
   );
 };
 
-export default List;
+export default BrandList;
 
