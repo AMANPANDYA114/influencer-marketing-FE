@@ -335,21 +335,23 @@ const InfluencerHistory = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedCampaignId, setSelectedCampaignId] = useState("");
   const [formData, setFormData] = useState({
-    name: '',  // The name will be set from localStorage
-    age: '',
-    followers: '',
-    email: '',
-    campaignId: '',
+    name: "",  // The name will be set from localStorage
+    age: "",
+    followers: "", // User can now input this value
+    email: "",
+    campaignId: "",
   });
-  const [searchQuery, setSearchQuery] = useState("");  // search query state
+  const [searchQuery, setSearchQuery] = useState(""); // search query state
 
   useEffect(() => {
     const getCampaigns = async () => {
       try {
         setLoading(true);
-        const response = await axios.get("https://server-side-influencer.vercel.app/brand/getAllCampaigns");
+        const response = await axios.get(
+          "https://server-side-influencer.vercel.app/brand/getAllCampaigns"
+        );
         const data = response.data.data;
-        setCampaigns(data);  // Set campaigns data
+        setCampaigns(data); // Set campaigns data
         setLoading(false);
       } catch (err) {
         toast.error("Error fetching campaign data.");
@@ -359,29 +361,21 @@ const InfluencerHistory = () => {
 
     getCampaigns();
 
-    // Retrieve the name (fullname) and followers count from localStorage
-    const fullname = localStorage.getItem('fullname');
-    console.log("fullnae in cmapiang ",fullname)
-    const followersCount = localStorage.getItem('followersCount');
-    
+    // Retrieve the name (fullname) from localStorage
+    const fullname = localStorage.getItem("fullname");
     if (fullname) {
       setFormData((prevFormData) => ({
         ...prevFormData,
-        name: fullname,  // Pre-fill the 'name' field with fullname from localStorage
-      }));
-    }
-    
-    if (followersCount) {
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        followers: followersCount,  // Pre-fill the 'followers' field
+        name: fullname, // Pre-fill the 'name' field with fullname from localStorage
       }));
     }
   }, []);
 
-  const filteredCampaigns = campaigns.filter(campaign => {
-    return campaign.tags.some(tag => {
-      return tag.toLowerCase().slice(0, 2) === searchQuery.toLowerCase().slice(0, 2);
+  const filteredCampaigns = campaigns.filter((campaign) => {
+    return campaign.tags.some((tag) => {
+      return (
+        tag.toLowerCase().slice(0, 2) === searchQuery.toLowerCase().slice(0, 2)
+      );
     });
   });
 
@@ -389,7 +383,7 @@ const InfluencerHistory = () => {
 
   const handleApplyClick = (campaign) => {
     setSelectedCampaignId(campaign._id);
-    setFormData(prevFormData => ({
+    setFormData((prevFormData) => ({
       ...prevFormData,
       campaignId: campaign._id,
     }));
@@ -423,20 +417,26 @@ const InfluencerHistory = () => {
     const applicationData = { ...formData, campaignId: selectedCampaignId };
 
     try {
-      const response = await axios.post("https://server-side-influencer.vercel.app/brand/applyToCampaign", applicationData);
+      const response = await axios.post(
+        "https://server-side-influencer.vercel.app/brand/applyToCampaign",
+        applicationData
+      );
 
       if (response.data.success) {
         toast.success("Application submitted successfully!");
         setShowModal(false);
         setFormData({
-          name: '',
-          age: '',
-          followers: '',
-          email: '',
-          campaignId: '',
+          name: "",
+          age: "",
+          followers: "",
+          email: "",
+          campaignId: "",
         });
       } else {
-        toast.error(response.data.message || "You are not eligible. Please check your email.");
+        toast.error(
+          response.data.message ||
+            "You are not eligible. Please check your email."
+        );
       }
     } catch (err) {
       if (err.response && err.response.data && err.response.data.message) {
@@ -603,9 +603,9 @@ const InfluencerHistory = () => {
                     name="followers"
                     value={formData.followers}
                     onChange={handleChange}
-                    placeholder="Followers count"
+                    placeholder="Enter your followers count"
                     className="w-full px-4 py-2 border rounded-md"
-                    readOnly
+                    required
                   />
                 </div>
 

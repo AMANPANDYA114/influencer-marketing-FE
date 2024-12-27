@@ -40,6 +40,7 @@ import BrandInfluencerGetDetail from "./components/Brand/Brandinfluncergetdetail
 import EditInfluencer from "./components/manager/Editinfluencer.jsx";
 // Import the CreateCampaign component
 import CreateCampaign from "./components/Brand/CreateCampaign";
+import CsvUploader from "./components/manager/CsvUploader.jsx";
 
 const App = () => {
   return (
@@ -47,6 +48,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
 
+        <Route path="/upload" element={<CsvUploader/>} />
         <Route path="/edit" element={<EditInfluencer/>} />
         <Route path="/getdetails" element={<BrandInfluencerGetDetail/>} />
         <Route path="/BrandIntro" element={<BrandIntro />} />

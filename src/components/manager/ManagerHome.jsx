@@ -1062,7 +1062,7 @@ const exportToCSV = () => {
 
 <div className="flex justify-between items-start mb-[-250px]">
   <div className="flex-1">
-    <CsvUploader /> {/* This will be on the left */}
+    <CsvUploader  fetchData={fetchData}  /> {/* This will be on the left */}
   </div>
   <div>
     <List /> {/* This will be on the right as a drawer */}
