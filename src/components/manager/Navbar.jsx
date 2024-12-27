@@ -107,14 +107,14 @@
 
 
 import React, { useState } from "react";
-import { HiMenuAlt1 } from 'react-icons/hi';
-import { FaUserCircle, FaHome } from 'react-icons/fa';
-import { BiLogOut, BiHistory } from 'react-icons/bi';
-import { BsPersonPlusFill } from 'react-icons/bs';
 import { AiTwotoneShop } from 'react-icons/ai';
+import { BiLogOut } from 'react-icons/bi';
+import { BsPersonPlusFill } from 'react-icons/bs';
+import { FaHome, FaUserCircle } from 'react-icons/fa';
+import { HiMenuAlt1 } from 'react-icons/hi';
 
-import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
     const navigate = useNavigate();

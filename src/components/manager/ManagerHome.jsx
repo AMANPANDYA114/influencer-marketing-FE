@@ -704,6 +704,13 @@ const ManagerHome=() => {
 
     const navigate = useNavigate();
 
+
+    useEffect(() => {
+      const token = localStorage.getItem('mangertoken');
+      if (!token) {
+        navigate('/ManagerLogin'); // Redirect to login if no token is found
+      }
+    }, [navigate]);
   
     // Fetch data from backend API
     const fetchData = async () => {
