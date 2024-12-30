@@ -504,6 +504,7 @@ import { FaTrashAlt } from "react-icons/fa"; // Import trash icon for delete but
 import { toast, ToastContainer } from "react-toastify"; // Import Toastify
 import "react-toastify/dist/ReactToastify.css"; // Import the toast CSS
 import Navbar from "./Navbar"; // Import the Navbar component
+import { useNavigate } from "react-router-dom";
 const CreateCampaign = () => {
   
 
@@ -523,7 +524,7 @@ const CreateCampaign = () => {
   const [myCampaigns, setMyCampaigns] = useState([]); // Store fetched campaigns
   const [loading, setLoading] = useState(false); // Loading state for API calls
   const [brandData, setBrandData] = useState(null); // Brand data state
-
+  const navigate = useNavigate();
   // Fetch brand data from API
   const getBrandData = async () => {
     try {
@@ -553,6 +554,15 @@ const CreateCampaign = () => {
     }
   };
 
+  const handleViewApplicants = (campaignId) => {
+    navigate(`/applicant/${campaignId}`); // Pass campaignId as part of the URL
+  };
+  
+
+  // const handleViewApplicants = (campaignId) => {
+  //   console.log("Current Campaign ID:", campaignId);
+  // };
+  
 
     useEffect(() => {
     const storedBrandId = localStorage.getItem("brandID");
@@ -963,12 +973,21 @@ const CreateCampaign = () => {
               <div
                 key={campaign._id}
                 className="bg-white p-4 rounded-lg shadow-lg flex flex-col w-full sm:w-1/2 md:w-1/3 lg:w-1/4"
-              >
+                style={{ width: "100%" }}
+>
                 <h3 className="text-xl font-semibold text-blue-600">
                   {campaign.campaignName}
                 </h3>
                 
-                <p className="mt-2">Brand Name :{campaign.brandName}</p>
+                {/* <p className="mt-2">Brand Name :{campaign.brandName}</p> */}
+                <div className="relative">
+    <p className="mt-2">
+      Brand Name: {campaign.brandName}
+      <span className="absolute top-0 right-0 bg-green-500 text-white px-3 py-1 rounded-full text-sm  cursor-pointer"  onClick={() => handleViewApplicants(campaign._id)}>
+        View Applicants
+      </span>
+    </p>
+  </div>
                      <p className="mt-2">campaign type :{campaign.campaignType}</p>
                 
 
@@ -976,6 +995,7 @@ const CreateCampaign = () => {
                 <p className="mt-2">Budget: {campaign.budget}</p>
                 <p className="mt-2">Start Date: {campaign.startDate}</p>
                 <p className="mt-2">End Date: {campaign.endDate}</p>
+                <p className="mt-2">Follower Range: {campaign.followerRange ? `${campaign.followerRange[0]} - ${campaign.followerRange[1]}` : "Not available"}</p>
                 <div className="mt-4 flex justify-between">
                   <div className="flex space-x-2">
                     {campaign.tags.map((tag, index) => (

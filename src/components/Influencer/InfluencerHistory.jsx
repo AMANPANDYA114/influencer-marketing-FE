@@ -321,13 +321,13 @@
 
 
 
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
-import Navbar from "./Navbar";
 import loader from "../../Images/loader.gif";
 import InfluencerHeader from "./InfluencerHeader";
+import Navbar from "./Navbar";
 
 const InfluencerHistory = () => {
   const [campaigns, setCampaigns] = useState([]);
@@ -415,10 +415,11 @@ const InfluencerHistory = () => {
     if (!validateForm()) return;
 
     const applicationData = { ...formData, campaignId: selectedCampaignId };
+    // https://server-side-influencer.vercel.app/brand/applyToCampaign
 
     try {
       const response = await axios.post(
-        "https://server-side-influencer.vercel.app/brand/applyToCampaign",
+        "https://server-side-influencer-1.onrender.com/brand/applyToCampaign",
         applicationData
       );
 

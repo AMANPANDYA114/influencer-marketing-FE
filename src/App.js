@@ -38,6 +38,7 @@ import AddNewBrand from './components/manager/AddNewBrand';
 import ManagerProfile from './components/manager/ManagerProfile';
 import BrandInfluencerGetDetail from "./components/Brand/Brandinfluncergetdetails.jsx";
 import EditInfluencer from "./components/manager/Editinfluencer.jsx";
+import Applicant from "./components/Brand/Applicant.jsx";
 // Import the CreateCampaign component
 import CreateCampaign from "./components/Brand/CreateCampaign";
 import CsvUploader from "./components/manager/CsvUploader.jsx";
@@ -47,7 +48,10 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+       
+        <Route path="/applicant/:campaignId" element={<Applicant/>} />
 
+        {/* <Route path="/applicant" element={< Applicant/>} /> */}
         <Route path="/upload" element={<CsvUploader/>} />
         <Route path="/edit" element={<EditInfluencer/>} />
         <Route path="/getdetails" element={<BrandInfluencerGetDetail/>} />
