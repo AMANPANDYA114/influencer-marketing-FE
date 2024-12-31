@@ -10,6 +10,7 @@ import { Download, Instagram, YouTube } from '@mui/icons-material';
 import { Slider } from '@mui/material';
 import { toast } from 'react-toastify';
 import CsvUploader from './CsvUploader';
+import Swal from 'sweetalert2';
 import List from './List';
 const ManagerHome=() => {
 
@@ -342,6 +343,17 @@ const safeEmail = (email) => {
 
 // Export selected rows to CSV
 const exportToCSV = () => {
+  if (!selectedRows || selectedRows.length === 0) {
+    // Show a toast error if no rows are selected
+    // toast.error("Please select at least one row to export Csv file.");
+    Swal.fire({
+      title: "Error",
+      text: "Please select at least one row to export the CSV file.",
+      icon: "error",
+      confirmButtonText: "OK",
+    });
+    return;
+  }
   const selectedData = selectedRows.map((index) => filteredData[index]);
 
   // Prepare CSV content

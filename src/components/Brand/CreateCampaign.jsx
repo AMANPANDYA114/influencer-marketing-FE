@@ -505,6 +505,7 @@ import { toast, ToastContainer } from "react-toastify"; // Import Toastify
 import "react-toastify/dist/ReactToastify.css"; // Import the toast CSS
 import Navbar from "./Navbar"; // Import the Navbar component
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 const CreateCampaign = () => {
   
 
@@ -739,7 +740,13 @@ const CreateCampaign = () => {
 
       if (response.ok) {
         const data = await response.json();
-        toast.success("Campaign created successfully!");
+        Swal.fire({
+          title: "Success",
+          text: "Campaign created successfully!",
+          icon: "success", // Success icon
+          confirmButtonText: "OK",
+        });
+        // toast.success("Campaign created successfully!");
         setMyCampaigns((prevCampaigns) => [...prevCampaigns, data.data]);
       } else {
         toast.error("Failed to create campaign");

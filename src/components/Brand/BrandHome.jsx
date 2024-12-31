@@ -503,9 +503,11 @@ import Navbar from './Navbar';
 import { Download, Instagram, YouTube } from '@mui/icons-material';
 import { Slider } from '@mui/material';
 import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import BrandList from './BrandList';
 import CsvUploader from '../manager/CsvUploader';
-
+import Swal from 'sweetalert2';
 const BrandHome=() => {
 
   const [cities, setCities] = useState([]);
@@ -740,14 +742,26 @@ const handleAdd = async (id) => {
     });
 
     if (response.ok) {
-      const data = await response.json();
-      toast.success(`Added successfully!`);
+      Swal.fire({
+        title: "Success",
+        text: "Influencer added successfully!",
+        icon: "success", // Success icon
+        confirmButtonText: "OK",
+      });
+      // const data = await response.json();
+      // toast.success(`Added successfully!`);
     } else {
       const errorData = await response.json();
       console.error('Error:', errorData.message);
       
       // Show error toast once, as expected
-      toast.error(` ${errorData.message}`);
+      Swal.fire({
+        title: "Error",
+        text: errorData.message, // Display the error message
+        icon: "error",           // Display an error icon
+        confirmButtonText: "OK", // Button text to close the alert
+      });
+      // toast.error(` ${errorData.message}`);
     }
   } catch (error) {
     console.error('Error occurred:', error);
@@ -837,6 +851,19 @@ const safeEmail = (email) => {
 
 // Export selected rows to CSV
 const exportToCSV = () => {
+
+  if (!selectedRows || selectedRows.length === 0) {
+    // Show a toast error if no rows are selected
+   
+    Swal.fire({
+      title: "Error",
+      text: "Please select at least one row to export the CSV file.",
+      icon: "error",
+      confirmButtonText: "OK",
+    });
+    // alert("Please select at least one row to export Csv file.");
+    return;
+  }
   const selectedData = selectedRows.map((index) => filteredData[index]);
 
   // Prepare CSV content
@@ -892,6 +919,7 @@ const exportToCSV = () => {
 
     return (
         <div className="h-screen flex">
+     
             <Navbar />
             <div className="h-screen ml-14 max-sm:ml-0  w-full flex flex-col">
                 <div className="text-center font-bold text-2xl mt-4 ml-6">
