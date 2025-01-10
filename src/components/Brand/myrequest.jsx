@@ -154,7 +154,7 @@ const MyRequest = () => {
 
   const deleteMessage = async (messageId) => {
     try {
-      const response = await fetch(`http://localhost:8000/brand/message/${messageId}`, {
+      const response = await fetch(`https://server-side-influencer-1.onrender.com/brand/message/${messageId}`, {
         method: "DELETE",
       });
       const result = await response.json();
