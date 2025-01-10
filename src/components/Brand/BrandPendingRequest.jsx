@@ -39,7 +39,7 @@ const BrandPendingRequest = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:8000/brand/message/${brandId}`,
+        `https://server-side-influencer-1.onrender.com/brand/message/${brandId}`,
         {
           method: "POST",
           headers: {
