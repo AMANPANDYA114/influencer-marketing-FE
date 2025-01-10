@@ -118,7 +118,7 @@ const InfluencerPendingRequest = () => {
   
   useEffect(() => {
     // Fetch data from API
-    fetch("http://localhost:8000/brand/messages")
+    fetch("https://server-side-influencer-1.onrender.com/brand/messages")
       .then(response => response.json())
       .then(data => {
         if (data.success) {
