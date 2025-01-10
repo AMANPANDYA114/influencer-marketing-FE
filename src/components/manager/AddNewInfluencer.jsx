@@ -350,7 +350,7 @@ const AddNewInfluencer = () => {
     }
 
     try {
-      const res = await fetch("https://server-side-influencer.vercel.app//manager/getunverifiedbrand", {
+      const res = await fetch("https://server-side-influencer.vercel.app/manager/getunverifiedbrand", {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${token}`, // Pass token in Authorization header
