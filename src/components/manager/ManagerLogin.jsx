@@ -65,7 +65,7 @@ const ManagerLogin = () => {
 
   // Handle navigation to ManagerSignUp page when "Register here" is clicked
   const navigateToSignUp = () => {
-    navigate('/ManagerSignUp');
+    // navigate('/ManagerSignUp');
   };
 
   return (
