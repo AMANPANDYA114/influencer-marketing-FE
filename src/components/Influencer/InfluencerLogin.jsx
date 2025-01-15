@@ -33,7 +33,7 @@ const InfluencerLogin = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        email, // Send 'email' in the payload instead of 'username'
+        email, // Send 'email' in the payload instead of 'usernamesw'
         password,
       }),
     });
