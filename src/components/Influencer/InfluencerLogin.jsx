@@ -27,7 +27,7 @@ const InfluencerLogin = () => {
     e.preventDefault();
 
     const { email, password } = userdata; // Use 'email' here instead of 'username'
-    const res = await fetch('https://server-side-influencer.vercel.app/influencer/influencerlogin', {
+    const res = await fetch('https://server-side-influencer.onrender.com/influencer/influencerlogin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

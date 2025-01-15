@@ -276,7 +276,7 @@ const InfluencerSignUp = () => {
     if (password === cpass) {
       try {
         // Submit signup data
-        const res = await fetch("https://server-side-influencer.vercel.app/influencer/signup", {
+        const res = await fetch("https://server-side-influencer.onrender.com/influencer/signup", {
           method: 'POST',
           headers: {
             "Content-Type": "application/json",
