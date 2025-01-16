@@ -503,11 +503,9 @@ import Navbar from './Navbar';
 import { Download, Instagram, YouTube } from '@mui/icons-material';
 import { Slider } from '@mui/material';
 import { toast } from 'react-toastify';
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import BrandList from './BrandList';
-import CsvUploader from '../manager/CsvUploader';
 import Swal from 'sweetalert2';
+import BrandList from './BrandList';
 const BrandHome=() => {
 
   const [cities, setCities] = useState([]);
@@ -546,7 +544,7 @@ const BrandHome=() => {
     const fetchData = async () => {
         try {
             setLoading(true);
-            const response = await fetch('https://server-side-influencer-1.onrender.com/influencer/all'); // Replace with your API endpoint
+            const response = await fetch('https://server-side-influencer.onrender.com/influencer/allss'); // Replace with your API endpoint
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
@@ -768,60 +766,6 @@ const handleAdd = async (id) => {
   }
 };
 
-const handleDelete = async (id) => {
-  console.log("Item ID to delete:", id);
-
-  try {
-    const response = await fetch(`https://server-side-influencer-1.onrender.com/influencers/delete/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (response.ok) {
-      console.log(`Item with ID ${id} deleted successfully.`);
-      
-      // Show success toast once, as expected
-      toast.success(`deleted successfully!`);
-      fetchData();
-      // Remove the deleted item from the client-side (UI)
-      setApiData(prevData => prevData.filter(item => item.id !== id));
-
-      // Re-fetch data after successful delete (optional)
-      try {
-        setLoading(true); // Set loading state to true before fetching new data
-        const fetchResponse = await fetch('/influencer/all'); // Replace with your actual API endpoint for fetching the updated list
-
-        if (!fetchResponse.ok) {
-          throw new Error(`HTTP error! Status: ${fetchResponse.status}`);
-        }
-
-        const result = await fetchResponse.json();
-        console.log('API Data:', result); // Debugging line
-        setApiData(result); // Store the updated API data
-        setLoading(false); // Set loading state to false after data is fetched
-      } catch (err) {
-        console.error('Fetch error:', err.message); // Debugging line
-        setError(err.message); // Capture and display error if fetching fails
-        setLoading(false); // Set loading state to false in case of error
-      }
-    } else {
-      // This handles the case when deletion fails
-      console.error(`Failed to delete item with ID ${id}.`);
-      const errorData = await response.json();
-      console.error('Error:', errorData.message);
-      
-      // Show error toast once, as expected
-      toast.error(`Failed to delete item: ${errorData.message}`);
-    }
-  } catch (error) {
-    console.error("Error deleting item:", error);
-    
-    // Show error toast for unexpected errors
-    toast.error("An error occurred while deleting the item.");
-  }
-};
 
 
 

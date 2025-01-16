@@ -18,12 +18,13 @@ const CsvUploader = ({ fetchData }) => {  // Receive fetchData as a prop
       toast.error("Please select a file to upload.");
       return;
     }
-
+    // https://server-side-influencer-1.onrender.com/influencer/upload-csv
+  
     const formData = new FormData();
     formData.append("file", file);
     // 
     try {
-      const response = await fetch("https://server-side-influencer-1.onrender.com/influencer/upload-csv", {
+      const response = await fetch("http://localhost:8000/influencer/upload-csv", {
         method: "POST",
         body: formData,
       });
