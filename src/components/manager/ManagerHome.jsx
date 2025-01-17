@@ -2,6 +2,7 @@
 
 
 
+
 // import React, { useEffect, useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 // import Navbar from './Navbar';
@@ -9,8 +10,8 @@
 // import { Download, Instagram, YouTube } from '@mui/icons-material';
 // import { Slider } from '@mui/material';
 // import { toast } from 'react-toastify';
-// import CsvUploader from './CsvUploader';
 // import Swal from 'sweetalert2';
+// import CsvUploader from './CsvUploader';
 // import List from './List';
 // const ManagerHome=() => {
 
@@ -53,7 +54,7 @@
 //         try {
 //           // http://localhost:8000
 //             setLoading(true);
-//             const response = await fetch('https://server-side-influencer-1.onrender.com/influencer/all'); // Replace with your API endpoint
+//             const response = await fetch('https://server-side-influencer.onrender.com/influencer/allss'); // Replace with your API endpoint
 //             if (!response.ok) {
 //                 throw new Error(`HTTP error! Status: ${response.status}`);
 //             }
@@ -231,7 +232,7 @@
 // };
 
 
-// const handleAdd = async (id) => {
+// const handleAdd = async (_id) => {
 //   try {
 //     const managerId = localStorage.getItem('managerID');
     
@@ -240,7 +241,7 @@
 //       toast.error('Manager ID not found in localStorage');
 //       return;
 //     }
-//     const response = await fetch(`https://server-side-influencer-1.onrender.com/manager/influencer/add/${managerId}/${id}`, {
+//     const response = await fetch(`https://server-side-influencer.onrender.com/manager/influencer/add/${managerId}/${_id}`, {
 //       method: 'POST',
 //       headers: {
 //         'Content-Type': 'application/json',
@@ -262,11 +263,12 @@
 //   }
 // };
 
-// const handleDelete = async (id) => {
-//   console.log("Item ID to delete:", id);
+
+// const handleDelete = async (_id) => {
+//   console.log("Item ID to delete:", _id);
 
 //   try {
-//     const response = await fetch(`https://server-side-influencer-1.onrender.com/influencers/delete/${id}`, {
+//     const response = await fetch(`https://server-side-influencer.onrender.com/influencers/delete/${_id}`, {
 //       method: 'DELETE',
 //       headers: {
 //         'Content-Type': 'application/json',
@@ -274,49 +276,22 @@
 //     });
 
 //     if (response.ok) {
-//       console.log(`Item with ID ${id} deleted successfully.`);
-      
-//       // Show success toast once, as expected
-//       toast.success(`deleted successfully!`);
-//       fetchData();
-//       // Remove the deleted item from the client-side (UI)
-//       setApiData(prevData => prevData.filter(item => item.id !== id));
+//       console.log(`Item with ID ${_id} deleted successfully.`);
+//       toast.success(`Deleted successfully!`);
 
-//       // Re-fetch data after successful delete (optional)
-//       try {
-//         setLoading(true); // Set loading state to true before fetching new data
-//         const fetchResponse = await fetch('/influencer/all'); // Replace with your actual API endpoint for fetching the updated list
+//       // Update the state to remove the deleted item from the list
+//       setApiData(prevData => prevData.filter(item => item._id !== _id));
 
-//         if (!fetchResponse.ok) {
-//           throw new Error(`HTTP error! Status: ${fetchResponse.status}`);
-//         }
-
-//         const result = await fetchResponse.json();
-//         console.log('API Data:', result); // Debugging line
-//         setApiData(result); // Store the updated API data
-//         setLoading(false); // Set loading state to false after data is fetched
-//       } catch (err) {
-//         console.error('Fetch error:', err.message); // Debugging line
-//         setError(err.message); // Capture and display error if fetching fails
-//         setLoading(false); // Set loading state to false in case of error
-//       }
 //     } else {
-//       // This handles the case when deletion fails
-//       console.error(`Failed to delete item with ID ${id}.`);
 //       const errorData = await response.json();
 //       console.error('Error:', errorData.message);
-      
-//       // Show error toast once, as expected
 //       toast.error(`Failed to delete item: ${errorData.message}`);
 //     }
 //   } catch (error) {
 //     console.error("Error deleting item:", error);
-    
-//     // Show error toast for unexpected errors
 //     toast.error("An error occurred while deleting the item.");
 //   }
 // };
-
 
 
 //     // Followers range options
@@ -688,7 +663,7 @@
 //                                                         {/* <td className="border px-4 py-2">{item.id || 'N/A'}</td> */}
 //                                                         <td className="border px-4 py-2">
 //   <button
-//     onClick={() => handleDelete(item.id)} // Call the function with the ID
+//     onClick={() => handleDelete(item._id)} // Call the function with the ID
 //     className="text-red-500 hover:text-red-700 focus:outline-none"
 //   >
 //    delete
@@ -706,7 +681,7 @@
 
 // <td className="border px-4 py-2">
 //   <button
-//     onClick={() => handleAdd(item.id)} // Call the function with the ID
+//     onClick={() => handleAdd(item._id)} // Call the function with the ID
 //     className="text-green-500 hover:text-red-700 focus:outline-none"
 //   >
 //    Add
@@ -759,6 +734,9 @@
 
 
 
+
+
+
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
@@ -790,7 +768,7 @@ const ManagerHome=() => {
       priceRange: [0, 5000000], // Default price range [0, 50 lakh]
   });
 
-
+  const [categories, setCategories] = useState([]); // Store unique categories
     const [loading, setLoading] = useState(true); // Track loading state
     const [error, setError] = useState(null); // Track error state
 
@@ -806,25 +784,42 @@ const ManagerHome=() => {
     }, [navigate]);
   
     // Fetch data from backend API
-    const fetchData = async () => {
-        try {
-          // http://localhost:8000
-            setLoading(true);
-            const response = await fetch('https://server-side-influencer.onrender.com/influencer/allss'); // Replace with your API endpoint
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            const result = await response.json();
-            console.log('API Data:', result); // Debugging line
-            setApiData(result); // Only store API data here
-            setLoading(false);
-        } catch (err) {
-            console.error('Fetch error:', err.message); // Debugging line
-            setError(err.message);
-            setLoading(false);
-        }
-    };
+    // const fetchData = async () => {
+    //     try {
+    //       // http://localhost:8000
+    //         setLoading(true);
+    //         const response = await fetch('https://server-side-influencer.onrender.com/influencer/allss'); // Replace with your API endpoint
+    //         if (!response.ok) {
+    //             throw new Error(`HTTP error! Status: ${response.status}`);
+    //         }
+    //         const result = await response.json();
+    //         console.log('API Data:', result); // Debugging line
+    //         setApiData(result); // Only store API data here
+    //         setLoading(false);
+    //     } catch (err) {
+    //         console.error('Fetch error:', err.message); // Debugging line
+    //         setError(err.message);
+    //         setLoading(false);
+    //     }
+    // };
 
+
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://server-side-influencer.onrender.com/influencer/allss');
+        const data = await response.json();
+        setApiData(data);
+        
+        // Extract unique categories from the API data
+        const uniqueCategories = [
+          ...new Set(data.map(item => item.category)) // Set will remove duplicates
+        ];
+        setCategories(uniqueCategories);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+  
 
     // Load data on component mount
     useEffect(() => {
@@ -840,14 +835,7 @@ const ManagerHome=() => {
   };
     // subcatorygries 
 
-    const categoryOptions = {
-        Fashion: ['Clothing', 'Accessories', 'Footwear'],
-        Beauty: ['Skincare', 'Makeup', 'Haircare'],
-        HealthFitness: ['Gym', 'Yoga', 'Nutrition'],
-        Sports: ['Cricket', 'Football', 'Basketball'],
-        HomeDecor: ['Furniture', 'Wall Art', 'Lighting'],
-    };
-
+    
 
   
 
@@ -945,7 +933,7 @@ const price = parseFloat(item.costingPerSegment || 0);
     (searchQuery.name === '' || (item.name && item.name.toLowerCase().includes(searchQuery.name.toLowerCase()))) &&
 
     // Ensure item.category exists and is a string before calling toLowerCase()
-    (searchQuery.category === '' || (item.category && item.category.toLowerCase() === searchQuery.category.toLowerCase())) &&
+    (searchQuery.category === '' || item.category.toLowerCase().includes(searchQuery.category.toLowerCase())) &&
 
     // Ensure item.subCategory exists and is a string before calling toLowerCase()
     (searchQuery.subCategory === '' || (item.subCategory && item.subCategory.toLowerCase() === searchQuery.subCategory.toLowerCase())) &&
@@ -1199,7 +1187,7 @@ const exportToCSV = () => {
                         />
 
                         {/* Category Dropdown */}
-                        <select
+                        {/* <select
                             name="category"
                             className="w-full border px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                             value={searchQuery.category}
@@ -1211,10 +1199,20 @@ const exportToCSV = () => {
                                     {category}
                                 </option>
                             ))}
-                        </select>
+                        </select> */}
+
+
+<select name="category" className="w-full border px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" onChange={handleInputChange} value={searchQuery.category}>
+          <option value="">Select Category</option>
+          {categories.map((category, index) => (
+            <option key={index} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
 
                         {/* Subcategory Dropdown */}
-                        {searchQuery.category && (
+                        {/* {searchQuery.category && (
                             <select
                                 name="subCategory"
                                 className="w-full border px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -1228,7 +1226,7 @@ const exportToCSV = () => {
                                     </option>
                                 ))}
                             </select>
-                        )}
+                        )} */}
 
                         <input
                             type="text"
@@ -1478,6 +1476,11 @@ const exportToCSV = () => {
 };
 
 export default ManagerHome;
+
+
+
+
+
 
 
 

@@ -2,16 +2,15 @@
 
 
 
-import React, { useEffect, useState } from "react";
-import { HiMenuAlt1 } from 'react-icons/hi';
-import { FaUserCircle, FaHome } from 'react-icons/fa';
-import { CgImport } from 'react-icons/cg';
-import { MdPendingActions } from 'react-icons/md';
-import { BiLogOut, BiHistory } from 'react-icons/bi';
-import { FaHandshake } from 'react-icons/fa';
-import { IoPeople } from 'react-icons/io5'; // Icon for Influencer Consolidation
-import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { BiHistory, BiLogOut } from 'react-icons/bi';
+import { CgImport } from 'react-icons/cg';
+import { FaHandshake, FaHome, FaUserCircle } from 'react-icons/fa';
+import { HiMenuAlt1 } from 'react-icons/hi';
+import { IoPeople } from 'react-icons/io5'; // Icon for Influencer Consolidation
+import { MdPendingActions } from 'react-icons/md';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -59,28 +58,47 @@ const Navbar = () => {
     // };
 
 
-    const logout = async () => {
+
+    const logout = () => {
         try {
-            // Make an API call to the server to logout the user
-            const res = await axios.get('https://server-side-influencer-1.onrender.com/logout');
-            console.log(res.data);
+            // Clear localStorage and sessionStorage
+            localStorage.clear();  // Clears all data stored in localStorage
+            sessionStorage.clear(); // Clears all data stored in sessionStorage
     
-            if (res.data.success === true) {
-                // Clear localStorage and sessionStorage to remove any saved data
-                localStorage.clear();
-                sessionStorage.clear();
+            // Clear cookies by iterating over all cookies and removing them
+            document.cookie.split(";").forEach((cookie) => {
+                const cookieName = cookie.split("=")[0].trim();
+                document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+            });
     
-                // Optionally, clear specific data if you're saving some key-values:
-                // localStorage.removeItem("user_data");  // Example of specific removal
-    
-                // Remove any session-related state in the frontend (e.g., logged in user data)
-                // Reset any React state or context as needed
-    
-                // Redirect user to the login page (or home page)
-                navigate('/');  // Or you could redirect to a login page like navigate('/login')
+            // Clear IndexedDB if you need to (can be optional)
+            if (window.indexedDB) {
+                const request = indexedDB.deleteDatabase('your-database-name'); // Replace with your actual DB name
+                request.onsuccess = function () {
+                    console.log('IndexedDB cleared');
+                };
+                request.onerror = function (error) {
+                    console.error('Error clearing IndexedDB:', error);
+                };
             }
+    
+            // Clear CacheStorage if needed (can be optional)
+            if (window.caches) {
+                caches.keys().then((cacheNames) => {
+                    cacheNames.forEach((cacheName) => {
+                        caches.delete(cacheName);
+                    });
+                });
+            }
+    
+            // Navigate to the homepage or login page after clearing everything
+            navigate('/');
         } catch (err) {
-            console.log(err);
+            console.log("Error during logout:", err);
+            // In case of an error, clear all stored data and navigate anyway
+            localStorage.clear();
+            sessionStorage.clear();
+            navigate('/');
         }
     };
     

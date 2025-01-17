@@ -171,26 +171,74 @@ const Navbar = () => {
         getInfluencerData();
     }, []);
 
-    const logout = async () => {
-        try {
-            const res = await axios.get('https://server-side-influencer.vercel.app/logout');
-            console.log(res.data);
-            if (res.data.success === true) {
-                // Clear both localStorage and sessionStorage
-                localStorage.clear();
-                sessionStorage.clear();
+    // const logout = async () => {
+    //     try {
+    //         const res = await axios.get('https://server-side-influencer.vercel.app/logout');
+    //         console.log(res.data);
+    //         if (res.data.success === true) {
+    //             // Clear both localStorage and sessionStorage
+    //             localStorage.clear();
+    //             sessionStorage.clear();
 
-                // Navigate to the homepage or login page after logout
-                navigate('/');
+    //             // Navigate to the homepage or login page after logout
+    //             navigate('/');
+    //         }
+    //     } catch (err) {
+    //         console.log(err);
+    //         // If there's an error, clear the storage and navigate anyway
+    //         localStorage.clear();
+    //         sessionStorage.clear();
+    //         navigate('/');
+    //     }
+    // };
+
+
+
+    
+
+    const logout = () => {
+        try {
+            // Clear localStorage and sessionStorage
+            localStorage.clear();  // Clears all data stored in localStorage
+            sessionStorage.clear(); // Clears all data stored in sessionStorage
+    
+            // Clear cookies by iterating over all cookies and removing them
+            document.cookie.split(";").forEach((cookie) => {
+                const cookieName = cookie.split("=")[0].trim();
+                document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+            });
+    
+            // Clear IndexedDB if you need to (can be optional)
+            if (window.indexedDB) {
+                const request = indexedDB.deleteDatabase('your-database-name'); // Replace with your actual DB name
+                request.onsuccess = function () {
+                    console.log('IndexedDB cleared');
+                };
+                request.onerror = function (error) {
+                    console.error('Error clearing IndexedDB:', error);
+                };
             }
+    
+            // Clear CacheStorage if needed (can be optional)
+            if (window.caches) {
+                caches.keys().then((cacheNames) => {
+                    cacheNames.forEach((cacheName) => {
+                        caches.delete(cacheName);
+                    });
+                });
+            }
+    
+            // Navigate to the homepage or login page after clearing everything
+            navigate('/');
         } catch (err) {
-            console.log(err);
-            // If there's an error, clear the storage and navigate anyway
+            console.log("Error during logout:", err);
+            // In case of an error, clear all stored data and navigate anyway
             localStorage.clear();
             sessionStorage.clear();
             navigate('/');
         }
     };
+    
 
     return (
         <>

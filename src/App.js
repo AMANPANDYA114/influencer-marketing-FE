@@ -43,11 +43,13 @@ import Applicant from "./components/Brand/Applicant.jsx";
 import CreateCampaign from "./components/Brand/CreateCampaign";
 import CsvUploader from "./components/manager/CsvUploader.jsx";
 import MyRequest from "./components/Brand/myrequest.jsx";
+import PendingRequest from "./components/manager/pendingrequest.jsx";
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/request" element={<PendingRequest />} />
         <Route path="/myrequest" element={<MyRequest />} />
         <Route path="/applicant/:campaignId" element={<Applicant/>} />
 
