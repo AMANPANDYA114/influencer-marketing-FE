@@ -1,54 +1,56 @@
 
 
-import "./App.css";
-import Home from "./Home";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import BrandIntro from "./components/Brand/BrandIntro";
-import InfluencerIntro from "./components/Influencer/InfluencerIntro";
-import BrandSignUp from "./components/Brand/BrandSignUp";
-import InfluencerSignUp from "./components/Influencer/InfluencerSignUp";
-import ManagerSignUp from "./components/manager/ManagerSignUp";
+import "./App.css";
 import AboutUs from "./components/About";
-import NewToSite from "./components/Newtosite";
-import BrandHome from "./components/Brand/BrandHome";
-import BrandPendingRequest from "./components/Brand/BrandPendingRequest";
+import Applicant from "./components/Brand/Applicant.jsx";
 import BrandArrivalRequest from "./components/Brand/BrandArrivalRequest";
 import BrandConsignments from "./components/Brand/BrandConsignments";
 import BrandHistory from "./components/Brand/BrandHistory";
+import BrandHome from "./components/Brand/BrandHome";
+import BrandInfluencerGetDetail from "./components/Brand/Brandinfluncergetdetails.jsx";
+import BrandIntro from "./components/Brand/BrandIntro";
 import BrandLogin from "./components/Brand/BrandLogin";
-import BrandDetails from "./components/Influencer/BrandDetails";
+import BrandPendingRequest from "./components/Brand/BrandPendingRequest";
 import BrandProfile from "./components/Brand/BrandProfile.jsx";
 import BrandProfileEdit from "./components/Brand/BrandProfileEdit.jsx";
+import BrandSignUp from "./components/Brand/BrandSignUp";
+import InfluencerCompare from "./components/Brand/InfluencerCompare";
+import Influencerconsolidation from './components/Brand/Influencerconsolidation';
 import InfluencerDetails from "./components/Brand/InfluencerDetails";
-import InfluencerHome from "./components/Influencer/InfluencerHome";
-import InfluencerProfile from "./components/Influencer/InfluencerProfile";
-import InfluencerProfileEdit from "./components/Influencer/InfluencerProfileEdit";
+import BrandDetails from "./components/Influencer/BrandDetails";
+import InfluencerArrivalRequest from "./components/Influencer/InfluencerArrivalRequest";
 import InfluencerConsignments from "./components/Influencer/InfluencerConsignments";
 import InfluencerHistory from "./components/Influencer/InfluencerHistory";
+import InfluencerHome from "./components/Influencer/InfluencerHome";
+import InfluencerIntro from "./components/Influencer/InfluencerIntro";
 import InfluencerLogin from "./components/Influencer/InfluencerLogin";
-import InfluencerArrivalRequest from "./components/Influencer/InfluencerArrivalRequest";
 import InfluencerPendingRequest from "./components/Influencer/InfluencerPendingRequest";
-import InfluencerCompare from "./components/Brand/InfluencerCompare"; 
-import Influencerconsolidation from './components/Brand/Influencerconsolidation';
+import InfluencerProfile from "./components/Influencer/InfluencerProfile";
+import InfluencerProfileEdit from "./components/Influencer/InfluencerProfileEdit";
+import InfluencerSignUp from "./components/Influencer/InfluencerSignUp";
+import AddNewBrand from './components/manager/AddNewBrand';
+import AddNewInfluencer from './components/manager/AddNewInfluencer';
+import EditInfluencer from "./components/manager/Editinfluencer.jsx";
+import ManagerHeader from './components/manager/ManagerHeader';
 import ManagerHome from './components/manager/ManagerHome';
 import ManagerLogin from './components/manager/ManagerLogin';
-import ManagerHeader from './components/manager/ManagerHeader';
-import AddNewInfluencer from './components/manager/AddNewInfluencer';
-import AddNewBrand from './components/manager/AddNewBrand';
 import ManagerProfile from './components/manager/ManagerProfile';
-import BrandInfluencerGetDetail from "./components/Brand/Brandinfluncergetdetails.jsx";
-import EditInfluencer from "./components/manager/Editinfluencer.jsx";
-import Applicant from "./components/Brand/Applicant.jsx";
+import ManagerSignUp from "./components/manager/ManagerSignUp";
+import NewToSite from "./components/Newtosite";
+import Home from "./Home";
 // Import the CreateCampaign component
 import CreateCampaign from "./components/Brand/CreateCampaign";
-import CsvUploader from "./components/manager/CsvUploader.jsx";
 import MyRequest from "./components/Brand/myrequest.jsx";
+import CsvUploader from "./components/manager/CsvUploader.jsx";
 import PendingRequest from "./components/manager/pendingrequest.jsx";
+import UpdateProfile from "./components/manager/updateprofile.jsx";
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/updateagency" element={<UpdateProfile />} />
         <Route path="/request" element={<PendingRequest />} />
         <Route path="/myrequest" element={<MyRequest />} />
         <Route path="/applicant/:campaignId" element={<Applicant/>} />

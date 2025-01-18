@@ -1,6 +1,8 @@
 
 
+
 // import React, { useEffect, useState } from "react";
+// import Swal from "sweetalert2"; // Import SweetAlert2
 // import { FaWhatsapp } from "react-icons/fa"; // Import WhatsApp icon
 // import { FiPhoneCall } from "react-icons/fi";
 // import { MdEmail } from "react-icons/md";
@@ -24,19 +26,18 @@
 //       });
 //   }, []);
 
-//   const sendMessage = (phoneNumber) => {
-//     const message = `Hi, I need more information about your request which you posted in Hypbox`;
-//     // Format the phone number for WhatsApp
-//     const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-    
-//     // Open WhatsApp with pre-filled message (navigates to WhatsApp)
-//     window.location.href = whatsappLink;
+//   const sendMessage = () => {
+//     // Show SweetAlert after the request is sent
+//     Swal.fire({
+//       title: "Request Sent",
+//       text: "Your request has been sent. You will be contacted through email for this post.",
+//       icon: "success",
+//       confirmButtonText: "OK",
+//     });
 //   };
 
 //   return (
-//     <div className="flex flex-col min-h-screen bg-gradient-to-b from-blue-50 to-indigo-100">
-
-
+//     <div className="flex flex-col min-h-screen bg-white">
 //       <Navbar />
 //       <ManagerHeader page="New post" />
 //       <div className="flex flex-col w-full flex-grow p-8 items-center">
@@ -48,7 +49,7 @@
 //             profilecard.map((item, index) => (
 //               <div
 //                 key={index}
-//                 className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-all ease-in-out duration-300 transform hover:scale-105 w-full max-w-md ml-[13%]" 
+//                 className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-all ease-in-out duration-300 transform hover:scale-105 w-full max-w-md ml-[13%]"
 //               >
 //                 <div className="flex justify-center mb-6">
 //                   <img src={item.brandLogo} alt="Brand Logo" className="w-20 h-20 rounded-full object-cover border-4 border-indigo-500 shadow-lg" />
@@ -94,13 +95,14 @@
 //                     </div>
 //                   </div>
 //                 </div>
+
+//                 {/* Send Request Button */}
 //                 <div className="flex justify-center my-5">
 //                   <button
-//                     onClick={() => sendMessage(item.whatsappNumber)}
-//                     className="flex items-center px-4 py-2 bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 text-white font-semibold text-xs rounded-lg shadow-md transition duration-200 ease-in-out transform hover:scale-105"
+//                     onClick={sendMessage} // Call sendMessage when clicked
+//                     className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-sm font-bold py-2 px-4 rounded-full shadow-lg transition duration-200 transform hover:scale-105 hover:from-blue-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
 //                   >
-//                     <FaWhatsapp size={18} className="mr-2" />
-//                     <span>Chat on WhatsApp</span>
+//                     Send Request
 //                   </button>
 //                 </div>
 //               </div>
@@ -120,14 +122,11 @@
 
 
 import React, { useEffect, useState } from "react";
-import { FaWhatsapp } from "react-icons/fa"; // Import WhatsApp icon
-import { FiPhoneCall } from "react-icons/fi";
-import { MdEmail } from "react-icons/md";
-import { TiLocation } from "react-icons/ti";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Swal from "sweetalert2"; // Import SweetAlert2
+import ManagerHeader from './ManagerHeader';
 import Navbar from "./Navbar";
-import ManagerHeader from "./ManagerHeader";
 
 const PendingRequest = () => {
   const [profilecard, setProfilecard] = useState([]);
@@ -135,21 +134,63 @@ const PendingRequest = () => {
   useEffect(() => {
     // Fetch data from API
     fetch("https://server-side-influencer-1.onrender.com/brand/messages")
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         if (data.success) {
           setProfilecard(data.data); // Set the fetched data
         }
       });
   }, []);
 
-  const sendMessage = (phoneNumber) => {
-    const message = `Hi, I need more information about your request which you posted in Hypbox`;
-    // Format the phone number for WhatsApp
-    const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-    
-    // Open WhatsApp with pre-filled message (navigates to WhatsApp)
-    window.location.href = whatsappLink;
+  // Function to send the message (trigger the API call)
+  const sendMessage = async (messageId) => {
+    const managerId = localStorage.getItem('managerID'); // Get manager ID from local storage
+
+    if (!managerId) {
+      Swal.fire({
+        title: "Error",
+        text: "Manager ID not found. Please login again.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+      return;
+    }
+
+    // Send the GET request to the backend
+    try {
+      const response = await fetch(
+        `https://server-side-influencer-1.onrender.com/manager/send-email/${messageId}/${managerId}`,
+        {
+          method: "GET",
+        }
+      );
+      const data = await response.json();
+
+      // Check if the email was sent successfully
+      if (data.success) {
+        Swal.fire({
+          title: "Request Sent",
+          text: "Your request has been sent. You will be contacted through email for this post.",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "There was an error sending your request. Please try again.",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+      }
+    } catch (error) {
+      console.error("Error sending request:", error);
+      Swal.fire({
+        title: "Error",
+        text: "There was an issue with the server. Please try again later.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    }
   };
 
   return (
@@ -211,14 +252,15 @@ const PendingRequest = () => {
                     </div>
                   </div>
                 </div>
+
+                {/* Send Request Button */}
                 <div className="flex justify-center my-5">
-                  {/* <button
-                    onClick={() => sendMessage(item.whatsappNumber)}
-                    className="flex items-center px-4 py-2 bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 text-white font-semibold text-xs rounded-lg shadow-md transition duration-200 ease-in-out transform hover:scale-105"
+                  <button
+                    onClick={() => sendMessage(item._id)} // Pass messageId to the function
+                    className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-sm font-bold py-2 px-4 rounded-full shadow-lg transition duration-200 transform hover:scale-105 hover:from-blue-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   >
-                    <FaWhatsapp size={18} className="mr-2" />
-                    <span>Chat on WhatsApp</span>
-                  </button> */}
+                    Send Request
+                  </button>
                 </div>
               </div>
             ))
@@ -231,5 +273,3 @@ const PendingRequest = () => {
 };
 
 export default PendingRequest;
-
-
