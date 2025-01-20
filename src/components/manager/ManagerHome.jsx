@@ -88,6 +88,7 @@ const  ManagerHome= () => {
       'Managed By',
       'Lifestyle',
       'Email',
+      'Commercial'
     ];
   
     const csvRows = [];
@@ -114,6 +115,7 @@ const  ManagerHome= () => {
         row.managedBy || 'No Manager',  // If no manager, use 'No Manager'
         row.lifestyle || 'No Lifestyle',  // If no lifestyle, use 'No Lifestyle'
         row.email || 'No Email',  // If no email, use 'No Email'
+        row.commercial || 'No Commercial',  // Default to 'No Commercial' if empty
       ];
       
       // Push the row data to the CSV
