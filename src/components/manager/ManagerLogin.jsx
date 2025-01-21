@@ -68,6 +68,10 @@ const ManagerLogin = () => {
     navigate('/ManagerSignUp');
   };
 
+
+  const navigateToForgotPassword = () => {
+    navigate('/manageemail'); // Navigate to the influenceremail page
+  };
   return (
     <div className="font-[sans-serif]">
       <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
@@ -143,7 +147,11 @@ const ManagerLogin = () => {
                 </div>
 
                 <div className="text-sm">
-                  <a href="javascript:void(0);" className="text-blue-600 hover:underline font-semibold">
+                <a
+                    href="javascript:void(0);"
+                    className="text-blue-600 hover:underline font-semibold"
+                    onClick={navigateToForgotPassword} // Navigate to forgot password page
+                  >
                     Forgot your password?
                   </a>
                 </div>

@@ -45,11 +45,47 @@ import MyRequest from "./components/Brand/myrequest.jsx";
 import CsvUploader from "./components/manager/CsvUploader.jsx";
 import PendingRequest from "./components/manager/pendingrequest.jsx";
 import UpdateProfile from "./components/manager/updateprofile.jsx";
+import OtpEnterInfluencer from "./components/Influencer/OtpEnterInfluence.jsx";
+import ChangePasswordInfluencer from "./components/Influencer/ChangePasswordInfluencer.jsx";
+import InfluencerEmail from "./components/Influencer/InfluencerEmail.jsx";
+import BrandEnterEmail from "./components/Brand/Brandenteremail.jsx";
+import ChangePasswordBrand from "./components/Brand/ChangepasswordBrand.jsx";
+import OtpEnterBrand from "./components/Brand/Otpenterbrand.jsx";
+
+import ManageEnterEmail from "./components/manager/Managerenteremail.jsx";
+import OtpEnterManage from "./components/manager/otpentermanage.jsx";
+import ChangePasswordManage from "./components/manager/Changepasswordmanager.jsx";
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+
+
+
+
+
+        <Route path="/manageemail" element={<ManageEnterEmail/>} />
+        <Route path="/changepassbrand" element={<ChangePasswordManage/>} />
+        <Route path="/otpmanage" element={<OtpEnterManage/>} />
+
+
+        <Route path="/brandemail" element={<BrandEnterEmail/>} />
+        <Route path="/changepassbrand" element={<ChangePasswordBrand/>} />
+        <Route path="/otpbrand" element={<OtpEnterBrand/>} />
+
+
+
+
+        <Route path="/brandemail" element={<BrandEnterEmail/>} />
+        <Route path="/changepassbrand" element={<ChangePasswordBrand/>} />
+        <Route path="/otpbrand" element={<OtpEnterBrand/>} />
+
+
+
+        <Route path="/influenceremail" element={<InfluencerEmail/>} />
+        <Route path="/changepassinfluencer" element={<ChangePasswordInfluencer/>} />
+        <Route path="/influencerotp" element={<OtpEnterInfluencer/>} />
         <Route path="/updateagency" element={<UpdateProfile />} />
         <Route path="/request" element={<PendingRequest />} />
         <Route path="/myrequest" element={<MyRequest />} />

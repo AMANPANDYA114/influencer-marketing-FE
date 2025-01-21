@@ -50,7 +50,7 @@ const ManagerHeader = (props) => {
         </div>
         <div className="flex items-center space-x-4">
           <div className="">
-            <img className="w-10 h-10 rounded-full group" src={logo} alt="DP" />
+            <img className="w-10 h-10 rounded-full group" src={'https://i.postimg.cc/rwYFBbkT/agency.jpg'} alt="DP" />
           </div>
           <div className="font-medium">
             <div>Hi, {managerName || 'Agency'}</div> {/* Display manager's name from API or default 'Agency' */}

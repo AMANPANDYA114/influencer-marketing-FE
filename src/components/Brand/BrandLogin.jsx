@@ -53,6 +53,9 @@ const BrandLogin = () => {
   const navigateToSignUp = () => {
     navigate('/BrandSignUp');
   };
+  const navigateToForgotPassword = () => {
+    navigate('/brandemail'); // Navigate to the influenceremail page
+  };
 
   return (
     <div className="font-[sans-serif]">
@@ -129,7 +132,11 @@ const BrandLogin = () => {
                 </div>
 
                 <div className="text-sm">
-                  <a href="javascript:void(0);" className="text-blue-600 hover:underline font-semibold">
+                <a
+                    href="javascript:void(0);"
+                    className="text-blue-600 hover:underline font-semibold"
+                    onClick={navigateToForgotPassword} // Navigate to forgot password page
+                  >
                     Forgot your password?
                   </a>
                 </div>
