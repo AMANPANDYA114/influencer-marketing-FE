@@ -75,7 +75,7 @@ const InfCard = ({ item, onData }) => {
                             onClick={async (e) => {
                                 e.preventDefault();
                                 try {
-                                    const res = await axios.put("manager/validateinfluencer", { email: item.email });
+                                    const res = await axios.put("https://server-side-influencer.onrender.com/manager/validateinfluencer", { email: item.email });
                                     const data = res.data;
                                     if (data.success === true) {
                                         onData(item._id); // Remove influencer from the list

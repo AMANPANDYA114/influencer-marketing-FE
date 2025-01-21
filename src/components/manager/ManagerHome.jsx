@@ -42,6 +42,15 @@ const  ManagerHome= () => {
   // Fetch API data
   const fetchData = async () => {
     try {
+
+
+      const token = localStorage.getItem("mangertoken");
+
+    if (!token) {
+      // If no token found, redirect to login page
+      navigate("/ManagerLogin");
+      return;
+    }
       const response = await fetch('https://server-side-influencer.onrender.com/influencer/allss');
       if (!response.ok) {
         throw new Error('Failed to fetch data');

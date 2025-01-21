@@ -13,17 +13,6 @@ const BrandHeader = (props) => {
   // Set initial state to null instead of an empty array
   const [brandData, setBrandData] = useState(null);
 
-  // const getBrandData = async () => {
-  //   try {
-  //     const { data } = await axios.get("/brand/getBrandData");
-  //     setBrandData(data.data); // Assuming 'data.data' holds the brand information
-  //   } catch (err) {
-  //     console.log(err.response.status);
-  //     if (err.response.status === 422) {
-  //       toast.error("Something went wrong..");
-  //     }
-  //   }
-  // };
 
 
 
@@ -31,26 +20,57 @@ const BrandHeader = (props) => {
     try {
       // Retrieve the brandId from localStorage
       const brandId = localStorage.getItem("brandID");
-
+  
       if (!brandId) {
         console.log("Brand ID not found in localStorage");
         return;
       }
-
+  
       // Make the API call with the brandId from localStorage
       const response = await fetch(`https://server-side-influencer-1.onrender.com/brand/getBrandData/${brandId}`);
       const data = await response.json();
-      
+  
       // Set the response data to the state
       setBrandData(data.data);
       console.log("Logged in brand is data:- ", data.data);
     } catch (err) {
       console.log(err);
-      if (err.response.status === 422) {
+      
+      // Check if err.response exists before accessing err.response.status
+      if (err.response && err.response.status === 422) {
         navigate('/');
+      } else {
+        // Handle other types of errors (e.g., network issues)
+        toast.error("An error occurred. Please try again later.");
       }
     }
   };
+  
+
+  // const getBrandData = async () => {
+  //   try {
+  //     // Retrieve the brandId from localStorage
+  //     const brandId = localStorage.getItem("brandID");
+
+  //     if (!brandId) {
+  //       console.log("Brand ID not found in localStorage");
+  //       return;
+  //     }
+
+  //     // Make the API call with the brandId from localStorage
+  //     const response = await fetch(`https://server-side-influencer-1.onrender.com/brand/getBrandData/${brandId}`);
+  //     const data = await response.json();
+      
+  //     // Set the response data to the state
+  //     setBrandData(data.data);
+  //     console.log("Logged in brand is data:- ", data.data);
+  //   } catch (err) {
+  //     console.log(err);
+  //     if (err.response.status === 422) {
+  //       navigate('/');
+  //     }
+  //   }
+  // };
   
   useEffect(() => {
     getBrandData();
