@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom'; // Import useNavigate and useLocation
 import { ToastContainer, toast } from 'react-toastify'; // Import ToastContainer and toast
 import 'react-toastify/dist/ReactToastify.css'; // Import CSS for toast
-import { useNavigate, useLocation } from 'react-router-dom'; // Import useNavigate and useLocation
 
 const OtpEnterManage = () => {
   const [otp, setOtp] = useState(''); // State to store the OTP entered by the user

@@ -66,7 +66,7 @@ const App = () => {
 
 
         <Route path="/manageemail" element={<ManageEnterEmail/>} />
-        <Route path="/changepassbrand" element={<ChangePasswordManage/>} />
+        <Route path="/changepassmanage" element={<ChangePasswordManage/>} />
         <Route path="/otpmanage" element={<OtpEnterManage/>} />
 
 

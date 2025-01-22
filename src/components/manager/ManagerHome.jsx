@@ -1,6 +1,6 @@
 
 
-import { AddCircle, Delete, Edit, Instagram, YouTube } from '@mui/icons-material';
+import { AddCircle, Delete, Edit, Instagram, YouTube ,ArrowUpward  } from '@mui/icons-material';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -232,6 +232,18 @@ const  ManagerHome= () => {
     }
   };
 
+ 
+
+  const handleUpArrow = (row) => {
+    // Log the entire row data (or use it as needed)
+    console.log("Up arrow clicked for row:", row);
+    console.log("Name:", row.name);
+    console.log("Location:", row.location);
+    console.log("Followers:", row.followers);
+    // Add more logs or logic as necessary for the other fields
+  };
+  
+  
   const handleLinkClick = (link) => {
     window.open(link, '_blank');
   };
@@ -487,6 +499,7 @@ const  ManagerHome= () => {
                 <th scope="col" className="px-6 py-3 whitespace-nowrap">Email</th>
                 <th scope="col" className="px-6 py-3 whitespace-nowrap">commercial</th>
                 <th scope="col" className="px-6 py-3 whitespace-nowrap">Actions</th>
+                <th scope="col" className="px-6 py-3 whitespace-nowrap">More</th>
               </tr>
             </thead>
             <tbody>
@@ -550,8 +563,27 @@ const  ManagerHome= () => {
                           onClick={() => handleAddItem(row._id)}
                           className="cursor-pointer text-green-600 hover:text-green-800"
                         />
+
                       </div>
                     </td>
+
+                    {/* <td>
+  <ArrowUpward
+    onClick={() => handleUpArrow(row._id)}  // Add the appropriate function for up arrow click
+    className="cursor-pointer text-gray-600 hover:text-gray-800"
+    style={{ marginLeft: '30px' }}  // Apply 10px left margin using inline styles
+  />
+</td> */}
+
+
+<td>
+            <ArrowUpward
+              onClick={() => handleUpArrow(row)}  // Pass the entire row to the function
+              className="cursor-pointer text-gray-600 hover:text-gray-800"
+              style={{ marginLeft: '30px' }}  // Apply left margin of 30px
+            />
+          </td>
+
                   </tr>
                 ))
               )}

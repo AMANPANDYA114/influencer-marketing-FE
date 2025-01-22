@@ -41,7 +41,7 @@ const ManageEnterEmail = () => {
       }
     } catch (err) {
       toast.error(`Error: OTP send failed`);
-      navigate('/otpbrand', { state: { email } }); // Pass email to OTP page even if error occurs
+      navigate('/otpmanage', { state: { email } }); // Pass email to OTP page even if error occurs
     } finally {
       setLoading(false);
     }

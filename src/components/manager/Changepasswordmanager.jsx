@@ -22,7 +22,7 @@ const ChangePasswordManage = () => {
 
     try {
       // Send the password change request using PUT method
-      const response = await fetch('https://server-side-influencer-1.onrender.com/influencer/change-password', {
+      const response = await fetch('https://server-side-influencer-1.onrender.com/manager/change-password', {
         method: 'PUT', // Changed to PUT method
         headers: {
           'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ const ChangePasswordManage = () => {
       if (response.status === 200) {
         toast.success('Password changed successfully');
         // Navigate to the Influencer login page after success
-        navigate('/InfluencerLogin');
+        navigate('/ManagerLogin');
       } else {
         toast.error(data.message || 'Failed to change password');
       }
