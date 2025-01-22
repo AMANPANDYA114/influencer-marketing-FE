@@ -81,7 +81,7 @@ function Card({ item, onData }) {
                   e.preventDefault()
                   console.log("hello")
                   try {
-                    const res = await axios.put("manager/validatebrand", { email })
+                    const res = await axios.put("https://server-side-influencer.onrender.com/manager/validatebrand", { email })
                     const data = res.data;
                     console.log(data)
                     if (data.success == true) {
@@ -107,7 +107,7 @@ function Card({ item, onData }) {
                   
                   try {
 
-                    const res = await axios.delete("manager/deletebrand", { data: { email: email } });
+                    const res = await axios.delete("https://server-side-influencer.onrender.com/manager/deletebrand", { data: { email: email } });
                     const data = res.data;
                     console.log(data)
                     if (data.success == true) {
