@@ -320,19 +320,14 @@ const  ManagerHome= () => {
 
       <div className="ml-[5%] flex-1 overflow-y-auto p-4 mb-0">
         <ManagerHeader page="Manager Home" />
-{/* 
-        <h1 className="text-4xl font-extrabold text-center text-black mt-0 mb-0 cursor-pointer hover:text-gray-700 transition-all duration-300 ease-in-out transform hover:scale-105">
-          Start Searching Influencers from a Large Database
-          <span className="block text-xl font-normal text-gray-600 mt-0">
-            Discover top influencers to elevate your brand's reach and impact.
-          </span>
-        </h1> */}
-<h1 className="text-xs sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-center text-black mt-[50px] mb-[50px] cursor-pointer hover:text-gray-700 transition-all duration-300 ease-in-out transform hover:scale-105 ml-[10px]">
+
+<h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-center text-black mt-[50px] mb-[50px] cursor-pointer hover:text-gray-700 transition-all duration-300 ease-in-out transform hover:scale-105 ml-[10px] break-words">
   Start Searching Influencers from a Large Database
-  <span className="block text-xs sm:text-sm md:text-base lg:text-lg font-normal text-gray-600 mt-0 ml-[10px]">
+  <span className="block text-base sm:text-sm md:text-base lg:text-lg font-normal text-gray-600 mt-0 ml-[10px] break-words">
     Discover top influencers to elevate your brand's reach and impact.
   </span>
 </h1>
+
 
 
 
