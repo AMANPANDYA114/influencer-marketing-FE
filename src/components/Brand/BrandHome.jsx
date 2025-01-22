@@ -254,18 +254,18 @@ const  BrandHome= () => {
 
   const handleAddItem = async (_id) => {
     try {
-      const managerId = localStorage.getItem('managerID');
-      if (!managerId) {
+      const brandId = localStorage.getItem('brandID');
+      if (!brandId) {
         Swal.fire({
           title: "Error",
-          text: 'Manager ID not found in localStorage',
+          text: 'brand ID not found in localStorage',
           icon: "error",
           confirmButtonText: "OK",
         });
         return;
       }
 
-      const response = await fetch(`https://server-side-influencer.onrender.com/manager/influencer/add/${managerId}/${_id}`, {
+      const response = await fetch(`https://server-side-influencer-1.onrender.com/brand/addInfluencer/${brandId}/${_id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
