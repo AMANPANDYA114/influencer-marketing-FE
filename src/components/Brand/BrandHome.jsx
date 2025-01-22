@@ -1,11 +1,12 @@
 
 
 
-import { AddCircle, Delete, Edit, Instagram, YouTube } from '@mui/icons-material';
+import { AddCircle, Delete, Edit, Instagram, YouTube ,FilterList } from '@mui/icons-material';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import BrandHeader from "./BrandHeader";
 import Navbar from './Navbar';
 import { Slider } from '@mui/material'; // Import Slider component from MUI
@@ -67,6 +68,15 @@ const  BrandHome= () => {
 
 
   const handleExportCSV = () => {
+    if (selectedRows.length === 0) {
+      Swal.fire({
+        title: "Error",
+        text: "Please select at least one row to export.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+      return; // Stop further execution if no rows are selected
+    }
     const selectedRowsData = selectedRows.map((index) => filteredData[index]);
     exportCSV(selectedRowsData);
   };
@@ -289,12 +299,20 @@ const  BrandHome= () => {
       <div className="ml-[5%] flex-1 overflow-y-auto p-4 mb-0">
         <BrandHeader page="brand home" />
 
-        <h1 className="text-4xl font-extrabold text-center text-black mt-0 mb-0 cursor-pointer hover:text-gray-700 transition-all duration-300 ease-in-out transform hover:scale-105">
-          Start Searching Influencers from a Large Database
-          <span className="block text-xl font-normal text-gray-600 mt-0">
-            Discover top influencers to elevate your brand's reach and impact.
-          </span>
-        </h1>
+{/*       
+<h1 className="text-xs sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-center text-black mt-[50px] mb-[50px] cursor-pointer hover:text-gray-700 transition-all duration-300 ease-in-out transform hover:scale-105">
+  Start Searching Influencers from a Large Database
+  <span className="block text-xs sm:text-sm md:text-base lg:text-lg font-normal text-gray-600 mt-0">
+    Discover top influencers to elevate your brand's reach and impact.
+  </span>
+</h1> */}
+
+<h1 className="text-xs sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-center text-black mt-[50px] mb-[50px] cursor-pointer hover:text-gray-700 transition-all duration-300 ease-in-out transform hover:scale-105 ml-[10px]">
+  Start Searching Influencers from a Large Database
+  <span className="block text-xs sm:text-sm md:text-base lg:text-lg font-normal text-gray-600 mt-0 ml-[10px]">
+    Discover top influencers to elevate your brand's reach and impact.
+  </span>
+</h1>
 
         <div className="relative mt-[-10%] mb-0">
           <div className="absolute top-0 right-0 mt-[10%]">
@@ -304,13 +322,13 @@ const  BrandHome= () => {
 
         <div className="flex justify-center mt-[-5%] mb-0">
           <div className="text-center mt-[10%] ml-[60%] mb-5">
-            <button
+            {/* <button
               onClick={() => setDrawerOpen(true)}
               className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               type="button"
             >
               Show Search Filters
-            </button>
+            </button> */}
           </div>
 
           {/* Drawer component */}
@@ -446,9 +464,17 @@ const  BrandHome= () => {
         <CsvUploader  fetchData={fetchData}  /> 
 </div> */}
 
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg max-h-[calc(100vh-250px)] mt-[-0%] mb-0">
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg max-h-[calc(100vh-250px)] mt-[10%] mb-0">
 
-
+ 
+<button
+  onClick={() => setDrawerOpen(true)}
+  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 mb-2 flex items-center space-x-2 ml-[30px]"
+  type="button"
+>
+  <FilterList fontSize="small" /> {/* MUI Icon */}
+  <span className="text-sm">Filters</span> {/* Button text */}
+</button>
           
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-black uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

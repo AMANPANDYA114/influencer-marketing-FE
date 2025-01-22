@@ -18,6 +18,13 @@ const ManagerHeader = (props) => {
         // Get managerID from localStorage
         const managerID = localStorage.getItem('managerID');
         
+        const token = localStorage.getItem("mangertoken");
+
+        if (!token) {
+          // If no token found, redirect to login page
+          navigate("/ManagerLogin");
+          return;
+        }
         if (!managerID) {
           console.error("Manager ID not found in localStorage.");
           return;
