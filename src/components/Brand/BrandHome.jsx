@@ -1,7 +1,7 @@
 
 
 
-import { AddCircle, Delete, Edit, Instagram, YouTube ,FilterList } from '@mui/icons-material';
+import { AddCircle, Delete, Edit, Instagram, YouTube ,FilterList ,ArrowUpward } from '@mui/icons-material';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -179,6 +179,17 @@ const  BrandHome= () => {
   };
   
 
+  const handleUpArrow = (row) => {
+    // Log the entire row data (or use it as needed)
+    console.log("Up arrow clicked for row:", row);
+    console.log("Name:", row.name);
+    console.log("Location:", row.location);
+    console.log("Followers:", row.followers);
+    navigate('/allinfluencer2', { state: { influencer: row } });
+    // Add more logs or logic as necessary for the other fields
+  };
+  
+  
   const handleDelete = async (_id) => {
     console.log("Item ID to delete:", _id);
 
@@ -507,6 +518,7 @@ const  BrandHome= () => {
                 <th scope="col" className="px-6 py-3 whitespace-nowrap">Email</th>
                 <th scope="col" className="px-6 py-3 whitespace-nowrap">commercial</th>
                 <th scope="col" className="px-6 py-3 whitespace-nowrap">Actions</th>
+                <th scope="col" className="px-6 py-3 whitespace-nowrap">More</th>
               </tr>
             </thead>
             <tbody>
@@ -565,6 +577,15 @@ const  BrandHome= () => {
                         />
                       </div>
                     </td>
+
+                    <td>
+                                <ArrowUpward
+                                  onClick={() => handleUpArrow(row)}  // Pass the entire row to the function
+                                  className="cursor-pointer text-gray-600 hover:text-gray-800"
+                                  style={{ marginLeft: '30px' }}  // Apply left margin of 30px
+                                />
+                              </td>
+                    
                   </tr>
                 ))
               )}

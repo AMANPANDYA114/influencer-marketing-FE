@@ -38,6 +38,7 @@ import ManagerLogin from './components/manager/ManagerLogin';
 import ManagerProfile from './components/manager/ManagerProfile';
 import ManagerSignUp from "./components/manager/ManagerSignUp";
 import NewToSite from "./components/Newtosite";
+import AllInfluencerDetails from "./components/manager/Allinfluencerdetails.jsx";
 import Home from "./Home";
 // Import the CreateCampaign component
 import CreateCampaign from "./components/Brand/CreateCampaign";
@@ -55,14 +56,15 @@ import OtpEnterBrand from "./components/Brand/Otpenterbrand.jsx";
 import ManageEnterEmail from "./components/manager/Managerenteremail.jsx";
 import OtpEnterManage from "./components/manager/otpentermanage.jsx";
 import ChangePasswordManage from "./components/manager/Changepasswordmanager.jsx";
+import AllInfluencerDetails2 from "./components/Brand/AllInfluencerDetails2.jsx";
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
 
-
-
+        <Route path="/allinfluencer" element={<AllInfluencerDetails />} />
+        <Route path="/allinfluencer2" element={<AllInfluencerDetails2 />} />
 
 
         <Route path="/manageemail" element={<ManageEnterEmail/>} />

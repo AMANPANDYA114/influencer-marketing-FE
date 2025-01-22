@@ -251,6 +251,7 @@ const  ManagerHome= () => {
     console.log("Name:", row.name);
     console.log("Location:", row.location);
     console.log("Followers:", row.followers);
+    navigate('/allinfluencer', { state: { influencer: row } });
     // Add more logs or logic as necessary for the other fields
   };
   
