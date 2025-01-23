@@ -224,7 +224,7 @@ const InfluencerSignUp = () => {
       try {
         // https://server-side-influencer.onrender.com/influencer/signup
         // Submit signup data
-        const res = await fetch("hhttps://server-side-influencer.onrender.com/influencer/signup", {
+        const res = await fetch("https://server-side-influencer.onrender.com/influencer/signup", {
           method: 'POST',
           headers: {
             "Content-Type": "application/json",
