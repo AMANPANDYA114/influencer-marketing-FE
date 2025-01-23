@@ -365,7 +365,7 @@ const InfluencerProfile = () => {
             </div>
             <div className="flex flex-col items-center -mt-20">
               <img
-                src={userdata.profile}
+                src={userdata.profilepicinfluet}
                 className="w-40 h-40 border-4 border-white bg-gray-50 rounded-full"
               />
               <div className="flex items-center space-x-2 mt-2">
