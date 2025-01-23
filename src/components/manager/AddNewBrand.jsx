@@ -15,9 +15,7 @@ const AddNewBrand = () => {
     const token = localStorage.getItem("mangertoken");
 
     if (!token) {
-      // If no token found, redirect to login page
-      navigate("/ManagerLogin");
-      return;
+      navigate('/ManagerLogin'); // Redirect to login if no token found
     }
 
     try {

@@ -265,7 +265,8 @@
 
 import React, { useEffect, useState } from "react";
 import { AiFillTwitterCircle } from "react-icons/ai";
-import { BsFacebook, BsInstagram } from "react-icons/bs";
+import { BsFacebook, BsInstagram, BsYoutube } from "react-icons/bs";
+
 import { FaUserEdit } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -464,16 +465,26 @@ const InfluencerProfile = () => {
                     </span>
                   </li>
                   <li className="flex border-b py-2">
-                    <span className="font-bold w-24">Languages:</span>
+                    <span className="font-bold w-24">category:</span>
+                    <span className="text-gray-700">{userdata.category}</span>
+                  </li>
+                  
+                  <li className="flex border-b py-2">
+                    <span className="font-bold w-24">costing:</span>
+                    <span className="text-gray-700">{userdata.costingPerSegment}</span>
+                  </li>
+                  <li className="flex border-b py-2">
+                    <span className="font-bold w-24">Language:</span>
                     <span className="text-gray-700">English, Hindi</span>
                   </li>
+                 
                   <li className="flex items-center border-b py-2 space-x-2">
                     <span className="font-bold w-24">Elsewhere:</span>
                     <a target="_blank" href={userdata.facebookURL} title="Facebook">
                       <BsFacebook size={20} color="#3b5998" />
                     </a>
-                    <a target="_blank" href={userdata.twitterURL} title="Twitter">
-                      <AiFillTwitterCircle size={24} color="#1da1f2" />
+                    <a target="_blank" href={userdata.youtubeLink} title="youtube">
+                    <BsYoutube size={20} color="#3b5998" />
                     </a>
                     <a target="_blank" href={userdata.instagramURL} title="Instagram">
                       <BsInstagram size={20} color="#C13584" />

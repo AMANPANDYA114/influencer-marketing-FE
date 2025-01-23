@@ -54,6 +54,8 @@ const  ManagerHome= () => {
       navigate("/ManagerLogin");
       return;
     }
+    // const response = await fetch('https://server-side-influencer.onrender.com/influencer/allss'
+
       const response = await fetch('https://server-side-influencer.onrender.com/influencer/allss');
       if (!response.ok) {
         throw new Error('Failed to fetch data');
@@ -478,7 +480,7 @@ const  ManagerHome= () => {
         {/* Table for displaying filtered influencer data */}
 
 
-        <div className="mt-[-16%]">
+        <div className="mt-[-12%]" >
         <CsvUploader  fetchData={fetchData}  /> 
 </div>
 
