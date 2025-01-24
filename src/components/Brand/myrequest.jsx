@@ -122,11 +122,18 @@
 
 
 
+
+
+
+
+
+
+
+
 import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { Delete } from "@mui/icons-material"; // Import Material-UI's Delete icon
+import "react-toastify/dist/ReactToastify.css"; // Import Toastify styles
 
 const MyRequest = () => {
   const [data, setData] = useState([]); // Initialize state for API data
@@ -222,9 +229,9 @@ const MyRequest = () => {
                   {/* Delete Button */}
                   <button
                     onClick={() => deleteMessage(item._id)}
-                    className="absolute bottom-3 right-3 bg-red-600 text-white p-2 rounded-full hover:bg-red-700 focus:outline-none flex items-center justify-center"
+                    className="absolute bottom-3 right-3 bg-red-600 text-white p-2 rounded-full hover:bg-red-700 focus:outline-none"
                   >
-                    <Delete style={{ fontSize: 20 }} /> {/* Material-UI Delete Icon */}
+                    🗑
                   </button>
                 </div>
               </div>
