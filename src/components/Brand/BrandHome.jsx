@@ -493,14 +493,18 @@ const  BrandHome= () => {
 
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg max-h-[calc(100vh-250px)] mt-[10%] mb-0 ml-[10px] sm:ml-0">
 
-<button
-  onClick={() => setDrawerOpen(true)}
-  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 mb-2 flex items-center space-x-2 ml-[30px]"
-  type="button"
->
-  <FilterList fontSize="small" /> {/* MUI Icon */}
-  <span className="text-sm">Filters</span> {/* Button text */}
-</button>
+
+
+<div className="sticky top-0 z-10 bg-transparent">
+    <button
+      onClick={() => setDrawerOpen(true)}
+      className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 mb-4 flex items-center space-x-2 ml-[30px]"
+      type="button"
+    >
+      <FilterList fontSize="small" />
+      <span className="text-sm">Filters</span>
+    </button>
+  </div>
           
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-black uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
