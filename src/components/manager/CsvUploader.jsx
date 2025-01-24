@@ -113,10 +113,23 @@
 import React, { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Ensure the CSS is imported
-
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 const CsvUploader = ({ fetchData }) => {  // Receive fetchData as a prop
   const [file, setFile] = useState(null);
 
+  const navigate = useNavigate(); // This is missing in your code
+
+    useEffect(() => {
+      // Check if token exists
+      const token = localStorage.getItem("mangertoken");
+    
+      if (!token) {
+        navigate('/ManagerLogin'); // Redirect to login if no token found
+        return; // Exit the useEffect to avoid fetching data if not logged in
+      }
+    }, [navigate]);
+  
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
   };

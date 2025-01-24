@@ -30,6 +30,18 @@ const  BrandHome= () => {
   const [searchCostingRange, setSearchCostingRange] = useState([0, 100000]);
   const navigate = useNavigate();
 
+
+
+  useEffect(() => {
+    // Check if token exists
+    const token = localStorage.getItem("Brandtoken"); 
+  
+    if (!token) {
+      navigate('/BrandLogin'); // Redirect to login if no token found 
+      return; // Exit the useEffect to avoid fetching data if not logged in
+    }
+  }, [navigate]);
+  
   // Followers Range options
   const followersRangeOptions = [
     { label: '0 - 1000', min: 0, max: 1000 },
@@ -293,9 +305,9 @@ const  BrandHome= () => {
     }
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
 
   if (error) {
     return <div>Error: {error}</div>;

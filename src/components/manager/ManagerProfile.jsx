@@ -1,8 +1,4 @@
 
-
-
-
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
 import Swal from 'sweetalert2'; // Import SweetAlert2
@@ -12,9 +8,20 @@ import EditIcon from '@mui/icons-material/Edit'; // Import the Edit Icon from MU
 
 const ManagerProfile = () => {
   const [manager, setManager] = useState(null); // Store manager details
-  const [loading, setLoading] = useState(true); // For loading state
   const [error, setError] = useState(null); // For error handling
   const navigate = useNavigate(); // Hook to navigate programmatically
+
+
+
+    useEffect(() => {
+        // Check if token exists
+        const token = localStorage.getItem("mangertoken");
+      
+        if (!token) {
+          navigate('/ManagerLogin'); // Redirect to login if no token found
+          return; // Exit the useEffect to avoid fetching data if not logged in
+        }
+      }, [navigate]);
 
   useEffect(() => {
     const managerId = localStorage.getItem('managerID'); // Get managerId from localStorage
@@ -41,18 +48,11 @@ const ManagerProfile = () => {
       })
       .catch((err) => {
         setError('Server error. Please try again later.');
-      })
-      .finally(() => {
-        setLoading(false); // Set loading to false once the fetch is complete
       });
   }, []);
 
   // Dummy profile picture (fallback if manager doesn't have a picture)
   const profilePic = manager?.profilePic || 'https://i.postimg.cc/rwYFBbkT/agency.jpg'; // Placeholder if no picture
-
-  if (loading) {
-    return <div>Loading...</div>; // Loading state
-  }
 
   if (error) {
     return <div>Error: {error}</div>; // Error state
@@ -91,21 +91,21 @@ const ManagerProfile = () => {
 
             {/* Profile Information */}
             <div className="text-center">
-              <h2 className="text-3xl font-semibold text-gray-800">{manager.name}</h2>
-              <p className="text-lg text-gray-600 mt-2">{manager.bio || 'No bio available'}</p>
+              <h2 className="text-3xl font-semibold text-gray-800">{manager?.name || 'Manager Name'}</h2>
+              <p className="text-lg text-gray-600 mt-2">{manager?.bio || 'No bio available'}</p>
 
               <div className="mt-6 space-y-4 text-left text-gray-700">
                 <div className="flex justify-between">
                   <span className="font-semibold">Email:</span>
-                  <span>{manager.email}</span>
+                  <span>{manager?.email || 'Not provided'}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="font-semibold">Phone:</span>
-                  <span>{manager.phone || 'Not provided'}</span>
+                  <span>{manager?.phone || 'Not provided'}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="font-semibold">About:</span>
-                  <span>{manager.about || 'No information available'}</span>
+                  <span>{manager?.about || 'No information available'}</span>
                 </div>
               </div>
             </div>
@@ -117,5 +117,3 @@ const ManagerProfile = () => {
 };
 
 export default ManagerProfile;
-
-

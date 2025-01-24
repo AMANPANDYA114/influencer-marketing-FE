@@ -1,27 +1,58 @@
 
 
-import axios from 'axios';
+
 import React, { useEffect, useState } from 'react';
-import { FiSettings } from "react-icons/fi";
-import { useNavigate } from 'react-router-dom';
-import logo from '../../Images/favicon.ico';
+import { FiBell } from "react-icons/fi"; 
+import { io } from "socket.io-client"; 
+import { useNavigate } from 'react-router-dom'; 
+import axios from 'axios'; 
 
 const ManagerHeader = (props) => {
   const [managerName, setManagerName] = useState('');
+  const [notifications, setNotifications] = useState([]);
+  const [unreadCount, setUnreadCount] = useState(0); 
   const navigate = useNavigate();
-  let menuitemCommoncss = "rounded-sm px-3 py-1 hover:bg-gray-100 hover:text-blue-500 cursor-pointer";
 
-  // Fetch manager data on component mount
+  // Request notification permission
+  const requestNotificationPermission = () => {
+    if ("Notification" in window) {
+      Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+          console.log("Notification permission granted.");
+        } else {
+          console.log("Notification permission denied.");
+        }
+      });
+    } else {
+      console.log("Browser does not support notifications.");
+    }
+  };
+
+  // Function to show browser notification
+  const showBrowserNotification = (title, options) => {
+    if ("Notification" in window && Notification.permission === "granted") {
+      new Notification(title, options);
+    }
+  };
+
+  // Navigate to the /notify page with the notification data
+  // const handleNotificationClick = (notification) => {
+  //   navigate('/notify', { state: notification });  // Pass the notification data to /notify page
+  // };
+
+
+
+  const handleNotificationClick = () => {
+    navigate('/notify', { state: notifications });  // Pass all notifications to /notify page
+  };
+  
   useEffect(() => {
     const fetchManagerData = async () => {
       try {
-        // Get managerID from localStorage
         const managerID = localStorage.getItem('managerID');
-        
         const token = localStorage.getItem("mangertoken");
 
         if (!token) {
-          // If no token found, redirect to login page
           navigate("/ManagerLogin");
           return;
         }
@@ -30,37 +61,73 @@ const ManagerHeader = (props) => {
           return;
         }
 
-        // Fetch manager data using the managerID
         const res = await axios.get(`https://server-side-influencer.onrender.com/manager/managers/${managerID}`);
         console.log("Manager Data Header Response:", res); 
         
         if (res.data && res.data.success === true && res.data.data.name) {
-          console.log('Manager Name:', res.data.data.name); // Log the manager's name
-          setManagerName(res.data.data.name); // Set the manager's name from the API response
+          setManagerName(res.data.data.name);
         }
       } catch (err) {
         console.error('Error fetching manager data:', err);
       }
     };
-    
+
     fetchManagerData();
-  }, []); // Empty dependency array means this will run once on component mount
+
+    requestNotificationPermission();
+
+    const socket = io("https://server-side-influencer-1.onrender.com");
+
+    socket.on("newMessage", (data) => {
+      console.log("Notification received:", data);
+
+      const { message, data: notificationData } = data;
+
+      setNotifications((prev) => [
+        ...prev,
+        {
+          message,
+          shopName: notificationData.shopName,
+          platform: notificationData.platform,
+          budget: notificationData.budget,
+        },
+      ]);
+
+      setUnreadCount((prev) => prev + 1);
+
+      showBrowserNotification(message, {
+        body: `Brand: ${notificationData.shopName}\nPlatform: ${notificationData.platform}\nBudget: ${notificationData.budget}`,
+        icon: "https://via.placeholder.com/100",
+      });
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
   return (
     <div className="h-20 flex items-center justify-between mx-20 w-[screen] border-b-2">
-      <nav className="">
+      <nav className="flex items-center">
         <p className="font-bold">Manager &gt; {props.page}</p>
       </nav>
-      <div className="flex items-center">
-        <div className="flex mx-5">
-          <FiSettings />
+
+      <div className="flex items-center space-x-6">
+        <div className="relative">
+          <FiBell className="cursor-pointer" onClick={() => handleNotificationClick(notifications[notifications.length - 1])} />
+          {unreadCount > 0 && (
+            <span className="absolute top-0 right-0 rounded-full bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center" style={{ marginTop: '-20px',marginLeft: '10px' }}>
+              {unreadCount}
+            </span>
+          )}
         </div>
+
         <div className="flex items-center space-x-4">
           <div className="">
             <img className="w-10 h-10 rounded-full group" src={'https://i.postimg.cc/rwYFBbkT/agency.jpg'} alt="DP" />
           </div>
           <div className="font-medium">
-            <div>Hi, {managerName || 'Agency'}</div> {/* Display manager's name from API or default 'Agency' */}
+            <div>Hi, {managerName || 'Agency'}</div>
           </div>
         </div>
       </div>
@@ -69,5 +136,3 @@ const ManagerHeader = (props) => {
 };
 
 export default ManagerHeader;
-
-

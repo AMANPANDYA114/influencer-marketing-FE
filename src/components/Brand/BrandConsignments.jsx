@@ -532,8 +532,25 @@
 
 import React from "react";
 import Navbar from "./Navbar";
-
+import { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 const InfluencerHistory = () => {
+
+    const location = useLocation();
+    const navigate = useNavigate();
+
+  
+  
+  useEffect(() => {
+    // Check if token exists
+    const token = localStorage.getItem("Brandtoken"); 
+  
+    if (!token) {
+      navigate('/BrandLogin'); // Redirect to login if no token found 
+      return; // Exit the useEffect to avoid fetching data if not logged in
+    }
+  }, [navigate]);
+  
   return (
     <div className="flex h-screen">
       <Navbar />

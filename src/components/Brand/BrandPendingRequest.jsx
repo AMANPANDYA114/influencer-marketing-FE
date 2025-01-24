@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate for naviga
 import Navbar from "./Navbar";
 import { ToastContainer, toast } from "react-toastify"; // Import ToastContainer and toast
 import "react-toastify/dist/ReactToastify.css"; // Import CSS for toasts
-
+import { useEffect } from "react";
 const BrandPendingRequest = () => {
   const [formData, setFormData] = useState({
     message: "",
@@ -23,6 +23,18 @@ const BrandPendingRequest = () => {
   });
 
   const navigate = useNavigate(); // Initialize navigate function
+
+
+
+    useEffect(() => {
+      // Check if token exists
+      const token = localStorage.getItem("Brandtoken"); 
+    
+      if (!token) {
+        navigate('/BrandLogin'); // Redirect to login if no token found 
+        return; // Exit the useEffect to avoid fetching data if not logged in
+      }
+    }, [navigate]);
 
   const brandId = localStorage.getItem("brandID");
 

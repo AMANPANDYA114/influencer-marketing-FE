@@ -57,12 +57,13 @@ import ManageEnterEmail from "./components/manager/Managerenteremail.jsx";
 import OtpEnterManage from "./components/manager/otpentermanage.jsx";
 import ChangePasswordManage from "./components/manager/Changepasswordmanager.jsx";
 import AllInfluencerDetails2 from "./components/Brand/AllInfluencerDetails2.jsx";
+import Notifications from "./components/manager/Notifications.jsx";
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-
+        <Route path="/notify" element={<Notifications />} />
         <Route path="/allinfluencer" element={<AllInfluencerDetails />} />
         <Route path="/allinfluencer2" element={<AllInfluencerDetails2 />} />
 

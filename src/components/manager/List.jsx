@@ -5,12 +5,21 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify"; // Importing toast for notifications
 import "react-toastify/dist/ReactToastify.css"; // Include this for styling
+import { useLocation, useNavigate } from "react-router-dom";
 const List = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [influencers, setInfluencers] = useState([]);
   const [selectedInfluencers, setSelectedInfluencers] = useState([]);
-
-
+  const navigate = useNavigate();
+  useEffect(() => {
+      // Check if token exists
+      const token = localStorage.getItem("mangertoken");
+    
+      if (!token) {
+        navigate('/ManagerLogin'); // Redirect to login if no token found
+        return; // Exit the useEffect to avoid fetching data if not logged in
+      }
+    }, [navigate]);
   // Fetch Influencers function
 const fetchInfluencers = async () => {
   try {

@@ -372,7 +372,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify'; // Import toast and ToastContainer
 import 'react-toastify/dist/ReactToastify.css'; // Import styles for Toast
 import { ArrowBack } from '@mui/icons-material'; // Import ArrowBack icon
-
+import { useEffect } from 'react';
 const EditInfluencer = ({ onSubmit }) => {
   // Access item data passed from navigate using useLocation
   const { state } = useLocation();
@@ -413,6 +413,17 @@ const EditInfluencer = ({ onSubmit }) => {
     }));
   };
 
+
+  
+      useEffect(() => {
+        // Check if token exists
+        const token = localStorage.getItem("mangertoken");
+      
+        if (!token) {
+          navigate('/ManagerLogin'); // Redirect to login if no token found
+          return; // Exit the useEffect to avoid fetching data if not logged in
+        }
+      }, [navigate]);
   const handleSubmit = async (e) => {
     e.preventDefault();
 

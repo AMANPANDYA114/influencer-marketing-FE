@@ -9,10 +9,22 @@ import { MdEmail } from "react-icons/md";
 import { TiPlus } from "react-icons/ti";
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'; // Import SweetAlert
-
+import { useEffect } from 'react';
 const InfCard = ({ item, onData }) => {
     const navigate = useNavigate();
 
+
+
+
+      useEffect(() => {
+          // Check if token exists
+          const token = localStorage.getItem("mangertoken");
+        
+          if (!token) {
+            navigate('/ManagerLogin'); // Redirect to login if no token found
+            return; // Exit the useEffect to avoid fetching data if not logged in
+          }
+        }, [navigate]);
     return (
         <div className="max-sm:mx-5 px-5 border-gray-300 border-2 break-words bg-gray-100 shadow-2xl border-2 rounded-2xl my-10">
             <div className="flex">

@@ -114,6 +114,19 @@ const AllInfluencerDetails = () => {
   const navigate = useNavigate();
   const influencer = location.state?.influencer; // Get influencer data passed from previous page
 
+
+
+
+  useEffect(() => {
+    // Check if token exists
+    const token = localStorage.getItem("mangertoken");
+  
+    if (!token) {
+      navigate('/ManagerLogin'); // Redirect to login if no token found
+      return; // Exit the useEffect to avoid fetching data if not logged in
+    }
+  }, [navigate]);
+  
   useEffect(() => {
     if (influencer) {
       console.log("Influencer Details:", influencer);

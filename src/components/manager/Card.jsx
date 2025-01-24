@@ -5,7 +5,7 @@ import { RiContactsFill, RiFacebookBoxLine } from "react-icons/ri";
 import { TiLocation, TiPlus } from "react-icons/ti";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { useEffect } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FiPhoneCall, FiTwitter } from "react-icons/fi";
@@ -16,6 +16,18 @@ function Card({ item, onData }) {
   const navigate = useNavigate();
   const { _id, uname, shopName, brandType, phone, email, city, state, country,
     address, location, photo, instagramUrl, facebookUrl } = item
+
+
+    useEffect(() => {
+      // Check if token exists
+      const token = localStorage.getItem("mangertoken");
+    
+      if (!token) {
+        navigate('/ManagerLogin'); // Redirect to login if no token found
+        return; // Exit the useEffect to avoid fetching data if not logged in
+      }
+    }, [navigate]);
+    
   return (
     <>
       <div className="">

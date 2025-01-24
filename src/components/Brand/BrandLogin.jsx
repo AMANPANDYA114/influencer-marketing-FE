@@ -224,6 +224,7 @@ const BrandLogin = () => {
     if (res.status === 200) {
       toast.success(data.message);
       localStorage.setItem('brandID', data.brandId);
+      localStorage.setItem('Brandtoken', data.token);
       navigate('/BrandHome?page=1');
     } else {
       toast.error(data.error);
