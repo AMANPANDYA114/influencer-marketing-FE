@@ -261,7 +261,7 @@ const Navbar = () => {
                         color: 'white',
                     }}
                 >
-                    <h5 style={{ fontSize: '1.25rem', fontWeight: '600' }}>Menu</h5>
+                    <h5 style={{ fontSize: '1.25rem', fontWeight: '600' }}>HYPBOX</h5>
                     <button onClick={() => setOpen(!open)}>
                         <svg
                             className="w-6 h-6 text-gray-500 hover:text-gray-700"
