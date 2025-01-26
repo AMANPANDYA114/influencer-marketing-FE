@@ -315,7 +315,7 @@ const  BrandHome= () => {
 
   return (
     <div className="flex h-screen mb-0">
-      <div className="w-[1%] bg-gray-800 text-white fixed top-0 left-0 bottom-0 z-10">
+      <div className=" text-white fixed top-0 left-0 bottom-0 z-10">
         <Navbar />
       </div>
 
@@ -342,6 +342,22 @@ const  BrandHome= () => {
         <div className="relative mt-[-10%] mb-0">
           <div className="absolute top-0 right-0 mt-[10%]">
             <BrandList />
+
+
+            <div className="sticky top-0 z-10 bg-transparent mb-[30px]">
+  <button
+    onClick={() => setDrawerOpen(true)}
+    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 mb-4 flex items-center space-x-2 ml-[30px]"
+    type="button"
+  >
+    <FilterList fontSize="small" />
+    <span className="text-sm">Filters</span>
+  </button>
+</div>
+
+          
+
+
           </div>
         </div>
 
@@ -495,7 +511,7 @@ const  BrandHome= () => {
 
 
 
-<div className="sticky top-0 z-10 bg-transparent">
+{/* <div className="sticky top-0 z-10 bg-transparent">
     <button
       onClick={() => setDrawerOpen(true)}
       className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 mb-4 flex items-center space-x-2 ml-[30px]"
@@ -505,7 +521,7 @@ const  BrandHome= () => {
       <span className="text-sm">Filters</span>
     </button>
   </div>
-          
+           */}
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-black uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
