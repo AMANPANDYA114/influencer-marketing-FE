@@ -1,11 +1,11 @@
 
 
 
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { FiBell } from "react-icons/fi"; 
-import { io } from "socket.io-client"; 
-import { useNavigate } from 'react-router-dom'; 
-import axios from 'axios'; 
+import { FiBell } from "react-icons/fi";
+import { useNavigate } from 'react-router-dom';
+import { io } from "socket.io-client";
 
 const ManagerHeader = (props) => {
   const [managerName, setManagerName] = useState('');

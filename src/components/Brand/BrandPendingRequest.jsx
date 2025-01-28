@@ -1,17 +1,14 @@
 
 
-
-
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
-import { ToastContainer, toast } from "react-toastify"; // Import ToastContainer and toast
-import "react-toastify/dist/ReactToastify.css"; // Import CSS for toasts
-import { useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const BrandPendingRequest = () => {
   const [formData, setFormData] = useState({
     message: "",
-    whatsappNumber: "",
     category: "",
     language: "",
     location: "",
@@ -22,19 +19,15 @@ const BrandPendingRequest = () => {
     youtubeCount: "",
   });
 
-  const navigate = useNavigate(); // Initialize navigate function
+  const navigate = useNavigate();
 
-
-
-    useEffect(() => {
-      // Check if token exists
-      const token = localStorage.getItem("Brandtoken"); 
-    
-      if (!token) {
-        navigate('/BrandLogin'); // Redirect to login if no token found 
-        return; // Exit the useEffect to avoid fetching data if not logged in
-      }
-    }, [navigate]);
+  useEffect(() => {
+    const token = localStorage.getItem("Brandtoken");
+    if (!token) {
+      navigate('/BrandLogin');
+      return;
+    }
+  }, [navigate]);
 
   const brandId = localStorage.getItem("brandID");
 
@@ -74,61 +67,37 @@ const BrandPendingRequest = () => {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "row", height: "100vh" }}>
+    <div className="min-h-screen bg-white-100 flex flex-col">
       <Navbar />
-      <div style={{ height: "100vh", marginLeft: "56px", width: "100%" }}>
-        <div
+      <div className="absolute top-4 right-4 z-10">
+        <button
+          onClick={() => navigate("/myrequest")}
           style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: "16px 24px",
+            backgroundColor: "#007BFF",
+            color: "#fff",
+            padding: "10px 16px",
+            border: "none",
+            borderRadius: "4px",
+            cursor: "pointer",
+            fontSize: "16px",
           }}
         >
-          <h1 style={{ fontSize: "24px", fontWeight: "bold" }}>Add a Request</h1>
-          <button
-            onClick={() => navigate("/myrequest")}
-            style={{
-              backgroundColor: "#007BFF",
-              color: "#fff",
-              padding: "10px 16px",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "pointer",
-              fontSize: "16px",
-            }}
-          >
-            My Requests
-          </button>
-        </div>
+          My Requests
+        </button>
+      </div>
+      <div className="flex-grow flex justify-center items-center">
         <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            minHeight: "100vh",
-          }}
+          style={{ width: '84%' }} // Ensure full width
+          className="bg-white p-8 rounded-lg shadow-lg"
         >
-          <div style={{ width: "100%", maxWidth: "600px", margin: "0 auto" }}>
-            <form
-              onSubmit={handleSubmit}
-              style={{
-                padding: "24px",
-                backgroundColor: "#f3f4f6",
-                borderRadius: "8px",
-                boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-                display: "flex",
-                flexDirection: "column",
-                gap: "16px",
-              }}
-            >
-              {/* Form Inputs */}
+          <h2 className="text-2xl font-bold mb-4 text-center text-blue-600">
+            Add your post requirement for influencers
+          </h2>
+          <form onSubmit={handleSubmit}>
+            <div className="grid grid-cols-2 gap-4 mb-4">
               {Object.keys(formData).map((key) => (
                 <div key={key}>
-                  <label
-                    htmlFor={key}
-                    style={{ display: "block", marginBottom: "8px" }}
-                  >
+                  <label className="block text-gray-700 font-semibold mb-2">
                     {key.charAt(0).toUpperCase() + key.slice(1)}
                   </label>
                   <input
@@ -136,33 +105,19 @@ const BrandPendingRequest = () => {
                     name={key}
                     value={formData[key]}
                     onChange={handleChange}
-                    style={{
-                      width: "100%",
-                      padding: "12px",
-                      fontSize: "16px",
-                      border: "1px solid #ddd",
-                      borderRadius: "4px",
-                    }}
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                    placeholder={key.charAt(0).toUpperCase() + key.slice(1)}
                   />
                 </div>
               ))}
-              <button
-                type="submit"
-                style={{
-                  backgroundColor: "#4CAF50",
-                  color: "#fff",
-                  padding: "12px",
-                  border: "none",
-                  borderRadius: "4px",
-                  cursor: "pointer",
-                  fontSize: "16px",
-                  marginTop: "16px",
-                }}
-              >
-                Submit Request
-              </button>
-            </form>
-          </div>
+            </div>
+            <button
+              type="submit"
+              className="w-full px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mt-4"
+            >
+              Submit Request
+            </button>
+          </form>
         </div>
       </div>
       <ToastContainer />
@@ -171,4 +126,3 @@ const BrandPendingRequest = () => {
 };
 
 export default BrandPendingRequest;
-

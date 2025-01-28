@@ -57,7 +57,7 @@ const  BrandHome= () => {
   // Fetch API data
   const fetchData = async () => {
     try {
-      const response = await fetch('https://server-side-influencer.onrender.com/influencer/allss');
+      const response = await fetch('https://server-side-influencer-1.onrender.com/brand/allcsvinfluencers');
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }

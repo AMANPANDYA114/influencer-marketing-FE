@@ -146,7 +146,7 @@ const CsvUploader = ({ fetchData }) => {  // Receive fetchData as a prop
     formData.append("file", file);
     // https://server-side-influencer-1.onrender.com/influencer/upload-csv
     try {
-      const response = await fetch("https://server-side-influencer-1.onrender.com/influencer/upload-csv", {
+      const response = await fetch("https://server-side-influencer-1.onrender.com/manager/managercsv", {
         method: "POST",
         body: formData,
       });

@@ -167,7 +167,7 @@ const Navbar = () => {
 
     const menus = [
         { name: 'Home', link: '/ManagerHome', icon: FaHome },
-        { name: 'Requests', link: '/request', icon: AiOutlineFileSearch },
+        { name: 'Influencers Requirements', link: '/request', icon: AiOutlineFileSearch },
         { name: 'Add Brand', link: '/AddNewBrand', icon: AiTwotoneShop },
         { name: 'Add Influencer', link: '/AddNewInfluencer', icon: BsPersonPlusFill },
         { name: 'Profile', link: '/ManagerProfile', icon: FaUserCircle },

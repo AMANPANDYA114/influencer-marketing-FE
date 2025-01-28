@@ -56,7 +56,7 @@ const  ManagerHome= () => {
     }
     // const response = await fetch('https://server-side-influencer.onrender.com/influencer/allss'
 
-      const response = await fetch('https://server-side-influencer.onrender.com/influencer/allss');
+      const response = await fetch('https://server-side-influencer-1.onrender.com/manager/Allcsvinfluencers');
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }
@@ -195,7 +195,7 @@ const  ManagerHome= () => {
     console.log("Item ID to delete:", _id);
 
     try {
-      const response = await fetch(`https://server-side-influencer.onrender.com/influencers/delete/${_id}`, {
+      const response = await fetch(` http://localhost:8000/manager/deletecsv/${_id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
