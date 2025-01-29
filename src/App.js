@@ -52,7 +52,6 @@ import InfluencerEmail from "./components/Influencer/InfluencerEmail.jsx";
 import BrandEnterEmail from "./components/Brand/Brandenteremail.jsx";
 import ChangePasswordBrand from "./components/Brand/ChangepasswordBrand.jsx";
 import OtpEnterBrand from "./components/Brand/Otpenterbrand.jsx";
-
 import ManageEnterEmail from "./components/manager/Managerenteremail.jsx";
 import OtpEnterManage from "./components/manager/otpentermanage.jsx";
 import ChangePasswordManage from "./components/manager/Changepasswordmanager.jsx";
@@ -62,13 +61,16 @@ import CampaignDetailsPage from "./components/Influencer/campaigndetailspage.jsx
 import ApplyToCampaign from "./components/Influencer/applycampagin.jsx";
 import MyCampaigns from "./components/Brand/Mycampaigns.jsx";
 import SendPostRequest from "./components/manager/sendpostrequest.jsx";
+import MyCampaignsapplications from "./components/Influencer/Mycampaignsapplications.jsx";
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/requestpage" element={<SendPostRequest/>} />
+        <Route path="/myapplications" element={<MyCampaignsapplications/>} />
         <Route path="/MyCampaigns" element={<MyCampaigns/>} />
+     
         <Route path="/apply" element={<ApplyToCampaign />} />
         <Route path="/campaigndetails" element={<CampaignDetailsPage />} />
 
