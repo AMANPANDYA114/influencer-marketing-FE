@@ -475,7 +475,7 @@ const MyCampaigns = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:8000/brand/getMyCampaigns/${brandId}`,
+        `https://server-side-influencer-1.onrender.com/brand/getMyCampaigns/${brandId}`,
         {
           method: "GET",
           headers: {
