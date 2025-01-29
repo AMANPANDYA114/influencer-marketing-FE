@@ -561,90 +561,6 @@ const CreateCampaign = () => {
 
 
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  
-  //   // Ensure the dates are in string format
-  //   const formattedStartDate = new Date(campaignData.startDate).toISOString();
-  //   const formattedEndDate = new Date(campaignData.endDate).toISOString();
-  
-  //   // Log the selected dates to verify
-  //   console.log("Selected Start Date:", formattedStartDate);
-  //   console.log("Selected End Date:", formattedEndDate);
-  
-  //   // Validate the other fields
-  //   if (!campaignData.brandName) {
-  //     toast.error("Brand name is required!");
-  //     return;
-  //   }
-  //   if (!campaignData.campaignType) {
-  //     toast.error("Campaign type is required!");
-  //     return;
-  //   }
-  //   if (!campaignData.startDate) {
-  //     toast.error("Start date is required!");
-  //     return;
-  //   }
-  //   if (!campaignData.endDate) {
-  //     toast.error("End date is required!");
-  //     return;
-  //   }
-  //   if (!campaignData.budget) {
-  //     toast.error("Budget is required!");
-  //     return;
-  //   }
-  //   if (!campaignData.followerRange[0] || !campaignData.followerRange[1]) {
-  //     toast.error("Follower range is required!");
-  //     return;
-  //   }
-  //   if (campaignData.tags.length === 0) {
-  //     toast.error("At least one tag is required!");
-  //     return;
-  //   }
-  
-  //   const storedBrandId = localStorage.getItem("brandID");
-  
-  //   const campaignPayload = {
-  //     brandName: campaignData.brandName,
-  //     campaignType: campaignData.campaignType,
-  //     startDate: formattedStartDate,  // Pass the formatted string date
-  //     endDate: formattedEndDate,      // Pass the formatted string date
-  //     budget: campaignData.budget,
-  //     description: campaignData.description,
-  //     followerRange: campaignData.followerRange,
-  //     tags: campaignData.tags,
-  //   };
-  
-  //   // Submit campaign data to the backend
-  //   try {
-  //     const response = await fetch(`http://localhost:8000/brand/createCampaign/${storedBrandId}`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(campaignPayload),
-  //     });
-  
-  //     if (response.ok) {
-  //       const data = await response.json();
-  //       Swal.fire({
-  //         title: "Success",
-  //         text: "Campaign created successfully!",
-  //         icon: "success", // Success icon
-  //         confirmButtonText: "OK",
-  //       });
-  //       setMyCampaigns((prevCampaigns) => [...prevCampaigns, data.data]);
-  //     } else {
-  //       toast.error("Failed to create campaign");
-  //     }
-  //   } catch (error) {
-  //     toast.error("Error creating campaign");
-  //     console.error("Error:", error);
-  //   }
-  // };
-  
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -702,7 +618,7 @@ const CreateCampaign = () => {
 
     // Submit campaign data to the backend
     try {
-      const response = await fetch(`http://localhost:8000/brand/createCampaign/${storedBrandId}`, {
+      const response = await fetch(`https://server-side-influencer-1.onrender.com/brand/createCampaign/${storedBrandId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
