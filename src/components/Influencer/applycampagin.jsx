@@ -1,6 +1,8 @@
 
 
 
+
+
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -18,7 +20,7 @@ const ApplyToCampaign = () => {
   const [taskLink, setTaskLink] = useState('');
   const [instagramLink, setInstagramLink] = useState('');
   const [approvedBudget, setApprovedBudget] = useState('');
-  const [image, setImage] = useState(null);
+  const [images, setImages] = useState([]);
 
   if (!campaignId) {
     return (
@@ -31,8 +33,7 @@ const ApplyToCampaign = () => {
   const influencerID = localStorage.getItem('influencerID');
 
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setImage(file);
+    setImages([...e.target.files]);
   };
 
   const validateFields = () => {
@@ -44,7 +45,7 @@ const ApplyToCampaign = () => {
       { value: taskLink, message: 'Task Link is required' },
       { value: instagramLink, message: 'Instagram Link is required' },
       { value: approvedBudget, message: 'Approved Budget is required' },
-      { value: image, message: 'pls upload a image related to this campaign' }
+      { value: images.length > 0, message: 'Please upload at least one image' }
     ];
     
     for (let field of fields) {
@@ -70,7 +71,9 @@ const ApplyToCampaign = () => {
     formData.append('instagramLink', instagramLink);
     formData.append('approvedBudget', approvedBudget);
     formData.append('applicantRealId', influencerID);
-    formData.append('image', image);
+    images.forEach((image, index) => {
+      formData.append(`image${index}`, image);
+    });
 
     try {
       const response = await fetch('https://server-side-influencer-1.onrender.com/influencer/apply-to-campaign', {
@@ -108,8 +111,11 @@ const ApplyToCampaign = () => {
             <input type="url" placeholder="Task Link" value={taskLink} onChange={(e) => setTaskLink(e.target.value)} className="w-full p-3 border rounded-md" />
             <input type="url" placeholder="Instagram Link" value={instagramLink} onChange={(e) => setInstagramLink(e.target.value)} className="w-full p-3 border rounded-md" />
             <input type="number" placeholder="Approved Budget in rupees" value={approvedBudget} onChange={(e) => setApprovedBudget(e.target.value)} className="w-full p-3 border rounded-md" />
-            <input type="file" accept="image/*" onChange={handleImageChange} className="w-full p-3 border rounded-md" />
-            {image && <img src={URL.createObjectURL(image)} alt="Uploaded" className="w-16 h-16 object-cover border rounded mt-2" />}
+            <p>*add a image or screenshot relate to this campaign</p>
+            <input type="file" accept="image/*" multiple onChange={handleImageChange} className="w-full p-3 border rounded-md" />
+            {images.length > 0 && images.map((img, index) => (
+              <img key={index} src={URL.createObjectURL(img)} alt="Uploaded" className="w-16 h-16 object-cover border rounded mt-2" />
+            ))}
             <button type="submit" className="w-full p-3 bg-blue-600 text-white rounded-md font-semibold hover:bg-blue-700">Submit Application</button>
           </form>
         </div>
