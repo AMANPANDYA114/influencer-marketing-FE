@@ -89,7 +89,7 @@ const InfluencerHistory = () => {
         {loading ? (
           <img src={loader} alt="loading" className="h-52 mx-auto" />
         ) : (
-          <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 px-10 gap-10 max-sm:px-5">
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 px-10 gap-10 max-sm:px-5 ">
             {displayedCampaigns.length > 0 ? (
               displayedCampaigns.map((campaign) => (
                 <div
