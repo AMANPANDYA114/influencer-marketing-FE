@@ -597,7 +597,7 @@ const MyCampaigns = () => {
     try {
       // Sending DELETE request to remove the campaign
       await axios.delete(
-        `http://localhost:8000/influencer/${influencerId}/${campaignId}`
+        `https://server-side-influencer-1.onrender.com/influencer/${influencerId}/${campaignId}`
       );
 
       // Remove the deleted campaign from the list
