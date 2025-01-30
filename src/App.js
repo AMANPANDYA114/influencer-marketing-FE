@@ -62,11 +62,13 @@ import ApplyToCampaign from "./components/Influencer/applycampagin.jsx";
 import MyCampaigns from "./components/Brand/Mycampaigns.jsx";
 import SendPostRequest from "./components/manager/sendpostrequest.jsx";
 import MyCampaignsapplications from "./components/Influencer/Mycampaignsapplications.jsx";
+import NotificationInfluencer from "./components/Influencer/NotificationInfluencer.jsx";
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/notifyinflueencers" element={<NotificationInfluencer/>} />
         <Route path="/requestpage" element={<SendPostRequest/>} />
         <Route path="/myapplications" element={<MyCampaignsapplications/>} />
         <Route path="/MyCampaigns" element={<MyCampaigns/>} />

@@ -164,41 +164,31 @@
 
 
 
+
+
 import React, { useEffect, useState } from "react";
-import { HiMenuAlt1 } from 'react-icons/hi';
-import { FaUserCircle, FaHome } from 'react-icons/fa';
-import { CgImport } from 'react-icons/cg';
+import { FaUserCircle, FaHome, FaEnvelope, FaBell, FaBullhorn, FaFlag } from 'react-icons/fa';  
 import { MdPendingActions } from 'react-icons/md';
-import { BiLogOut, BiHistory } from 'react-icons/bi';
-import { FaHandshake } from 'react-icons/fa';
-import { Link, Navigate, NavLink, useNavigate } from 'react-router-dom';
-import axios from "axios";
+import { BiLogOut } from 'react-icons/bi';
+import { Link, useNavigate } from 'react-router-dom';
+import { ArrowDropDown, ArrowDropUp } from '@mui/icons-material'; // Import MUI arrow icons
 
-
-const Navbar = () => {
+const Navbar = ({ notificationCount }) => {
     const navigate = useNavigate();
-    
+    const [open, setOpen] = useState(true);
+    const [campaignDropdown, setCampaignDropdown] = useState(false); // State for campaign dropdown
 
     useEffect(() => {
         // Check if the influencer token exists in localStorage
         const token = localStorage.getItem("influcertoken");
         if (!token) {
-            // If no token, redirect to login or home page
-            navigate('/');
+            navigate('/'); // If no token, redirect to home or login
         } 
     }, [navigate]);
 
- 
-    const menus = [
-        { name: "Home", link: "/InfluencerHome", search: "?page=1", icon: FaHome },
-        { name: "Pending Request", link: "/InfluencerPendingRequest", search: "?page=1", icon: MdPendingActions },
-        { name: "Arrival Request", link: "/InfluencerArrivalRequest", search: "?page=1", icon: CgImport },
-        { name: "Agreement", link: "/InfluencerConsignments", search: "?page=1", icon: FaHandshake },
-        { name: "Campaigns", link: "/InfluencerHistory", search: "?page=1", icon: BiHistory },
-        { name: "Profile", link: "/InfluencerProfile", search: "?page=1", icon: FaUserCircle },
-    ];
-
-    const [open, setOpen] = useState(true);
+    const handleDropdownToggle = () => {
+        setCampaignDropdown(!campaignDropdown); // Toggle dropdown visibility
+    };
 
     const logout = () => {
         try {
@@ -212,31 +202,10 @@ const Navbar = () => {
                 document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
             });
 
-            // Clear IndexedDB if needed
-            if (window.indexedDB) {
-                const request = indexedDB.deleteDatabase('your-database-name');
-                request.onsuccess = function () {
-                    console.log('IndexedDB cleared');
-                };
-                request.onerror = function (error) {
-                    console.error('Error clearing IndexedDB:', error);
-                };
-            }
-
-            // Clear CacheStorage if needed
-            if (window.caches) {
-                caches.keys().then((cacheNames) => {
-                    cacheNames.forEach((cacheName) => {
-                        caches.delete(cacheName);
-                    });
-                });
-            }
-
             // Navigate to the login page after clearing everything
             navigate('/');
         } catch (err) {
             console.log("Error during logout:", err);
-            // In case of an error, clear all stored data and navigate anyway
             localStorage.clear();
             sessionStorage.clear();
             navigate('/');
@@ -300,28 +269,167 @@ const Navbar = () => {
                     </button>
                 </div>
                 <ul style={{ marginTop: '1.5rem', paddingLeft: '1rem' }}>
-                    {menus.map((menu, index) => (
-                        <li key={index} style={{ marginBottom: '1rem' }}>
-                            <Link
-                                to={menu.link}
-                                style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    padding: '0.5rem',
-                                    color: 'white',
-                                    textDecoration: 'none',
-                                    borderRadius: '0.375rem',
-                                    transition: 'background-color 0.3s',
-                                }}
-                                onMouseEnter={(e) => (e.target.style.backgroundColor = '#333')}
-                                onMouseLeave={(e) => (e.target.style.backgroundColor = 'transparent')}
-                            >
-                                {React.createElement(menu.icon, { className: 'w-5 h-5 text-blue-600' })}
-                                <span style={{ marginLeft: '1rem' }}>{menu.name}</span>
-                            </Link>
-                        </li>
-                    ))}
-                    <li>
+                    {/* Home */}
+                    <li style={{ marginBottom: '1rem' }}>
+                        <Link
+                            to="/InfluencerHome"
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                padding: '0.5rem',
+                                color: 'white',
+                                textDecoration: 'none',
+                                borderRadius: '0.375rem',
+                                transition: 'background-color 0.3s',
+                            }}
+                            onMouseEnter={(e) => (e.target.style.backgroundColor = '#333')}
+                            onMouseLeave={(e) => (e.target.style.backgroundColor = 'transparent')}
+                        >
+                            <FaHome className="w-5 h-5 text-blue-600" />
+                            <span style={{ marginLeft: '1rem' }}>Home</span>
+                        </Link>
+                    </li>
+
+                    {/* Campaigns Dropdown */}
+                    <li style={{ marginBottom: '1rem' }}>
+                        <button
+                            onClick={handleDropdownToggle}
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                padding: '0.5rem',
+                                width: '100%',
+                                color: 'white',
+                                textAlign: 'left',
+                                borderRadius: '0.375rem',
+                                backgroundColor: 'transparent',
+                                cursor: 'pointer',
+                                transition: 'background-color 0.3s',
+                            }}
+                            onMouseEnter={(e) => (e.target.style.backgroundColor = '#333')}
+                            onMouseLeave={(e) => (e.target.style.backgroundColor = 'transparent')}
+                        >
+                            <FaBullhorn className="w-5 h-5 text-blue-600" />
+                            <span style={{ marginLeft: '1rem' }}>Campaigns</span>
+                            {campaignDropdown ? (
+                                <ArrowDropUp style={{ marginLeft: 'auto', color: 'white' }} />
+                            ) : (
+                                <ArrowDropDown style={{ marginLeft: 'auto', color: 'white' }} />
+                            )}
+                        </button>
+
+                        {campaignDropdown && (
+                            <ul style={{ marginTop: '1rem', paddingLeft: '1rem', color: 'white' }}>
+                                <li>
+                                    <Link
+                                        to="/InfluencerHistory"
+                                        style={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            padding: '0.5rem',
+                                            color: 'white',
+                                            textDecoration: 'none',
+                                            borderRadius: '0.375rem',
+                                            transition: 'background-color 0.3s',
+                                        }}
+                                    >
+                                        <FaBullhorn className="w-5 h-5 text-blue-600" />
+                                        <span style={{ marginLeft: '1rem' }}>Live Campaigns</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
+                                        to="/myapplications"
+                                        style={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            padding: '0.5rem',
+                                            color: 'white',
+                                            textDecoration: 'none',
+                                            borderRadius: '0.375rem',
+                                            transition: 'background-color 0.3s',
+                                        }}
+                                    >
+                                        <FaBullhorn className="w-5 h-5 text-blue-600" />
+                                        <span style={{ marginLeft: '1rem' }}>My Campaigns</span>
+                                    </Link>
+                                </li>
+                            </ul>
+                        )}
+                    </li>
+
+                    {/* Messages */}
+                    <li style={{ marginBottom: '1rem' }}>
+                        <Link
+                            to="/InfluencerMessages"
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                padding: '0.5rem',
+                                color: 'white',
+                                textDecoration: 'none',
+                                borderRadius: '0.375rem',
+                                transition: 'background-color 0.3s',
+                            }}
+                            onMouseEnter={(e) => (e.target.style.backgroundColor = '#333')}
+                            onMouseLeave={(e) => (e.target.style.backgroundColor = 'transparent')}
+                        >
+                            <FaEnvelope className="w-5 h-5 text-blue-600" />
+                            <span style={{ marginLeft: '1rem' }}>Messages</span>
+                        </Link>
+                    </li>
+
+                    {/* Notifications */}
+                    <li style={{ marginBottom: '1rem' }}>
+                        <Link
+                            to="/notifyinflueencers"
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                padding: '0.5rem',
+                                color: 'white',
+                                textDecoration: 'none',
+                                borderRadius: '0.375rem',
+                                transition: 'background-color 0.3s',
+                            }}
+                            onMouseEnter={(e) => (e.target.style.backgroundColor = '#333')}
+                            onMouseLeave={(e) => (e.target.style.backgroundColor = 'transparent')}
+                        >
+                            <FaBell className="w-5 h-5 text-blue-600" />
+                            <span style={{ marginLeft: '1rem' }}>Notifications</span>
+
+                               {/* Notification Counter */}
+                               {notificationCount > 0 && (
+                                <div className="ml-2 w-5 h-5 bg-red-600 text-white text-xs rounded-full flex items-center justify-center">
+                                    {notificationCount} {/* Show the count */}
+                                </div>
+                            )}
+                        </Link>
+                    </li>
+
+                    {/* Profile */}
+                    <li style={{ marginBottom: '1rem' }}>
+                        <Link
+                            to="/InfluencerProfile"
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                padding: '0.5rem',
+                                color: 'white',
+                                textDecoration: 'none',
+                                borderRadius: '0.375rem',
+                                transition: 'background-color 0.3s',
+                            }}
+                            onMouseEnter={(e) => (e.target.style.backgroundColor = '#333')}
+                            onMouseLeave={(e) => (e.target.style.backgroundColor = 'transparent')}
+                        >
+                            <FaUserCircle className="w-5 h-5 text-blue-600" />
+                            <span style={{ marginLeft: '1rem' }}>Profile</span>
+                        </Link>
+                    </li>
+
+                    {/* Logout */}
+                    <li style={{ marginTop: 'auto', marginBottom: '1rem' }}>
                         <button
                             onClick={logout}
                             style={{
@@ -339,15 +447,7 @@ const Navbar = () => {
                             onMouseEnter={(e) => (e.target.style.backgroundColor = '#333')}
                             onMouseLeave={(e) => (e.target.style.backgroundColor = 'transparent')}
                         >
-                            <svg
-                                className="w-5 h-5 text-blue-600"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
+                            <BiLogOut className="w-5 h-5 text-blue-600" />
                             <span style={{ marginLeft: '1rem' }}>Logout</span>
                         </button>
                     </li>
@@ -358,4 +458,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

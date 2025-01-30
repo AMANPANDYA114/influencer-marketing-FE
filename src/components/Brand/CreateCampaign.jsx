@@ -200,13 +200,14 @@ const CreateCampaign = () => {
         });
         setMyCampaigns((prevCampaigns) => [...prevCampaigns, data.data]);
       } else {
-        toast.error("Failed to create campaign");
+        toast.error("please enter all valid fields");
       }
     } catch (error) {
       toast.error("Error creating campaign");
       console.error("Error:", error);
     }
   };
+
 
 
   
