@@ -476,13 +476,13 @@ const BrandProfile = () => {
           <div className="bg-white border-2 w-5/6 m-auto rounded-lg shadow-xl pb-8">
             <div className="w-full h-[300px]">
               <img
-                src={brandData.photo1}
+                src={brandData.brandbackgroundimage2}
                 className="w-full h-full rounded-tl-lg rounded-tr-lg"
               />
             </div>
             <div className="flex flex-col items-center -mt-20">
               <img
-                src={brandData.logo}
+                src={brandData.brandbackgroundimage}
                 className="w-40 h-40 border-4 border-white bg-gray-50 rounded-sm "
               />
               <div className="flex items-center space-x-2 mt-2">

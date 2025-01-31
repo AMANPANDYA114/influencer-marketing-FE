@@ -101,7 +101,7 @@ const InfluencerProfile = () => {
         <div className="h-full py-8 w-5/6 m-auto">
           <div className="bg-white w-5/6 m-auto rounded-lg border-2 shadow-xl pb-8">
             <div className="w-full h-[300px]">
-              <img src={userdata.photo} className="w-full h-full rounded-tl-lg rounded-tr-lg" />
+              <img src={userdata.profilepicinfluet2} className="w-full h-full rounded-tl-lg rounded-tr-lg" />
             </div>
             <div className="flex flex-col items-center -mt-20">
               <img

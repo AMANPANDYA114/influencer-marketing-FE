@@ -83,7 +83,8 @@ const InfluencerHeader = (props) => {
         <NavLink to='/InfluencerProfile'>
           <div className="flex items-center space-x-4">
             <div>
-              <img className="w-10 h-10 rounded-full" src={userdata.profile} alt="" />
+              <img className="w-10 h-10 rounded-full" src={userdata.profilepicinfluet} alt="" />
+
             </div>
             <div className="font-medium hover:text-blue-700 cursor-pointer">
               <div>Hi, {userdata.fullname}</div>

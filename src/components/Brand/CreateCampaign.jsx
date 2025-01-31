@@ -46,10 +46,10 @@ const CreateCampaign = () => {
       console.log("Brand data received:", data.data);
 
       // Set the brand name to the campaign data if available
-      if (data.data && data.data.uname) {
+      if (data.data && data.data.shopName) {
         setCampaignData((prevState) => ({
           ...prevState,
-          brandName: data.data.uname // Default brand name
+          brandName: data.data.shopName     // Default brand name
         }));
       }
     } catch (err) {
@@ -239,7 +239,7 @@ const CreateCampaign = () => {
             type="text"
             name="brandName"
             disabled={true}
-            defaultValue={brandData ? brandData.uname : ''} // Default value from brandData.uname
+            defaultValue={brandData ? brandData.shopName : ''} // Default value from brandData.uname
             onChange={handleInputChange}
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"  // Add text-sm to reduce the font size
             placeholder="Brand name"

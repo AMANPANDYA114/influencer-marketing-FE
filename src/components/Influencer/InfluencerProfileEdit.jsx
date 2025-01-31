@@ -2370,6 +2370,408 @@
 
 
 
+// import React, { useEffect, useState } from "react";
+// import { useNavigate } from "react-router-dom";
+// import { toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
+// import axios from "axios";
+
+// const InfluencerProfileEdit = () => {
+//   const navigate = useNavigate();
+//   const influencerId = localStorage.getItem("influencerID");
+
+//   // Form Data State
+//   const [formData, setFormData] = useState({
+//     fullname: "",
+//     instagramProfile: "",
+//     followers: "",
+//     youtubeLink: "",
+//     subscribers: "",
+//     category: "",
+//     contactNumber: "",
+//     location: "",
+//     state: "",
+//     city: "",
+//     costingPerSegment: "",
+//     notes: "",
+//     hashtags: "",
+//     managedBy: "",
+//     lifestyle: "",
+//     email: "",
+//     commercial: "",
+//     profileImage: "", // Add profileImage field for URL
+//   });
+
+//   // Image Upload States
+//   const [image, setImage] = useState(null); // To store the selected image
+//   const [loading, setLoading] = useState(true); // To check loading state
+//   const [uploading, setUploading] = useState(false); // To check uploading state
+
+//   // API URL to upload image
+//   // const uploadImageUrl = "http://localhost:8000/influencer/uploadimage/67922bc66db0bf7949bd4288";
+
+//   const uploadImageUrl = `https://server-side-influencer.onrender.com/influencer/profilepic/${influencerId}`;
+//   // Handle Image Upload
+//   const uploadImage = async () => {
+//     if (!image) {
+//       toast.error("Please select an image first.");
+//       return;
+//     }
+
+//     const formData = new FormData();
+//     formData.append("image", image); // Send image file
+
+//     try {
+//       setUploading(true); // Set uploading to true
+//       const response = await axios.post(uploadImageUrl, formData, {
+//         headers: {
+//           "Content-Type": "multipart/form-data",
+//         },
+//       });
+
+//       if (response.data.success) {
+//         setFormData((prevData) => ({
+//           ...prevData,
+//           profileImage: response.data.imageUrl, // Assuming your API returns the image URL
+//         }));
+//         toast.success("Image uploaded successfully!");
+//       } else {
+//         toast.error("Image upload failed.");
+//       }
+//     } catch (error) {
+//       console.error("Error uploading image:", error);
+//       toast.error("Error uploading image.");
+//     } finally {
+//       setUploading(false); // Set uploading to false
+//     }
+//   };
+
+//   // Fetch Influencer Data
+//   useEffect(() => {
+//     if (influencerId) {
+//       fetch(`https://server-side-influencer.vercel.app/influencer/getInfluencer/${influencerId}`)
+//         .then((response) => response.json())
+//         .then((data) => {
+//           if (data && data.data) {
+//             setFormData(data.data); // Set the form data from API
+//             setLoading(false); // Set loading to false once data is fetched
+//           }
+//         })
+//         .catch((error) => {
+//           console.error("Error fetching influencer data:", error);
+//           setLoading(false); // Set loading to false if an error occurs
+//         });
+//     }
+//   }, [influencerId]);
+
+//   // Handle Input Field Changes
+//   const handleChange = (name, value) => {
+//     setFormData((prevData) => ({ ...prevData, [name]: value }));
+//   };
+
+//   // Handle Image File Change
+//   const handleImageChange = (e) => {
+//     const file = e.target.files[0]; // Get the selected file
+//     if (file) {
+//       setImage(file); // Set the image to state
+//     }
+//   };
+
+//   // Handle Form Submission for Profile Update
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     const token = localStorage.getItem("influcertoken");
+
+//     try {
+//       const response = await fetch(
+//         "https://server-side-influencer.onrender.com/influencer/updateprofile",
+//         {
+//           method: "PUT",
+//           headers: {
+//             "Content-Type": "application/json",
+//             Authorization: `Bearer ${token}`,
+//           },
+//           body: JSON.stringify(formData), // Send the form data with the uploaded image URL
+//         }
+//       );
+
+//       if (response.ok) {
+//         toast.success("Profile updated successfully!");
+//         setTimeout(() => {
+//           navigate("/InfluencerProfile"); // Redirect to the profile after a successful update
+//         }, 4000);
+//       } else {
+//         const errorData = await response.json();
+//         alert(errorData.message || "Failed to update profile.");
+//       }
+//     } catch (error) {
+//       console.error("Error:", error);
+//       alert("An error occurred. Please try again.");
+//     }
+//   };
+
+//   // Show Loading until data is fetched
+//   if (loading) {
+//     return <div>Loading...</div>;
+//   }
+
+//   return (
+//     <div className="max-w-3xl mx-auto p-6 font-sans">
+//       <h1 className="text-2xl font-bold mb-6">Update Profile</h1>
+
+//       {/* Profile Image Display */}
+//       <div className="flex justify-center items-center">
+//         <img
+//           src={formData.profilepicinfluet || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7QY2ioIRa17CorwDpwkHIujVaLvc6R_FpMA&usqp=CAU"}
+//           alt="Profile"
+//           className="rounded-full w-32 h-32 object-cover"
+//         />
+//       </div>
+
+//       {/* Form */}
+//       <form onSubmit={handleSubmit} className="space-y-4">
+//         {/* Full Name */}
+//         <div>
+//           <label className="block text-sm font-medium text-gray-700">Full Name</label>
+//           <input
+//             className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+//             type="text"
+//             placeholder="Full Name"
+//             value={formData.fullname}
+//             onChange={(e) => handleChange("fullname", e.target.value)}
+//           />
+//         </div>
+
+//         {/* Instagram Profile */}
+//         <div>
+//           <label className="block text-sm font-medium text-gray-700">Instagram Profile</label>
+//           <input
+//             className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+//             type="text"
+//             placeholder="Instagram Profile"
+//             value={formData.instagramProfile}
+//             onChange={(e) => handleChange("instagramProfile", e.target.value)}
+//           />
+//         </div>
+
+//         {/* Followers */}
+//         <div>
+//           <label className="block text-sm font-medium text-gray-700">Followers</label>
+//           <input
+//             className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+//             type="number"
+//             placeholder="Followers"
+//             value={formData.followers}
+//             onChange={(e) => handleChange("followers", e.target.value)}
+//           />
+//         </div>
+
+//         {/* YouTube Link */}
+//         <div>
+//           <label className="block text-sm font-medium text-gray-700">YouTube Link</label>
+//           <input
+//             className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+//             type="url"
+//             placeholder="YouTube Link"
+//             value={formData.youtubeLink}
+//             onChange={(e) => handleChange("youtubeLink", e.target.value)}
+//           />
+//         </div>
+
+//         {/* Subscribers */}
+//         <div>
+//           <label className="block text-sm font-medium text-gray-700">Subscribers</label>
+//           <input
+//             className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+//             type="number"
+//             placeholder="Subscribers"
+//             value={formData.subscribers}
+//             onChange={(e) => handleChange("subscribers", e.target.value)}
+//           />
+//         </div>
+
+//         {/* Category */}
+//         <div>
+//           <label className="block text-sm font-medium text-gray-700">Category</label>
+//           <input
+//             className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+//             type="text"
+//             placeholder="Category"
+//             value={formData.category}
+//             onChange={(e) => handleChange("category", e.target.value)}
+//           />
+//         </div>
+
+//         {/* Contact Number */}
+//         <div>
+//           <label className="block text-sm font-medium text-gray-700">Contact Number</label>
+//           <input
+//             className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+//             type="text"
+//             placeholder="Contact Number"
+//             value={formData.contactNumber}
+//             onChange={(e) => handleChange("contactNumber", e.target.value)}
+//           />
+//         </div>
+
+//         {/* Location */}
+//         <div>
+//           <label className="block text-sm font-medium text-gray-700">Location</label>
+//           <input
+//             className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+//             type="text"
+//             placeholder="Location"
+//             value={formData.location}
+//             onChange={(e) => handleChange("location", e.target.value)}
+//           />
+//         </div>
+
+//         {/* State */}
+//         <div>
+//           <label className="block text-sm font-medium text-gray-700">State</label>
+//           <input
+//             className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+//             type="text"
+//             placeholder="State"
+//             value={formData.state}
+//             onChange={(e) => handleChange("state", e.target.value)}
+//           />
+//         </div>
+
+//         {/* City */}
+//         <div>
+//           <label className="block text-sm font-medium text-gray-700">City</label>
+//           <input
+//             className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+//             type="text"
+//             placeholder="City"
+//             value={formData.city}
+//             onChange={(e) => handleChange("city", e.target.value)}
+//           />
+//         </div>
+
+//         {/* Costing per Segment */}
+//         <div>
+//           <label className="block text-sm font-medium text-gray-700">Costing per Segment</label>
+//           <input
+//             className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+//             type="number"
+//             placeholder="Costing per Segment"
+//             value={formData.costingPerSegment}
+//             onChange={(e) => handleChange("costingPerSegment", e.target.value)}
+//           />
+//         </div>
+
+//         {/* Notes */}
+//         <div>
+//           <label className="block text-sm font-medium text-gray-700">Notes</label>
+//           <textarea
+//             className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+//             placeholder="Notes"
+//             value={formData.notes}
+//             onChange={(e) => handleChange("notes", e.target.value)}
+//           />
+//         </div>
+
+//         {/* Hashtags */}
+//         <div>
+//           <label className="block text-sm font-medium text-gray-700">Hashtags</label>
+//           <input
+//             className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+//             type="text"
+//             placeholder="Hashtags"
+//             value={formData.hashtags}
+//             onChange={(e) => handleChange("hashtags", e.target.value)}
+//           />
+//         </div>
+
+//         {/* Managed By */}
+//         <div>
+//           <label className="block text-sm font-medium text-gray-700">Managed By</label>
+//           <input
+//             className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+//             type="text"
+//             placeholder="Managed By"
+//             value={formData.managedBy}
+//             onChange={(e) => handleChange("managedBy", e.target.value)}
+//           />
+//         </div>
+
+//         {/* Lifestyle */}
+//         <div>
+//           <label className="block text-sm font-medium text-gray-700">Lifestyle</label>
+//           <input
+//             className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+//             type="text"
+//             placeholder="Lifestyle"
+//             value={formData.lifestyle}
+//             onChange={(e) => handleChange("lifestyle", e.target.value)}
+//           />
+//         </div>
+
+//         {/* Email */}
+//         <div>
+//           <label className="block text-sm font-medium text-gray-700">Email</label>
+//           <input
+//             className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+//             type="email"
+//             placeholder="Email"
+//             value={formData.email}
+//             onChange={(e) => handleChange("email", e.target.value)}
+//           />
+//         </div>
+
+//         {/* Commercial */}
+//         <div>
+//           <label className="block text-sm font-medium text-gray-700">Commercial</label>
+//           <input
+//             className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+//             type="text"
+//             placeholder="Commercial"
+//             value={formData.commercial}
+//             onChange={(e) => handleChange("commercial", e.target.value)}
+//           />
+//         </div>
+
+//         {/* Image Upload */}
+//         <div>
+//           <label className="block text-sm font-medium text-gray-700">Profile Image</label>
+//           <input
+//             type="file"
+//             onChange={handleImageChange}
+//             className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+//           />
+//           {/* Trigger Image Upload Button */}
+//           <button
+//             type="button"
+//             onClick={uploadImage}
+//             className="mt-2 w-full bg-blue-500 text-white py-2 rounded-md text-lg"
+//           >
+//             {uploading ? "Uploading..." : "Upload Image"}
+//           </button>
+//         </div>
+
+//         {/* Submit Button */}
+//         <button
+//           type="submit"
+//           className="mt-6 w-full bg-green-500 text-white py-2 rounded-md text-lg"
+//         >
+//           Update Profile
+//         </button>
+//       </form>
+//     </div>
+//   );
+// };
+
+// export default InfluencerProfileEdit;
+
+
+
+
+
+
+
+
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -2407,10 +2809,8 @@ const InfluencerProfileEdit = () => {
   const [loading, setLoading] = useState(true); // To check loading state
   const [uploading, setUploading] = useState(false); // To check uploading state
 
-  // API URL to upload image
-  // const uploadImageUrl = "http://localhost:8000/influencer/uploadimage/67922bc66db0bf7949bd4288";
-
-  const uploadImageUrl = `https://server-side-influencer.onrender.com/influencer/uploadimage/${influencerId}`;
+  const uploadImageUrl = `https://server-side-influencer.onrender.com/influencer/profilepic/${influencerId}`;
+  
   // Handle Image Upload
   const uploadImage = async () => {
     if (!image) {
@@ -2469,11 +2869,12 @@ const InfluencerProfileEdit = () => {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  // Handle Image File Change
+  // Handle Image File Change and Upload Automatically
   const handleImageChange = (e) => {
     const file = e.target.files[0]; // Get the selected file
     if (file) {
       setImage(file); // Set the image to state
+      uploadImage(); // Automatically upload image once selected
     }
   };
 
@@ -2522,7 +2923,7 @@ const InfluencerProfileEdit = () => {
       {/* Profile Image Display */}
       <div className="flex justify-center items-center">
         <img
-          src={formData.profilepicinfluet || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7QY2ioIRa17CorwDpwkHIujVaLvc6R_FpMA&usqp=CAU"}
+          src={formData.profileImage || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7QY2ioIRa17CorwDpwkHIujVaLvc6R_FpMA&usqp=CAU"}
           alt="Profile"
           className="rounded-full w-32 h-32 object-cover"
         />
@@ -2741,20 +3142,12 @@ const InfluencerProfileEdit = () => {
             onChange={handleImageChange}
             className="mt-1 p-2 w-full border border-gray-300 rounded-md"
           />
-          {/* Trigger Image Upload Button */}
-          <button
-            type="button"
-            onClick={uploadImage}
-            className="mt-2 w-full bg-blue-500 text-white py-2 rounded-md text-lg"
-          >
-            {uploading ? "Uploading..." : "Upload Image"}
-          </button>
         </div>
 
         {/* Submit Button */}
         <button
           type="submit"
-          className="mt-6 w-full bg-green-500 text-white py-2 rounded-md text-lg"
+          className="mt-6 w-full bg-blue-500 text-white py-2 rounded-md text-lg"
         >
           Update Profile
         </button>

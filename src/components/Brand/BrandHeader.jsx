@@ -92,7 +92,7 @@ const BrandHeader = (props) => {
             {/* Use fallback logo if brandData.logo is not available */}
             <img
               className="w-10 h-10 rounded-full group"
-              src={brandData.logo || logo} // Use fallback image if logo is missing
+              src={brandData.brandbackgroundimage || logo} // Use fallback image if logo is missing
               alt="Brand Logo"
             />
             <div className="absolute hidden group-hover:block">hello</div>
