@@ -239,7 +239,7 @@ const InfluencerHistory = () => {
 
   return (
     <div className="flex h-screen relative">
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="h-screen ml-14 max-sm:ml-0 w-screen">
         <InfluencerHeader page="Profile" />
 

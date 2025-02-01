@@ -563,7 +563,7 @@ const Navbar = () => {
            {/* Profile */}
            <li style={{ marginBottom: "1.5rem" }}>
             <Link
-              to="/BrandProfile"
+              to="/messagebrand"
               style={{
                 display: "flex",
                 alignItems: "center",
