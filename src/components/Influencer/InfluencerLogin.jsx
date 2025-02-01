@@ -26,8 +26,10 @@ const InfluencerLogin = () => {
   const postdata = async (e) => {
     e.preventDefault();
 
+    // https://server-side-influencer.onrender.com/
+
     const { email, password } = userdata; // Use 'email' here instead of 'username'
-    const res = await fetch('https://server-side-influencer.onrender.com/influencer/influencerlogin', {
+    const res = await fetch('https://server-side-influencer.vercel.app/influencer/influencerlogin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
