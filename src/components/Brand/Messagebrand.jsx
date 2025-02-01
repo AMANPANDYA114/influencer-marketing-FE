@@ -71,7 +71,7 @@ const MessageBox = () => {
   color: '#000', // Black text color
   textTransform: 'uppercase', // Uppercase letters for emphasis
   letterSpacing: '2px', // Slight letter spacing for readability
-  padding: '20px 0', // Padding to give space above and below the text
+  padding: '20px 0', // Padding to give space above and below th
 }}>
         Launch Your Powerful Brand Campaign and Connect with  Influencers!
           </h1>
