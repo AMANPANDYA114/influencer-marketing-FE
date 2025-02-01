@@ -525,16 +525,15 @@
 
 
 
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import Navbar from "./Navbar";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
-import InfluencerHeader from "./InfluencerHeader";
 import DeleteIcon from "@mui/icons-material/Delete"; // Material-UI Delete Icon
 import IconButton from "@mui/material/IconButton"; // Material-UI IconButton for the delete icon
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import InfluencerHeader from "./InfluencerHeader";
 
 const MyCampaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
@@ -668,7 +667,7 @@ const MyCampaigns = () => {
                   </div>
                 </div>
               ))
-            : !loading && <p className="text-center">No campaigns found.</p>}
+            : !loading && <p className="text-center">No campaigns found !</p>}
         </div>
       </div>
 
