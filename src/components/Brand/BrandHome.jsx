@@ -339,27 +339,22 @@ const  BrandHome= () => {
   </span>
 </h1>
 
-        <div className="relative mt-[-10%] mb-0">
-          <div className="absolute top-0 right-0 mt-[10%]">
-            <BrandList />
+<div className="relative mt-[-10%] mb-0">
+  <div className="absolute top-0 right-0 mt-[10%] flex items-center space-x-4">
+    {/* BrandList component */}
+    <BrandList />
 
-
-            <div className="sticky top-0 z-10 bg-transparent mb-[30px]">
-  <button
-    onClick={() => setDrawerOpen(true)}
-    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 mb-4 flex items-center space-x-2 ml-[30px]"
-    type="button"
-  >
-    <FilterList fontSize="small" />
-    <span className="text-sm">Filters</span>
-  </button>
+    {/* Button */}
+    <button
+      onClick={() => setDrawerOpen(true)}
+      className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 mb-4 flex items-center space-x-2"
+      type="button"
+    >
+      <FilterList fontSize="small" />
+      <span className="text-sm">Filters</span>
+    </button>
+  </div>
 </div>
-
-          
-
-
-          </div>
-        </div>
 
         <div className="flex justify-center mt-[-5%] mb-0">
           <div className="text-center mt-[10%] ml-[60%] mb-5">
@@ -507,7 +502,7 @@ const  BrandHome= () => {
 
         {/* <div className="relative overflow-x-auto shadow-md sm:rounded-lg max-h-[calc(100vh-250px)] mt-[10%] mb-0"> */}
 
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg max-h-[calc(100vh-250px)] mt-[10%] mb-0 ml-[10px] sm:ml-0">
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg max-h-[calc(100vh-250px)] mt-[10%] mb-0 ml-[1px] sm:ml-0">
 
 
 
