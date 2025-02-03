@@ -132,7 +132,7 @@ const InfluencerProfileEdit = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("influcertoken");
-
+console.log("infliere datav ", token)
     try {
       const response = await fetch(
         "https://server-side-influencer.onrender.com/influencer/updateprofile",
