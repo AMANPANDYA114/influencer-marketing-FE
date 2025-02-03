@@ -77,7 +77,7 @@ const EditInfluencer = () => {
     };
 
     try {
-      const response = await fetch(`http://localhost:8000/manager/update-influencer/${item._id}`, {
+      const response = await fetch(`https://server-side-influencer-1.onrender.com/manager/update-influencer/${item._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -101,9 +101,9 @@ const EditInfluencer = () => {
   return (
     <div className="relative max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
       {/* Navbar on the left corner */}
-      <div className="absolute left-0 top-4">
+      {/* <div className="absolute left-0 top-4">
         <Navbar />
-      </div>
+      </div> */}
 
       {/* Back arrow button in left corner */}
       <button
