@@ -218,12 +218,12 @@
 
 
 
-import React, { useEffect, useState } from 'react';
-import Swal from 'sweetalert2';
 import axios from 'axios';
-import Navbar from './Navbar'; // Ensure this import exists in your code
-import ManagerHeader from './ManagerHeader'; // Ensure this import exists in your code
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import ManagerHeader from './ManagerHeader'; // Ensure this import exists in your code
+import Navbar from './Navbar'; // Ensure this import exists in your code
 
 const UpdateProfile = () => {
   const navigate = useNavigate(); // Initialize useNavigate hook
@@ -420,7 +420,7 @@ const UpdateProfile = () => {
   }
 
   if (error) {
-    return <div>Error: {error}</div>; // Show error if fetching fails
+    return <div>Error: {error}</div>; // Show error if fetching failsssssss
   }
 
   return (
