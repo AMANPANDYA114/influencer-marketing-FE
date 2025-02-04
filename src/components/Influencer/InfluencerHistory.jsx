@@ -18,30 +18,6 @@
 //   const [searchQuery, setSearchQuery] = useState("");
 //   const navigate = useNavigate();
 
-
-//   // skeletal with useffetc withoud loading 
-//   // useEffect(() => {
-//   //   const getCampaigns = async () => {
-//   //     try {
-//   //       setLoading(true);
-//   //       const response = await axios.get(
-//   //         "https://server-side-influencer.onrender.com/brand/getAllCampaigns"
-//   //       );
-//   //       setCampaigns(response.data.data);
-//   //     } catch (err) {
-//   //       toast.error("Error fetching campaign data.");
-//   //     } finally {
-//   //       setLoading(false);
-//   //     }
-//   //   };
-
-//   //   getCampaigns();
-//   // }, []);
-
-
-//   // skeletal useffetct with loading animations
-
-
 //   useEffect(() => {
 //     const getCampaigns = async () => {
 //       try {
@@ -61,6 +37,7 @@
 
 //     getCampaigns();
 //   }, []);
+
 //   const filteredCampaigns = campaigns.filter((campaign) =>
 //     campaign.tags.some((tag) =>
 //       tag.toLowerCase().startsWith(searchQuery.toLowerCase().slice(0, 2))
@@ -79,9 +56,12 @@
 
 //   return (
 //     <div className="flex h-screen relative">
-//       <Navbar />
+//       {/* <Navbar /> */}
 //       <div className="h-screen ml-14 max-sm:ml-0 w-screen">
-//         <InfluencerHeader page="Profile" />
+//       <InfluencerHeader 
+//         page="History"   // 'page' is the header text to display
+//         getCampaigns={getCampaigns}   // Pass the getCampaigns function
+//       />
 
 //         {/* Search bar */}
 //         <div className="mx-10 mb-5 mt-2">
@@ -96,11 +76,10 @@
 //               />
 //             </div>
 //           </form>
-
 //         </div>
 
 //         {/* Campaigns grid */}
-//         <p className="text-center font-bold text-2xl mb-5">Join Campaigns</p>
+//         <p className="text-center font-bold text-2xl mb-5">Find Your Perfect Brand Partnership in These Campaigns !</p>
 
 //         <div
 //           style={{ marginTop: "80px" }}
@@ -135,7 +114,7 @@
 //                   onClick={() => handleCardClick(campaign)}
 //                 >
 //                   <img
-//                     className="w-full object-cover h-[250px]"
+//                     className="w-full object-cover h-[210px]"
 //                     src={campaign.backgroundImage}
 //                     alt="Campaign Background"
 //                   />
@@ -144,6 +123,9 @@
 //                       {campaign.brandName}
 //                     </h3>
 //                   </div>
+                
+
+                
 
 //                   {campaign.followerRange && (
 //                     <div className="flex space-x-2.5 items-center">
@@ -154,21 +136,23 @@
 //                     </div>
 //                   )}
 
-//                   {campaign.tags?.length > 0 && (
-//                     <div className="mt-2">
-//                       <p className="text-md">Tags: </p>
-//                       <ul className="flex space-x-3">
-//                         {campaign.tags.map((tag, index) => (
-//                           <li
-//                             key={index}
-//                             className="px-3 py-1 bg-blue-200 text-blue-800 rounded-full text-xs font-semibold"
-//                           >
-//                             {tag}
-//                           </li>
-//                         ))}
-//                       </ul>
-//                     </div>
-//                   )}
+
+// {campaign.tags && campaign.tags.length > 0 && (
+//   <div className="flex  flex-wrap space-x-1 mt-1 mb-2 mx-2">
+//  <h1 className="text-base font-bold text-gray-700 ml-[3px]">Tags</h1>
+
+
+//     {campaign.tags.map((tag, index) => (
+//       <span
+//         key={index}
+//         className="bg-blue-500 text-white px-2 py-1 rounded-full text-xs" // Reduced font size and padding
+//       >
+//         {tag}
+//       </span>
+//     ))}
+//   </div>
+// )}
+                 
 //                 </div>
 //               ))
 //             : !loading && <p className="text-center">No campaigns found.</p>}
@@ -183,15 +167,13 @@
 
 
 
-
-
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import InfluencerHeader from "./InfluencerHeader";
+import InfluencerHeader from "./InfluencerHeader"; // Import InfluencerHeader
 import Navbar from "./Navbar";
 import { useNavigate } from "react-router-dom";
 
@@ -201,23 +183,24 @@ const InfluencerHistory = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const getCampaigns = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get(
-          "https://server-side-influencer.onrender.com/brand/getAllCampaigns"
-        );
-        setTimeout(() => {
-          setCampaigns(response.data.data);
-          setLoading(false);
-        }, 4000); // Ensures the loader remains for at least 4 seconds
-      } catch (err) {
-        toast.error("Error fetching campaign data.");
+  // Define the getCampaigns function
+  const getCampaigns = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get(
+        "https://server-side-influencer.onrender.com/brand/getAllCampaigns"
+      );
+      setTimeout(() => {
+        setCampaigns(response.data.data);
         setLoading(false);
-      }
-    };
+      }, 4000); // Ensures the loader remains for at least 4 seconds
+    } catch (err) {
+      toast.error("Error fetching campaign data.");
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     getCampaigns();
   }, []);
 
@@ -239,9 +222,12 @@ const InfluencerHistory = () => {
 
   return (
     <div className="flex h-screen relative">
-      {/* <Navbar /> */}
       <div className="h-screen ml-14 max-sm:ml-0 w-screen">
-        <InfluencerHeader page="Profile" />
+        {/* Pass the getCampaigns function to InfluencerHeader */}
+        <InfluencerHeader 
+          page="History"   // 'page' is the header text to display
+          getCampaigns={getCampaigns}   // Pass the getCampaigns function to InfluencerHeader
+        />
 
         {/* Search bar */}
         <div className="mx-10 mb-5 mt-2">
@@ -303,10 +289,6 @@ const InfluencerHistory = () => {
                       {campaign.brandName}
                     </h3>
                   </div>
-                
-
-                
-
                   {campaign.followerRange && (
                     <div className="flex space-x-2.5 items-center">
                       <p className="mb-1 text-md">
@@ -315,24 +297,21 @@ const InfluencerHistory = () => {
                       </p>
                     </div>
                   )}
-
-
-{campaign.tags && campaign.tags.length > 0 && (
-  <div className="flex  flex-wrap space-x-1 mt-1 mb-2 mx-2">
- <h1 className="text-base font-bold text-gray-700 ml-[3px]">Tags</h1>
-
-
-    {campaign.tags.map((tag, index) => (
-      <span
-        key={index}
-        className="bg-blue-500 text-white px-2 py-1 rounded-full text-xs" // Reduced font size and padding
-      >
-        {tag}
-      </span>
-    ))}
-  </div>
-)}
-                 
+                  {campaign.tags && campaign.tags.length > 0 && (
+                    <div className="flex  flex-wrap space-x-1 mt-1 mb-2 mx-2">
+                      <h1 className="text-base font-bold text-gray-700 ml-[3px]">
+                        Tags
+                      </h1>
+                      {campaign.tags.map((tag, index) => (
+                        <span
+                          key={index}
+                          className="bg-blue-500 text-white px-2 py-1 rounded-full text-xs"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
               ))
             : !loading && <p className="text-center">No campaigns found.</p>}

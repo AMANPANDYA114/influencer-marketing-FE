@@ -154,9 +154,11 @@ console.log("infliere datav ", token)
       } else {
         const errorData = await response.json();
         alert(errorData.message || "Failed to update profile.");
+        navigate("/");
       }
     } catch (error) {
       console.error("Error:", error);
+      navigate("/");
       alert("An error occurred. Please try again.");
     }
   };

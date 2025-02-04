@@ -1,247 +1,100 @@
 
-// import React, { useEffect, useState } from 'react';
-// import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
-// import Swal from 'sweetalert2'; // Import SweetAlert2
-// import ManagerHeader from './ManagerHeader';
-// import Navbar from './Navbar';
-// import EditIcon from '@mui/icons-material/Edit'; // Import the Edit Icon from MUI
-
-// const ManagerProfile = () => {
-//   const [manager, setManager] = useState(null); // Store manager details
-//   const [error, setError] = useState(null); // For error handling
-//   const navigate = useNavigate(); // Hook to navigate programmatically
-
-
-
-//     useEffect(() => {
-//         // Check if token exists
-//         const token = localStorage.getItem("mangertoken");
-      
-//         if (!token) {
-//           navigate('/ManagerLogin'); // Redirect to login if no token found
-//           return; // Exit the useEffect to avoid fetching data if not logged in
-//         }
-//       }, [navigate]);
-
-//   useEffect(() => {
-//     const managerId = localStorage.getItem('managerID'); // Get managerId from localStorage
-
-//     if (!managerId) {
-//       Swal.fire({
-//         title: "Error",
-//         text: "Manager ID not found. Please log in again.",
-//         icon: "error",
-//         confirmButtonText: "OK",
-//       });
-//       return;
-//     }
-
-//     // Fetch manager data from the API
-//     fetch(`https://server-side-influencer-1.onrender.com/manager/managers/${managerId}`)
-//       .then((response) => response.json())
-//       .then((data) => {
-//         if (data.success) {
-//           setManager(data.data); // Set manager data
-//         } else {
-//           setError(data.error || 'Manager not found');
-//         }
-//       })
-//       .catch((err) => {
-//         setError('Server error. Please try again later.');
-//       });
-//   }, []);
-
-//   // Dummy profile picture (fallback if manager doesn't have a picture)
-//   const profilePic = manager?.profilePic || 'https://i.postimg.cc/rwYFBbkT/agency.jpg'; // Placeholder if no picture
-
-//   if (error) {
-//     return <div>Error: {error}</div>; // Error state
-//   }
-
-//   // Handle the edit click event
-//   const handleEditClick = () => {
-//     navigate('/updateagency'); // Navigate to the updateagency page
-//   };
-
-//   return (
-//     <div className="h-screen flex bg-white-100">
-//       <Navbar />
-//       <div className="ml-14 w-full p-6">
-//         <ManagerHeader page="Profile" />
-
-//         <div className="flex justify-center items-center py-10">
-//           <div className="bg-white rounded-lg shadow-xl p-10 max-w-4xl w-full">
-//             {/* Profile Image */}
-//             <div className="flex justify-center mb-6 relative">
-//               <img
-//                 src={profilePic}
-//                 alt="Manager"
-//                 className="w-40 h-40 rounded-full object-cover border-4 border-indigo-500 shadow-lg"
-//               />
-//               {/* Edit Icon */}
-//               <div className="absolute top-0 right-0">
-//                 <button 
-//                   className="p-3 rounded-full bg-blue-500 hover:bg-blue-600 text-white"
-//                   onClick={handleEditClick} // Attach the onClick handler here
-//                 >
-//                   <EditIcon />
-//                 </button>
-//               </div>
-//             </div>
-
-//             {/* Profile Information */}
-//             <div className="text-center">
-//               <h2 className="text-3xl font-semibold text-gray-800">{manager?.name || 'Manager Name'}</h2>
-//               <p className="text-lg text-gray-600 mt-2">{manager?.bio || 'No bio available'}</p>
-
-//               <div className="mt-6 space-y-4 text-left text-gray-700">
-//                 <div className="flex justify-between">
-//                   <span className="font-semibold">Email:</span>
-//                   <span>{manager?.email || 'Not provided'}</span>
-//                 </div>
-//                 <div className="flex justify-between">
-//                   <span className="font-semibold">Phone:</span>
-//                   <span>{manager?.phone || 'Not provided'}</span>
-//                 </div>
-//                 <div className="flex justify-between">
-//                   <span className="font-semibold">About:</span>
-//                   <span>{manager?.about || 'No information available'}</span>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default ManagerProfile;
-
-
-
-
-
-
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
-import Swal from 'sweetalert2'; // Import SweetAlert2
-import ManagerHeader from './ManagerHeader'; // Import ManagerHeader component
-import Navbar from './Navbar'; // Import Navbar component
-import EditIcon from '@mui/icons-material/Edit'; // Import the Edit Icon from MUI
+import React, { useEffect, useState } from "react";
+import { BsFacebook, BsInstagram, BsYoutube } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+import { Edit } from "@mui/icons-material"; // Import the MUI Edit icon
+import Navbar from "./Navbar";
+import ManagerHeader from "./ManagerHeader";
 
 const ManagerProfile = () => {
-  const [manager, setManager] = useState(null); // Store manager details
-  const [error, setError] = useState(null); // For error handling
-  const navigate = useNavigate(); // Hook to navigate programmatically
+  const [manager, setManager] = useState(null);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-  // Check if token exists on initial render
   useEffect(() => {
     const token = localStorage.getItem("mangertoken");
-    if (!token) {
-      navigate('/ManagerLogin'); // Redirect to login if no token found
-      return; // Exit the useEffect to avoid fetching data if not logged in
+    const managerId = localStorage.getItem("managerID");
+    if (!token || !managerId) {
+      navigate("/ManagerLogin");
+      return;
     }
   }, [navigate]);
 
-  // Fetch manager data from API
   useEffect(() => {
-    const managerId = localStorage.getItem('managerID'); // Get managerId from localStorage
-
-    if (!managerId) {
-      Swal.fire({
-        title: "Error",
-        text: "Manager ID not found. Please log in again.",
-        icon: "error",
-        confirmButtonText: "OK",
-      });
-      return;
-    }
-
-    fetch(`https://server-side-influencer-1.onrender.com/manager/managers/${managerId}`)
+    fetch(`https://server-side-influencer.onrender.com/manager/managers/${localStorage.getItem('managerID')}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          setManager(data.data); // Set manager data
+          setManager(data.data);
         } else {
-          setError(data.error || 'Manager not found');
+          setError(data.error || "Manager not found");
         }
       })
-      .catch((err) => {
-        setError('Server error. Please try again later.');
+      .catch(() => {
+        setError("Server error. Please try again later.");
       });
   }, []);
 
-  // Dummy profile picture (fallback if manager doesn't have a picture)
-  const profilePic = manager?.profilePic || 'https://i.postimg.cc/rwYFBbkT/agency.jpg'; // Placeholder if no picture
-
-  if (error) {
-    return <div>Error: {error}</div>; // Error state
-  }
-
-  // Handle the edit click event
   const handleEditClick = () => {
-    navigate('/updateagency'); // Navigate to the update agency page
+    navigate("/updateagency"); // Navigate to the update agency page
   };
 
+  if (error) {
+    return <div className="text-red-500 text-center">Error: {error}</div>;
+  }
+
   return (
-    <div className="h-screen flex bg-white-100">
-      <Navbar /> {/* Navbar on the left */}
-      
-      <div className="ml-14 w-full p-6">
-        {/* Manager Header with "Profile" title */}
-        <ManagerHeader page="Profile" />
-
-        <section className="relative pt-40 pb-24">
-          {/* Cover Image */}
-          <img src="https://pagedone.io/asset/uploads/1705473378.png" alt="cover-image" className="w-full absolute top-0 left-0 z-0 h-60 object-cover" />
-          
-          <div className="w-full max-w-7xl mx-auto px-6 md:px-8">
-            {/* Profile Image */}
-            <div className="flex items-center justify-center sm:justify-start relative z-10 mb-5">
-              <img
-                src={profilePic}
-                alt="Manager"
-                className="border-4 border-solid border-white rounded-full object-cover w-32 h-32"
-              />
-            </div>
-
-            {/* Name, Bio, and Edit Button */}
-            <div className="flex flex-col sm:flex-row items-center justify-between mb-5">
-              <div className="block">
-                <h3 className="font-manrope font-bold text-4xl text-gray-900 mb-1">{manager?.name || 'Manager Name'}</h3>
-                <p className="font-normal text-base leading-7 text-gray-500">{manager?.bio || 'No bio available'}</p>
-              </div>
-              <button
-                onClick={handleEditClick}
-                className="rounded-full py-3.5 px-5 bg-gray-100 flex items-center group transition-all duration-500 hover:bg-indigo-100">
-                <EditIcon className="text-gray-700 group-hover:text-indigo-600" />
-                <span className="px-2 font-medium text-base leading-7 text-gray-700 transition-all duration-500 group-hover:text-indigo-600">Edit Profile</span>
-              </button>
-            </div>
-
-            {/* Manager Details (Email, Phone, About) */}
-            <div className="flex flex-col lg:flex-row items-center justify-between py-0.5">
-              <div className="flex flex-col gap-4 text-left text-gray-700">
-                <div className="flex justify-between">
-                  <span className="font-semibold">Email:</span>
-                  <span>{manager?.email || 'Not provided'}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="font-semibold">Phone:</span>
-                  <span>{manager?.phone || 'Not provided'}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="font-semibold">About:</span>
-                  <span>{manager?.about || 'No information available'}</span>
-                </div>
-              </div>
-            </div>
+    <div className="bg-white min-h-screen flex flex-col">
+      {/* ManagerHeader stays at the top */}
+      <ManagerHeader />
+      {/* Navbar remains at the top as well */}
+      <Navbar />
+      <div className="flex flex-col items-center justify-center w-full mt-16">
+        {/* Dynamically set background image */}
+        <div className="w-full h-64 bg-cover bg-center relative" style={{ backgroundImage: `url(${manager?.backgroundImage || 'https://i.postimg.cc/rwYFBbkT/agency.jpg'})` }}>
+          {/* Dynamically set profile picture */}
+          <img 
+            src={manager?.profilePic || "https://i.postimg.cc/rwYFBbkT/agency.jpg"} 
+            alt="Profile" 
+            className="w-24 h-24 rounded-full border-4 border-white absolute left-1/2 transform -translate-x-1/2 bottom-[-40px]" 
+          />
+          <div 
+            onClick={handleEditClick}
+            className="bg-black cursor-pointer text-white p-2 rounded-full shadow-lg absolute bottom-[-30px] left-[calc(52%-15px)]"
+            title="Edit Profile"
+          >
+            <Edit />
           </div>
-        </section>
+        </div>
+        <div className="w-full max-w-3xl bg-white rounded-lg border-2 shadow-xl p-6 mt-16 mx-4">
+          <h4 className="text-xl text-gray-900 font-bold mb-4 text-center">Personal Information</h4>
+          <ul className="text-gray-700 space-y-2">
+            <li className="flex justify-between border-b pb-2">
+              <span className="font-semibold">Name:</span>
+              <span>{manager?.name}</span>
+            </li>
+            <li className="flex justify-between border-b pb-2">
+              <span className="font-semibold">Email:</span>
+              <span>{manager?.email}</span>
+            </li>
+            <li className="flex justify-between border-b pb-2">
+              <span className="font-semibold">Phone:</span>
+              <span>{manager?.phone}</span>
+            </li>
+            <li className="flex justify-between border-b pb-2">
+              <span className="font-semibold">Bio:</span>
+              <span>{manager?.bio}</span>
+            </li>
+            <li className="flex justify-between border-b pb-2">
+              <span className="font-semibold">About:</span>
+              <span>{manager?.about}</span>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );
 };
 
 export default ManagerProfile;
+

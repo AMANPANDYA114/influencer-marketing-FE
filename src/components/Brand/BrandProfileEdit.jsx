@@ -625,6 +625,324 @@
 
 
 
+// import axios from "axios";
+// import { toast } from "react-toastify";
+// import { useNavigate, useLocation } from "react-router-dom";
+// import { useState, useEffect } from "react";
+// import { IoMdArrowBack } from "react-icons/io"; // Importing back icon
+
+// const UpdateBrandProfile = () => {
+//   const navigate = useNavigate();
+//   const location = useLocation();
+
+//   // Form data state
+//   const [formData, setFormData] = useState({
+//     uname: "",
+//     email: "",
+//     city: "",
+//     country: "",
+//     about: "",
+//     shopName: "",
+//     phone: "",
+//     address: "",
+//     instagramUrl: "",
+//     facebookUrl: "",
+//     twitterUrl: "",
+//     description: "",
+//   });
+
+//   // State to hold the image files
+//   const [profileImage, setProfileImage] = useState(null);
+//   const [backgroundImage, setBackgroundImage] = useState(null);
+
+//   // Brand ID from localStorage
+//   const brandId = localStorage.getItem("brandID");
+
+//   // On initial load, populate form with location state
+//   useEffect(() => {
+//     setFormData(location.state || {});
+//   }, [location]);
+
+//   // Handle form field changes
+//   const handleChange = (name, value) => {
+//     setFormData((prevData) => ({ ...prevData, [name]: value }));
+//   };
+
+//   // Handle profile image selection
+//   const handleProfileImageChange = (e) => {
+//     const file = e.target.files[0];
+//     if (file) {
+//       setProfileImage(file);
+//       uploadProfileImage(file); // Automatically upload the profile image when selected
+//     }
+//   };
+
+//   // Handle background image selection
+//   const handleBackgroundImageChange = (e) => {
+//     const file = e.target.files[0];
+//     if (file) {
+//       setBackgroundImage(file);
+//       uploadBackgroundImage(file); // Automatically upload the background image when selected
+//     }
+//   };
+
+//   // Function to upload the profile image
+//   const uploadProfileImage = async (imageFile) => {
+//     const formData = new FormData();
+//     formData.append("image", imageFile);
+
+//     try {
+//       const res = await axios.post(
+//         `https://server-side-influencer.onrender.com/brand/uploadbrandimage/${brandId}`,
+//         formData,
+//         {
+//           headers: {
+//             "Content-Type": "multipart/form-data",
+//           },
+//         }
+//       );
+
+//       if (res.data.success) {
+//         toast.success("Profile image uploaded successfully!");
+//       } else {
+//         toast.error("Failed to upload profile image.");
+//       }
+//     } catch (error) {
+//       console.error(error);
+//       toast.error("Error uploading profile image.");
+//     }
+//   };
+
+//   // Function to upload the background image
+//   const uploadBackgroundImage = async (imageFile) => {
+//     const formData = new FormData();
+//     formData.append("image", imageFile);
+
+//     try {
+//       const res = await axios.post(
+//         `https://server-side-influencer.onrender.com/brand/uploadbrandimages2/${brandId}`,
+//         formData,
+//         {
+//           headers: {
+//             "Content-Type": "multipart/form-data",
+//           },
+//         }
+//       );
+
+//       if (res.data.success) {
+//         toast.success("Background image uploaded successfully!");
+//       } else {
+//         toast.error("Failed to upload background image.");
+//       }
+//     } catch (error) {
+//       console.error(error);
+//       toast.error("Error uploading background image.");
+//     }
+//   };
+
+//   // Submit form
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+//       const updatedData = { ...formData };
+//       const res = await axios.put(
+//         `https://server-side-influencer.vercel.app/brand/${brandId}/updateprofile`,
+//         updatedData
+//       );
+//       const data = res.data;
+//       if (data.success) {
+//         toast.success(data.message);
+//         setTimeout(() => {
+//           navigate("/BrandProfile");
+//           window.location.reload();
+//         }, 1500);
+//       }
+//     } catch (error) {
+//       console.error(error);
+//       toast.error("Failed to update profile.");
+//     }
+//   };
+
+//   return (
+//     <div className="max-w-3xl mx-auto p-6 font-sans">
+//       <div className="flex items-center">
+//         <button onClick={() => navigate(-1)} className="p-2 text-gray-700">
+//           <IoMdArrowBack size={24} /> {/* Back Icon */}
+//         </button>
+//         <h1 className="text-2xl font-bold mb-6 ml-4">Update Brand Profile</h1>
+//       </div>
+//       <form onSubmit={handleSubmit} className="space-y-4">
+//         {/* Username */}
+//         <div className="flex flex-col">
+//           <label className="block text-sm font-medium text-gray-700">Username</label>
+//           <input
+//             type="text"
+//             value={formData.uname}
+//             onChange={(e) => handleChange("uname", e.target.value)}
+//             className="mt-1 p-2 border rounded-md"
+//           />
+//         </div>
+
+//         {/* Email */}
+//         <div className="flex flex-col">
+//           <label className="block text-sm font-medium text-gray-700">Email</label>
+//           <input
+//             type="email"
+//             value={formData.email}
+//             onChange={(e) => handleChange("email", e.target.value)}
+//             className="mt-1 p-2 border rounded-md"
+//           />
+//         </div>
+
+//         {/* City */}
+//         <div className="flex flex-col">
+//           <label className="block text-sm font-medium text-gray-700">City</label>
+//           <input
+//             type="text"
+//             value={formData.city}
+//             onChange={(e) => handleChange("city", e.target.value)}
+//             className="mt-1 p-2 border rounded-md"
+//           />
+//         </div>
+
+//         {/* Country */}
+//         <div className="flex flex-col">
+//           <label className="block text-sm font-medium text-gray-700">Country</label>
+//           <input
+//             type="text"
+//             value={formData.country}
+//             onChange={(e) => handleChange("country", e.target.value)}
+//             className="mt-1 p-2 border rounded-md"
+//           />
+//         </div>
+
+//         {/* About */}
+//         <div className="flex flex-col">
+//           <label className="block text-sm font-medium text-gray-700">About</label>
+//           <textarea
+//             value={formData.about}
+//             onChange={(e) => handleChange("about", e.target.value)}
+//             className="mt-1 p-2 border rounded-md"
+//           />
+//         </div>
+
+//         {/* Shop Name */}
+//         <div className="flex flex-col">
+//           <label className="block text-sm font-medium text-gray-700">Shop Name</label>
+//           <input
+//             type="text"
+//             value={formData.shopName}
+//             onChange={(e) => handleChange("shopName", e.target.value)}
+//             className="mt-1 p-2 border rounded-md"
+//           />
+//         </div>
+
+//         {/* Phone */}
+//         <div className="flex flex-col">
+//           <label className="block text-sm font-medium text-gray-700">Phone</label>
+//           <input
+//             type="text"
+//             value={formData.phone}
+//             onChange={(e) => handleChange("phone", e.target.value)}
+//             className="mt-1 p-2 border rounded-md"
+//           />
+//         </div>
+
+//         {/* Address */}
+//         <div className="flex flex-col">
+//           <label className="block text-sm font-medium text-gray-700">Address</label>
+//           <input
+//             type="text"
+//             value={formData.address}
+//             onChange={(e) => handleChange("address", e.target.value)}
+//             className="mt-1 p-2 border rounded-md"
+//           />
+//         </div>
+
+//         {/* Instagram URL */}
+//         <div className="flex flex-col">
+//           <label className="block text-sm font-medium text-gray-700">Instagram URL</label>
+//           <input
+//             type="url"
+//             value={formData.instagramUrl}
+//             onChange={(e) => handleChange("instagramUrl", e.target.value)}
+//             className="mt-1 p-2 border rounded-md"
+//           />
+//         </div>
+
+//         {/* Facebook URL */}
+//         <div className="flex flex-col">
+//           <label className="block text-sm font-medium text-gray-700">Facebook URL</label>
+//           <input
+//             type="url"
+//             value={formData.facebookUrl}
+//             onChange={(e) => handleChange("facebookUrl", e.target.value)}
+//             className="mt-1 p-2 border rounded-md"
+//           />
+//         </div>
+
+//         {/* Twitter URL */}
+//         <div className="flex flex-col">
+//           <label className="block text-sm font-medium text-gray-700">Twitter URL</label>
+//           <input
+//             type="url"
+//             value={formData.twitterUrl}
+//             onChange={(e) => handleChange("twitterUrl", e.target.value)}
+//             className="mt-1 p-2 border rounded-md"
+//           />
+//         </div>
+
+//         {/* Description */}
+//         <div className="flex flex-col">
+//           <label className="block text-sm font-medium text-gray-700">Description</label>
+//           <textarea
+//             value={formData.description}
+//             onChange={(e) => handleChange("description", e.target.value)}
+//             className="mt-1 p-2 border rounded-md"
+//           />
+//         </div>
+
+//         {/* Profile Image Upload */}
+//         <div className="flex flex-col">
+//           <label className="block text-sm font-medium text-gray-700">Upload Profile Image</label>
+//           <input
+//             type="file"
+//             accept="image/*"
+//             onChange={handleProfileImageChange}
+//             className="mt-1 p-2 border rounded-md"
+//           />
+//         </div>
+
+//         {/* Background Image Upload */}
+//         <div className="flex flex-col">
+//           <label className="block text-sm font-medium text-gray-700">Upload Background Image</label>
+//           <input
+//             type="file"
+//             accept="image/*"
+//             onChange={handleBackgroundImageChange}
+//             className="mt-1 p-2 border rounded-md"
+//           />
+//         </div>
+
+//         {/* Submit Button */}
+//         <button
+//           type="submit"
+//           className="mt-4 bg-blue-600 text-white p-2 rounded-md w-full"
+//         >
+//           Update Profile
+//         </button>
+//       </form>
+//     </div>
+//   );
+// };
+
+// export default UpdateBrandProfile;
+
+
+
+
+
+
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -651,9 +969,12 @@ const UpdateBrandProfile = () => {
     description: "",
   });
 
-  // State to hold the image files
+  // States for images and loading
   const [profileImage, setProfileImage] = useState(null);
   const [backgroundImage, setBackgroundImage] = useState(null);
+  const [loadingProfileImage, setLoadingProfileImage] = useState(false); // For profile image loading
+  const [loadingBackgroundImage, setLoadingBackgroundImage] = useState(false); // For background image loading
+  const [submitting, setSubmitting] = useState(false); // For form submission
 
   // Brand ID from localStorage
   const brandId = localStorage.getItem("brandID");
@@ -688,6 +1009,7 @@ const UpdateBrandProfile = () => {
 
   // Function to upload the profile image
   const uploadProfileImage = async (imageFile) => {
+    setLoadingProfileImage(true); // Set loading to true when starting the upload
     const formData = new FormData();
     formData.append("image", imageFile);
 
@@ -710,11 +1032,14 @@ const UpdateBrandProfile = () => {
     } catch (error) {
       console.error(error);
       toast.error("Error uploading profile image.");
+    } finally {
+      setLoadingProfileImage(false); // Set loading to false after the upload is done
     }
   };
 
   // Function to upload the background image
   const uploadBackgroundImage = async (imageFile) => {
+    setLoadingBackgroundImage(true); // Set loading to true when starting the upload
     const formData = new FormData();
     formData.append("image", imageFile);
 
@@ -737,12 +1062,15 @@ const UpdateBrandProfile = () => {
     } catch (error) {
       console.error(error);
       toast.error("Error uploading background image.");
+    } finally {
+      setLoadingBackgroundImage(false); // Set loading to false after the upload is done
     }
   };
 
   // Submit form
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitting(true); // Set submitting to true when form is being submitted
     try {
       const updatedData = { ...formData };
       const res = await axios.put(
@@ -760,6 +1088,8 @@ const UpdateBrandProfile = () => {
     } catch (error) {
       console.error(error);
       toast.error("Failed to update profile.");
+    } finally {
+      setSubmitting(false); // Set submitting to false after the form submission is complete
     }
   };
 
@@ -911,6 +1241,7 @@ const UpdateBrandProfile = () => {
             onChange={handleProfileImageChange}
             className="mt-1 p-2 border rounded-md"
           />
+          {loadingProfileImage && <p className="text-gray-500 mt-2">Uploading...</p>} {/* Show loading text */}
         </div>
 
         {/* Background Image Upload */}
@@ -922,14 +1253,16 @@ const UpdateBrandProfile = () => {
             onChange={handleBackgroundImageChange}
             className="mt-1 p-2 border rounded-md"
           />
+          {loadingBackgroundImage && <p className="text-gray-500 mt-2">Uploading...</p>} {/* Show loading text */}
         </div>
 
         {/* Submit Button */}
         <button
           type="submit"
           className="mt-4 bg-blue-600 text-white p-2 rounded-md w-full"
+          disabled={submitting} // Disable button while submitting
         >
-          Update Profile
+          {submitting ? "Submitting..." : "Update Profile"} {/* Change text when submitting */}
         </button>
       </form>
     </div>
@@ -937,6 +1270,3 @@ const UpdateBrandProfile = () => {
 };
 
 export default UpdateBrandProfile;
-
-
-
