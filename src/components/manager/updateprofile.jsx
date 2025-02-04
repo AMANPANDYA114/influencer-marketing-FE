@@ -420,7 +420,7 @@ const UpdateProfile = () => {
   }
 
   if (error) {
-    return <div>Error: {error}</div>; // Show error if fetching failsssssss
+    return <div>Error: {error}</div>; // Show error if fetching failsssssssssss
   }
 
   return (
