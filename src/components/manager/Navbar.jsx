@@ -335,723 +335,123 @@
 // export default Navbar;
 
 
-
-
-
-// import React, { useState, useEffect } from 'react';
-// import { Link, useNavigate } from 'react-router-dom';
-// import { FaHome, FaUserCircle } from 'react-icons/fa';
-// import { AiOutlineFileSearch, AiTwotoneShop } from 'react-icons/ai';
-// import { BsPersonPlusFill } from 'react-icons/bs';
-
-// const Sidebar = () => {
-//     const navigate = useNavigate();
-
-//     // Check if the token is present in localStorage on initial render
-//     useEffect(() => {
-//         const token = localStorage.getItem('mangertoken');
-//         if (!token) {
-//             // Redirect to login page if no token
-//             navigate('/ManagerLogin');
-//         }
-//     }, [navigate]);
-
-//     const menus = [
-//         { name: 'Home', link: '/ManagerHome', icon: FaHome },
-//         { name: 'Influencers Requirements', link: '/request', icon: AiOutlineFileSearch },
-//         { name: 'Add Brand', link: '/AddNewBrand', icon: AiTwotoneShop },
-//         { name: 'Add Influencer', link: '/AddNewInfluencer', icon: BsPersonPlusFill },
-//         { name: 'Profile', link: '/ManagerProfile', icon: FaUserCircle },
-//     ];
-
-//     const [open, setOpen] = useState(true);
-
-//     const logout = () => {
-//         try {
-//             // Clear localStorage and sessionStorage
-//             localStorage.clear();
-//             sessionStorage.clear();
-
-//             // Clear cookies
-//             document.cookie.split(";").forEach((cookie) => {
-//                 const cookieName = cookie.split("=")[0].trim();
-//                 document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-//             });
-
-//             // Clear IndexedDB if needed
-//             if (window.indexedDB) {
-//                 const request = indexedDB.deleteDatabase('your-database-name');
-//                 request.onsuccess = function () {
-//                     console.log('IndexedDB cleared');
-//                 };
-//                 request.onerror = function (error) {
-//                     console.error('Error clearing IndexedDB:', error);
-//                 };
-//             }
-
-//             // Clear CacheStorage if needed
-//             if (window.caches) {
-//                 caches.keys().then((cacheNames) => {
-//                     cacheNames.forEach((cacheName) => {
-//                         caches.delete(cacheName);
-//                     });
-//                 });
-//             }
-
-//             // Navigate to the login page after clearing everything
-//             navigate('/ManagerLogin');
-//         } catch (err) {
-//             console.log("Error during logout:", err);
-//             // In case of an error, clear all stored data and navigate anyway
-//             localStorage.clear();
-//             sessionStorage.clear();
-//             navigate('/ManagerLogin');
-//         }
-//     };
-
-//     return (
-//         <div className="flex">
-//             <div
-//                 className={`bg-black h-screen p-5 pt-8 relative duration-300 ${open ? 'w-72' : 'w-20'}`}
-//             >
-//                 {/* Hamburger Icon */}
-//                 <img
-//                     src="/assets/control.png"
-//                     className={`absolute cursor-pointer -right-3 top-9 w-7 border-dark-purple border-2 rounded-full ${!open && 'rotate-180'}`}
-//                     onClick={() => setOpen(!open)}
-//                 />
-//                 <div className="flex gap-x-4 items-center">
-//                     <h1 className={`text-white origin-left font-medium text-xl duration-200 ${!open && 'scale-0'}`}>
-//                         HYPBOX
-//                     </h1>
-//                 </div>
-
-//                 {/* Menu Links */}
-//                 <ul className="pt-6">
-//                     {menus.map((menu, index) => (
-//                         <li
-//                             key={index}
-//                             className={`flex rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 ${index === 0 && 'bg-light-white'} ${menu.gap ? 'mt-9' : 'mt-2'}`}
-//                         >
-//                             {/* Render the icons for each menu */}
-//                             <menu.icon className={`w-6 h-6 ${!open && 'scale-0'}`} />
-//                             <Link
-//                                 to={menu.link}
-//                                 className={`ml-4 ${!open && 'hidden'} origin-left duration-200`}
-//                             >
-//                                 {menu.name}
-//                             </Link>
-//                         </li>
-//                     ))}
-//                     <li>
-//                         <button
-//                             onClick={logout}
-//                             className="flex items-center gap-x-4 p-2 cursor-pointer text-gray-300 text-sm hover:bg-light-white"
-//                         >
-//                             <svg
-//                                 className="w-6 h-6 text-gray-500 hover:text-gray-700"
-//                                 xmlns="http://www.w3.org/2000/svg"
-//                                 fill="none"
-//                                 viewBox="0 0 24 24"
-//                                 stroke="currentColor"
-//                             >
-//                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-//                             </svg>
-//                             <span className={`${!open && 'hidden'} origin-left duration-200`}>Logout</span>
-//                         </button>
-//                     </li>
-//                 </ul>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default Sidebar;
-
-
-
-// import React, { useState, useEffect } from 'react';
-// import { Link, useNavigate } from 'react-router-dom';
-// import { FaHome, FaUserCircle } from 'react-icons/fa';
-// import { AiOutlineFileSearch, AiTwotoneShop } from 'react-icons/ai';
-// import { BsPersonPlusFill } from 'react-icons/bs';
-
-// const Sidebar = () => {
-//     const navigate = useNavigate();
-
-//     // Check if the token is present in localStorage on initial render
-//     useEffect(() => {
-//         const token = localStorage.getItem('mangertoken');
-//         if (!token) {
-//             // Redirect to login page if no token
-//             navigate('/ManagerLogin');
-//         }
-//     }, [navigate]);
-
-//     const menus = [
-//         { name: 'Home', link: '/ManagerHome', icon: FaHome },
-//         { name: 'Influencers Requirements', link: '/request', icon: AiOutlineFileSearch },
-//         { name: 'Add Brand', link: '/AddNewBrand', icon: AiTwotoneShop },
-//         { name: 'Add Influencer', link: '/AddNewInfluencer', icon: BsPersonPlusFill },
-//         { name: 'Profile', link: '/ManagerProfile', icon: FaUserCircle },
-//     ];
-
-//     const [open, setOpen] = useState(true);
-
-//     const logout = () => {
-//         try {
-//             // Clear localStorage and sessionStorage
-//             localStorage.clear();
-//             sessionStorage.clear();
-
-//             // Clear cookies
-//             document.cookie.split(";").forEach((cookie) => {
-//                 const cookieName = cookie.split("=")[0].trim();
-//                 document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-//             });
-
-//             // Clear IndexedDB if needed
-//             if (window.indexedDB) {
-//                 const request = indexedDB.deleteDatabase('your-database-name');
-//                 request.onsuccess = function () {
-//                     console.log('IndexedDB cleared');
-//                 };
-//                 request.onerror = function (error) {
-//                     console.error('Error clearing IndexedDB:', error);
-//                 };
-//             }
-
-//             // Clear CacheStorage if needed
-//             if (window.caches) {
-//                 caches.keys().then((cacheNames) => {
-//                     cacheNames.forEach((cacheName) => {
-//                         caches.delete(cacheName);
-//                     });
-//                 });
-//             }
-
-//             // Navigate to the login page after clearing everything
-//             navigate('/ManagerLogin');
-//         } catch (err) {
-//             console.log("Error during logout:", err);
-//             // In case of an error, clear all stored data and navigate anyway
-//             localStorage.clear();
-//             sessionStorage.clear();
-//             navigate('/ManagerLogin');
-//         }
-//     };
-
-//     return (
-//         <div className="flex">
-//             <div
-//                 style={{
-//                     backgroundColor: 'black',
-//                     height: '2000px', // Set height directly
-//                     padding: '20px 20px 20px 20px', // Set padding
-//                     position: 'relative',
-//                     transition: 'width 0.3s ease', // Smooth transition for width change
-//                     width: open ? '18rem' : '5rem', // Dynamic width based on state
-//                 }}
-//             >
-//                 {/* Hamburger Icon */}
-//                 <img
-//                     src="/assets/control.png"
-//                     style={{
-//                         position: 'absolute',
-//                         cursor: 'pointer',
-//                         right: '-12px',
-//                         top: '36px',
-//                         width: '28px',
-//                         border: '2px solid #6b21a8', // Dark Purple Border
-//                         borderRadius: '50%',
-//                         transform: !open ? 'rotate(180deg)' : 'rotate(0deg)', // Rotate when closed
-//                     }}
-//                     onClick={() => setOpen(!open)}
-//                     alt="Toggle Sidebar"
-//                 />
-//                 <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-//                     <h1
-//                         style={{
-//                             color: 'white',
-//                             fontSize: '1.25rem',
-//                             fontWeight: '500',
-//                             transition: 'transform 0.2s ease',
-//                             transform: !open ? 'scale(0)' : 'scale(1)', // Hide text when sidebar is closed
-//                         }}
-//                     >
-//                         HYPBOX
-//                     </h1>
-//                 </div>
-
-//                 {/* Menu Links */}
-//                 <ul style={{ paddingTop: '24px' }}>
-//                     {menus.map((menu, index) => (
-//                         <li
-//                             key={index}
-//                             style={{
-//                                 display: 'flex',
-//                                 alignItems: 'center',
-//                                 padding: '8px',
-//                                 cursor: 'pointer',
-//                                 color: '#e5e5e5',
-//                                 fontSize: '0.875rem',
-//                                 gap: '16px',
-//                                 backgroundColor: index === 0 ? '#f3f4f6' : 'transparent', // Highlight first item
-//                                 borderRadius: '8px',
-//                             }}
-//                             className="hover:bg-light-white"
-//                         >
-//                             {/* Render the icons for each menu */}
-//                             <menu.icon style={{ width: '24px', height: '24px', transform: !open ? 'scale(0)' : 'scale(1)' }} />
-//                             <Link
-//                                 to={menu.link}
-//                                 style={{
-//                                     marginLeft: '16px',
-//                                     display: open ? 'block' : 'none',
-//                                     transition: 'transform 0.2s ease',
-//                                     transform: !open ? 'scale(0)' : 'scale(1)', // Hide text when sidebar is closed
-//                                 }}
-//                             >
-//                                 {menu.name}
-//                             </Link>
-//                         </li>
-//                     ))}
-//                     <li>
-//                         <button
-//                             onClick={logout}
-//                             style={{
-//                                 display: 'flex',
-//                                 alignItems: 'center',
-//                                 gap: '16px',
-//                                 padding: '8px',
-//                                 cursor: 'pointer',
-//                                 color: '#e5e5e5',
-//                                 fontSize: '0.875rem',
-//                             }}
-//                             className="hover:bg-light-white"
-//                         >
-//                             <svg
-//                                 style={{ width: '24px', height: '24px', color: '#6b7280', transition: 'color 0.3s' }}
-//                                 xmlns="http://www.w3.org/2000/svg"
-//                                 fill="none"
-//                                 viewBox="0 0 24 24"
-//                                 stroke="currentColor"
-//                             >
-//                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-//                             </svg>
-//                             <span
-//                                 style={{
-//                                     transform: !open ? 'scale(0)' : 'scale(1)',
-//                                     transition: 'transform 0.2s ease',
-//                                 }}
-//                             >
-//                                 Logout
-//                             </span>
-//                         </button>
-//                     </li>
-//                 </ul>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default Sidebar;
-
-
-// import React, { useState, useEffect } from 'react';
-// import { Link, useNavigate } from 'react-router-dom';
-// import { FaHome, FaUserCircle } from 'react-icons/fa';
-// import { AiOutlineFileSearch, AiTwotoneShop } from 'react-icons/ai';
-// import { BsPersonPlusFill } from 'react-icons/bs';
-
-// const Sidebar = () => {
-//     const navigate = useNavigate();
-
-//     // Check if the token is present in localStorage on initial render
-//     useEffect(() => {
-//         const token = localStorage.getItem('mangertoken');
-//         if (!token) {
-//             // Redirect to login page if no token
-//             navigate('/ManagerLogin');
-//         }
-//     }, [navigate]);
-
-//     const menus = [
-//         { name: 'Home', link: '/ManagerHome', icon: FaHome },
-//         { name: 'Influencers Requirements', link: '/request', icon: AiOutlineFileSearch },
-//         { name: 'Add Brand', link: '/AddNewBrand', icon: AiTwotoneShop },
-//         { name: 'Add Influencer', link: '/AddNewInfluencer', icon: BsPersonPlusFill },
-//         { name: 'Profile', link: '/ManagerProfile', icon: FaUserCircle },
-//     ];
-
-//     const [open, setOpen] = useState(true);
-
-//     const logout = () => {
-//         try {
-//             // Clear localStorage and sessionStorage
-//             localStorage.clear();
-//             sessionStorage.clear();
-
-//             // Clear cookies
-//             document.cookie.split(";").forEach((cookie) => {
-//                 const cookieName = cookie.split("=")[0].trim();
-//                 document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-//             });
-
-//             // Clear IndexedDB if needed
-//             if (window.indexedDB) {
-//                 const request = indexedDB.deleteDatabase('your-database-name');
-//                 request.onsuccess = function () {
-//                     console.log('IndexedDB cleared');
-//                 };
-//                 request.onerror = function (error) {
-//                     console.error('Error clearing IndexedDB:', error);
-//                 };
-//             }
-
-//             // Clear CacheStorage if needed
-//             if (window.caches) {
-//                 caches.keys().then((cacheNames) => {
-//                     cacheNames.forEach((cacheName) => {
-//                         caches.delete(cacheName);
-//                     });
-//                 });
-//             }
-
-//             // Navigate to the login page after clearing everything
-//             navigate('/ManagerLogin');
-//         } catch (err) {
-//             console.log("Error during logout:", err);
-//             // In case of an error, clear all stored data and navigate anyway
-//             localStorage.clear();
-//             sessionStorage.clear();
-//             navigate('/ManagerLogin');
-//         }
-//     };
-
-//     return (
-//         <div className="flex">
-//             <div
-//                 style={{
-//                     backgroundColor: 'black',
-//                     height: '1300px', // Set height directly
-//                     padding: '20px', // Set padding
-//                     position: 'relative',
-//                     transition: 'width 0.3s ease', // Smooth transition for width change
-//                     width: open ? '18rem' : '5rem', // Dynamic width based on state
-//                 }}
-//             >
-//                 {/* Hamburger Icon */}
-//                 <img
-//                     src="/assets/control.png"
-//                     style={{
-//                         position: 'absolute',
-//                         cursor: 'pointer',
-//                         right: '-12px',
-//                         top: '36px',
-//                         width: '28px',
-//                         border: '2px solid #6b21a8', // Dark Purple Border
-//                         borderRadius: '50%',
-//                         transform: !open ? 'rotate(180deg)' : 'rotate(0deg)', // Rotate when closed
-//                     }}
-//                     onClick={() => setOpen(!open)}
-//                     alt="Toggle Sidebar"
-//                 />
-//                 <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-//                     <h1
-//                         style={{
-//                             color: 'white',
-//                             fontSize: '1.25rem',
-//                             fontWeight: '500',
-//                             transition: 'transform 0.2s ease',
-//                             transform: !open ? 'scale(0)' : 'scale(1)', // Hide text when sidebar is closed
-//                         }}
-//                     >
-//                         HYPBOX
-//                     </h1>
-//                 </div>
-
-//                 {/* Menu Links */}
-//                 <ul style={{ paddingTop: '24px' }}>
-//                     {menus.map((menu, index) => (
-//                         <li
-//                             key={index}
-//                             style={{
-//                                 display: 'flex',
-//                                 alignItems: 'center',
-//                                 padding: '12px', // Increased padding for larger click area
-//                                 cursor: 'pointer',
-//                                 color: '#e5e5e5',
-//                                 fontSize: '0.875rem',
-//                                 gap: '16px',
-//                                 backgroundColor: index === 0 ? '#f3f4f6' : 'transparent', // Highlight first item
-//                                 borderRadius: '8px',
-//                                 marginTop: '79px', // Added space between items
-//                             }}
-//                             className="hover:bg-light-white"
-//                         >
-//                             {/* Render the icons for each menu */}
-//                             <menu.icon style={{ width: '24px', height: '24px', transform: !open ? 'scale(0)' : 'scale(1)' }} />
-//                             <Link
-//                                 to={menu.link}
-//                                 style={{
-//                                     marginLeft: '16px',
-//                                     display: open ? 'block' : 'none',
-//                                     transition: 'transform 0.2s ease',
-//                                     transform: !open ? 'scale(0)' : 'scale(1)', // Hide text when sidebar is closed
-//                                 }}
-//                             >
-//                                 {menu.name}
-//                             </Link>
-//                         </li>
-//                     ))}
-//                     <li>
-//                         <button
-//                             onClick={logout}
-//                             style={{
-//                                 display: 'flex',
-//                                 alignItems: 'center',
-//                                 gap: '16px',
-//                                 padding: '12px', // Increased padding for logout button
-//                                 cursor: 'pointer',
-//                                 color: '#e5e5e5',
-//                                 fontSize: '0.875rem',
-//                                 marginTop: '76px', // Added space for logout button
-//                             }}
-//                             className="hover:bg-light-white"
-//                         >
-//                             <svg
-//                                 style={{ width: '24px', height: '24px', color: '#6b7280', transition: 'color 0.3s' }}
-//                                 xmlns="http://www.w3.org/2000/svg"
-//                                 fill="none"
-//                                 viewBox="0 0 24 24"
-//                                 stroke="currentColor"
-//                             >
-//                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-//                             </svg>
-//                             <span
-//                                 style={{
-//                                     transform: !open ? 'scale(0)' : 'scale(1)',
-//                                     transition: 'transform 0.2s ease',
-//                                 }}
-//                             >
-//                                 Logout
-//                             </span>
-//                         </button>
-//                     </li>
-//                 </ul>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default Sidebar;
-
-
-
-
-import React, { useEffect, useState } from 'react';
-import { AiOutlineFileSearch, AiTwotoneShop } from 'react-icons/ai';
-import { BsPersonPlusFill } from 'react-icons/bs';
-import { FaHome, FaUserCircle } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import HomeIcon from "@mui/icons-material/Home";
+import SearchIcon from "@mui/icons-material/Search";
+import StoreIcon from "@mui/icons-material/Store";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const Sidebar = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(true);  // State for handling open and close sidebar
 
-    // Check if the token is present in localStorage on initial render
-    useEffect(() => {
-        const token = localStorage.getItem('mangertoken');
-        if (!token) {
-            // Redirect to login page if no token
-            navigate('/ManagerLogin');
-        }
-    }, [navigate]);
+  useEffect(() => {
+    const token = localStorage.getItem("mangertoken");
+    if (!token) {
+      navigate("/ManagerLogin");
+    }
+  }, [navigate]);
 
-    const menus = [
-        { name: 'Home', link: '/ManagerHome', icon: FaHome },
-        { name: 'Influencers Requirements', link: '/request', icon: AiOutlineFileSearch },
-        { name: 'Add Brand', link: '/AddNewBrand', icon: AiTwotoneShop },
-        { name: 'Add Influencer', link: '/AddNewInfluencer', icon: BsPersonPlusFill },
-        { name: 'Profile', link: '/ManagerProfile', icon: FaUserCircle },
-    ];
+  const menus = [
+    { name: "Home", link: "/ManagerHome", icon: HomeIcon },
+    { name: "Influencers Requirements", link: "/request", icon: SearchIcon },
+    { name: "Add Brand", link: "/AddNewBrand", icon: StoreIcon },
+    { name: "Add Influencer", link: "/AddNewInfluencer", icon: PersonAddIcon },
+    { name: "Profile", link: "/ManagerProfile", icon: AccountCircleIcon },
+  ];
 
-    const [open, setOpen] = useState(true);
+  const logout = () => {
+    try {
+      localStorage.clear();
+      sessionStorage.clear();
+      document.cookie.split(";").forEach((cookie) => {
+        const cookieName = cookie.split("=")[0].trim();
+        document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+      });
+      navigate("/ManagerLogin");
+    } catch (err) {
+      console.error("Error during logout:", err);
+      localStorage.clear();
+      sessionStorage.clear();
+      navigate("/ManagerLogin");
+    }
+  };
 
-    const logout = () => {
-        try {
-            // Clear localStorage and sessionStorage
-            localStorage.clear();
-            sessionStorage.clear();
+  return (
+    <div className="relative flex">
+      <div
+        className={`${
+          open ? "w-72" : "w-20"
+        } bg-black p-5 pt-8 relative duration-300 transition-all`}  // This controls the width of the sidebar
+        style={{ height: "1100px" }}  // Sidebar height
+      >
+        {/* Sidebar Toggle Button */}
+        <img
+          src="https://i.postimg.cc/8P1D6Vq6/left-arrow.jpg"
+          className={`absolute cursor-pointer -right-3 top-9 w-7 border-2 rounded-full transition-transform duration-300 ${
+            !open && "rotate-180"
+          }`}
+          onClick={() => setOpen(!open)}  // Toggle sidebar state with arrow button
+          alt="Toggle Sidebar"
+        />
 
-            // Clear cookies
-            document.cookie.split(";").forEach((cookie) => {
-                const cookieName = cookie.split("=")[0].trim();
-                document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-            });
-
-            // Clear IndexedDB if needed
-            if (window.indexedDB) {
-                const request = indexedDB.deleteDatabase('your-database-name');
-                request.onsuccess = function () {
-                    console.log('IndexedDB cleared');
-                };
-                request.onerror = function (error) {
-                    console.error('Error clearing IndexedDB:', error);
-                };
-            }
-
-            // Clear CacheStorage if needed
-            if (window.caches) {
-                caches.keys().then((cacheNames) => {
-                    cacheNames.forEach((cacheName) => {
-                        caches.delete(cacheName);
-                    });
-                });
-            }
-
-            // Navigate to the login page after clearing everything
-            navigate('/ManagerLogin');
-        } catch (err) {
-            console.log("Error during logout:", err);
-            // In case of an error, clear all stored data and navigate anyway
-            localStorage.clear();
-            sessionStorage.clear();
-            navigate('/ManagerLogin');
-        }
-    };
-
-    return (
-        <div className="flex">
-            <div
-                style={{
-                    backgroundColor: 'black',
-                    height: '1600px', // Reduced height to 900px (Adjust this value as needed)
-                    padding: '20px', // Set padding
-                    position: 'relative',
-                    transition: 'width 0.3s ease', // Smooth transition for width change
-                    width: open ? '18rem' : '5rem', // Dynamic width based on state
-                }}
-            >
-                {/* Hamburger Icon */}
-                <img
-                    src="https://i.postimg.cc/8P1D6Vq6/left-arrow.jpg"
-                    style={{
-                        position: 'absolute',
-                        cursor: 'pointer',
-                        right: '-12px',
-                        top: '36px',
-                        width: '28px',
-                        border: '2px solid black', // Dark Purple Border
-                        borderRadius: '50%',
-                        transform: !open ? 'rotate(180deg)' : 'rotate(0deg)', // Rotate when closed
-                    }}
-                    onClick={() => setOpen(!open)}
-                    alt="Toggle Sidebar"
-                />
-                
-                <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                    {/* Logo Image will only appear when sidebar is closed */}
-                    <img 
-                        src="https://i.postimg.cc/d1Kgc2Fy/hyboxlog.jpg" // Make sure to use the correct path for the logo
-                        alt="Logo"
-                        style={{
-                            width: '24px', 
-                            height: '24px',
-                            display: open ? 'none' : 'block', // Logo appears only when sidebar is closed
-                        }}
-                    />
-                    <h1
-                        style={{
-                            color: 'white',
-                            fontSize: '1.25rem',
-                            fontWeight: '500',
-                            transition: 'transform 0.2s ease',
-                            transform: !open ? 'scale(0)' : 'scale(1)', // Hide text when sidebar is closed
-                        }}
-                    >
-                        HYPBOX
-                    </h1>
-                </div>
-
-                {/* Menu Links */}
-                <ul style={{ paddingTop: '24px' }}>
-                    {menus.map((menu, index) => (
-                        <li
-                            key={index}
-                            style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                padding: '12px', // Increased padding for larger click area
-                                cursor: 'pointer',
-                                color: '#e5e5e5',
-                                fontSize: '0.875rem',
-                                gap: '16px',
-                                backgroundColor: index === 0 ? 'transparent' : 'transparent', 
-                                borderRadius: '8px',
-                                marginTop: '16px', // Added space between items
-                            }}
-                            className="hover:bg-light-white"
-                        >
-                            {/* Render the icons for each menu */}
-                            <menu.icon 
-                                style={{ 
-                                    width: '24px', 
-                                    height: '24px', 
-                                    transform: 'scale(1)'  // Ensure icons are always visible, even when sidebar is closed
-                                }} 
-                            />
-                            <Link
-                                to={menu.link}
-                                style={{
-                                    marginLeft: '16px',
-                                    display: open ? 'block' : 'none',
-                                    transition: 'transform 0.2s ease',
-                                    transform: !open ? 'scale(0)' : 'scale(1)', // Hide text when sidebar is closed
-                                }}
-                            >
-                                {menu.name}
-                            </Link>
-                        </li>
-                    ))}
-                    <li>
-                        <button
-                            onClick={logout}
-                            style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '16px',
-                                padding: '12px', // Increased padding for logout button
-                                cursor: 'pointer',
-                                color: '#e5e5e5',
-                                fontSize: '0.875rem',
-                                marginTop: '16px', // Added space for logout button
-                            }}
-                            className="hover:bg-light-white"
-                        >
-                            <svg
-                                style={{ width: '24px', height: '24px', color: '#6b7280', transition: 'color 0.3s' }}
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                            <span
-                                style={{
-                                    transform: !open ? 'scale(0)' : 'scale(1)',
-                                    transition: 'transform 0.2s ease',
-                                }}
-                            >
-                                Logout
-                            </span>
-                        </button>
-                    </li>
-                </ul>
-            </div>
+        {/* Logo and Title */}
+        <div className="flex gap-x-4 items-center">
+          <img
+            src="https://i.postimg.cc/d1Kgc2Fy/hyboxlog.jpg"
+            className={`cursor-pointer transition-transform duration-500 ${
+              open && "rotate-[360deg]"
+            }`}
+            style={{ width: "50px", height: "50px" }}  // Adjust logo size
+            alt="Logo"
+          />
+          <h1
+            className={`text-white font-medium text-xl transition-transform duration-200 ${
+              !open && "scale-0"  // Hide title when collapsed
+            }`}
+          >
+            HYPBOX
+          </h1>
         </div>
-    );
+
+        {/* Menu Items */}
+        <ul className="pt-6">
+          {menus.map((menu, index) => (
+            <li
+              key={index}
+              className="flex rounded-md p-2 cursor-pointer hover:bg-gray-700 text-gray-300 text-sm items-center gap-x-4 group"
+            >
+              <menu.icon className="w-5 h-5 group-hover:scale-125 transition-all duration-200" /> {/* Icon grows on hover */}
+              {/* Display text when sidebar is open */}
+              <Link
+                to={menu.link}
+                className={`transition-transform duration-200 ${
+                  !open && "hidden"  // Hide text when collapsed
+                }`}
+              >
+                {menu.name}
+              </Link>
+            </li>
+          ))}
+          {/* Logout Button */}
+          <li>
+            <button
+              onClick={logout}
+              className="flex items-center p-2 w-full text-white text-sm gap-x-4 cursor-pointer hover:bg-gray-700"
+            >
+              <LogoutIcon className="w-5 h-5 group-hover:scale-125 transition-all duration-200" />
+              <span className={`transition-transform duration-200 ${!open && "hidden"}`}>
+                Logout
+              </span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  );
 };
 
 export default Sidebar;
