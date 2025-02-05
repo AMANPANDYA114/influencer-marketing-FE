@@ -426,9 +426,9 @@ const UpdateProfile = () => {
   return (
     <div className="h-screen flex">
       {/* Navbar positioned on the left */}
-      <div className="w-1/6 bg--800 text-white">
+      {/* <div className="w-1/6 bg--800 text-white">
         <Navbar />
-      </div>
+      </div> */}
 
       {/* Main content area */}
       <div className="flex-1 bg-white flex flex-col justify-center items-center">
