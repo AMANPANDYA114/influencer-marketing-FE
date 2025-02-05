@@ -396,17 +396,432 @@
 
 
 
+// import React, { useEffect, useState } from "react";
+// import { AiFillTwitterCircle } from "react-icons/ai";
+// import { BsFacebook, BsInstagram } from "react-icons/bs";
+// import { FaUserEdit } from "react-icons/fa";
+// import { useNavigate } from "react-router-dom";
+// import BrandHeader from "./BrandHeader";
+// import Navbar from "./Navbar";
+
+// import "react-slideshow-image/dist/styles.css";
+// import "slick-carousel/slick/slick-theme.css";
+// import "slick-carousel/slick/slick.css";
+
+// const BrandProfile = () => {
+//   const navigate = useNavigate();
+//   const [brandData, setBrandData] = useState({});
+//   const [loading, setLoading] = useState(true);
+
+//   const getBrandData = async () => {
+//     try {
+//       // Retrieve the brandId from localStorage
+//       const brandId = localStorage.getItem("brandID");
+
+//       if (!brandId) {
+//         console.log("Brand ID not found in localStorage");
+//         return;
+//       }
+
+//       // Make the API call with the brandId from localStorage
+//       const response = await fetch(`https://server-side-influencer.vercel.app/brand/getBrandData/${brandId}`);
+//       const data = await response.json();
+      
+//       // Set the response data to the state
+//       setBrandData(data.data);
+//       console.log("Logged in brand is data:- ", data.data);
+//     } catch (err) {
+//       console.log(err);
+//       if (err.response.status === 422) {
+//         navigate('/');
+//       }
+//     }
+//   };
+
+//   // Call getBrandData when the component mounts
+//   useEffect(() => {
+//     getBrandData();
+//   }, []);
+
+//   const editProfile = () => {
+//     navigate('/BrandProfileEdit', { state: brandData });
+//   };
+
+//   const images = brandData.images;
+//   const divStyle = {
+//     display: "flex",
+//     alignItems: "center",
+//     justifyContent: "center",
+//     backgroundSize: "cover",
+//     height: "200px",
+//     borderRadius: "12px",
+//     margin: "10px",
+//   };
+
+//   let settings = {
+//     infinite: true,
+//     speed: 600,
+//     slidesToShow: 2,
+//     slidesToScroll: 1,
+//     autoplay: true,
+//   };
+
+//   return (
+//     <div className="flex">
+//       <Navbar />
+
+//       <div className="ml-14 w-screen max-sm:ml-0 h-screen">
+//         <BrandHeader page="Profile" />
+//         <div className="h-full py-8 w-5/6 m-auto">
+//           <div className="bg-white border-2 w-5/6 m-auto rounded-lg shadow-xl pb-8">
+//             <div className="w-full h-[300px]">
+//               <img
+//                 src={brandData.brandbackgroundimage2}
+//                 className="w-full h-full rounded-tl-lg rounded-tr-lg"
+//               />
+//             </div>
+//             <div className="flex flex-col items-center -mt-20">
+//               <img
+//                 src={brandData.brandbackgroundimage}
+//                 className="w-40 h-40 border-4 border-white bg-gray-50 rounded-sm "
+//               />
+//               <div className="flex items-center space-x-2 mt-2">
+//                 <p className="text-2xl">{brandData.uname}</p>
+//                 <span className="bg-blue-500 rounded-full p-1" title="Verified">
+//                   <svg
+//                     xmlns="http://www.w3.org/2000/svg"
+//                     className="text-gray-100 h-2.5 w-2.5"
+//                     fill="none"
+//                     viewBox="0 0 24 24"
+//                     stroke="currentColor"
+//                   >
+//                     <path
+//                       strokeLinecap="round"
+//                       strokeLinejoin="round"
+//                       strokeWidth="4"
+//                       d="M5 13l4 4L19 7"
+//                     ></path>
+//                   </svg>
+//                 </span>
+//               </div>
+//               <p className="text-gray-700">Brand</p>
+//               <p className="text-sm text-gray-500">
+//                 {brandData.city + " , " + brandData.country}
+//               </p>
+
+//               <button
+//                 onClick={editProfile}
+//                 className="mt-5 flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+//                 <FaUserEdit size={17} />
+//                 <span>Edit Profile</span>
+//               </button>
+//             </div>
+//           </div>
+
+//           <div className="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
+//             <div className="w-full flex flex-col 2xl:w-1/3">
+//               <div className="flex-1 border-2 bg-white rounded-lg shadow-xl p-8">
+//                 <h4 className="text-xl text-gray-900 font-bold">Brand Information</h4>
+//                 <ul className="mt-2 text-gray-700">
+//                   <li className="flex border-y py-2">
+//                     <span className="font-bold w-54">Brand name:</span>
+//                     <span className="text-gray-700">{brandData.shopName}</span>
+//                   </li>
+//                   <li className="flex border-b py-2">
+//                     <span className="font-bold w-24">Brand Type:</span>
+//                     <span className="text-gray-700">{brandData.brandType}</span>
+//                   </li>
+//                   <li className="flex border-b py-2">
+//                     <span className="font-bold w-24">Mobile:</span>
+//                     <span className="text-gray-700">{brandData.phone}</span>
+//                   </li>
+//                   <li className="flex border-b py-2">
+//                     <span className="font-bold w-24">Email:</span>
+//                     <span className="text-gray-700">{brandData.email}</span>
+//                   </li>
+//                   <li className="flex border-b py-2">
+//                     <span className="font-bold w-24">Location:</span>
+//                     <a href={brandData.location} className="text-gray-700">Click here...</a>
+//                   </li>
+//                   <li className="flex border-b py-2">
+//                     <span className="font-bold w-24">Languages:</span>
+//                     <span className="text-gray-700">English, Hindi</span>
+//                   </li>
+//                   <li className="flex items-center border-b py-2 space-x-2">
+//                     <span className="font-bold w-24">Elsewhere:</span>
+//                     <a
+//                       target="_blank"
+//                       href={brandData.facebookUrl}
+//                       title="Facebook"
+//                     >
+//                       <BsFacebook size={20} color="#3b5998" />
+//                     </a>
+//                     <a
+//                       target="_blank"
+//                       href={brandData.twitterUrl}
+//                       title="Twitter"
+//                     >
+//                       <AiFillTwitterCircle size={24} color="#1da1f2" />
+//                     </a>
+//                     <a href="#" title="LinkedIn">
+//                       <svg
+//                         className="w-5 h-5"
+//                         xmlns="http://www.w3.org/2000/svg"
+//                         viewBox="0 0 333333 333333"
+//                         shapeRendering="geometricPrecision"
+//                         textRendering="geometricPrecision"
+//                         imageRendering="optimizeQuality"
+//                         fillRule="evenodd"
+//                         clipRule="evenodd"
+//                       >
+//                         <path
+//                           d="M166667 0c92048 0 166667 74619 166667 166667s-74619 166667-166667 166667S0 258715 0 166667 74619 0 166667 0zm-18220 138885h28897v14814l418 1c4024-7220 13865-14814 28538-14814 30514-1 36157 18989 36157 43691v50320l-30136 1v-44607c0-10634-221-24322-15670-24322-15691 0-18096 11575-18096 23548v45382h-30109v-94013zm-20892-26114c0 8650-7020 15670-15670 15670s-15672-7020-15672-15670 7022-15670 15672-15670 15670 7020 15670 15670zm-31342 26114h31342v94013H96213v-94013z"
+//                           fill="#0077b5"
+//                         ></path>
+//                       </svg>
+//                     </a>
+//                     <a
+//                       target="_blank"
+//                       href={brandData.instagramUrl}
+//                       title="Instagram"
+//                     >
+//                       <BsInstagram size={20} color="#E1306C" />
+//                     </a>
+//                   </li>
+//                 </ul>
+//               </div>
+
+//               <div className="flex-1 border-2 bg-white rounded-lg shadow-xl mt-4 p-8">
+//                 <h4 className="text-xl text-gray-900 font-bold">About</h4>
+//                 <p className="mt-4 text-gray-700">{brandData.about}</p>
+//               </div>
+//             </div>
+
+//             <div className="w-full 2xl:w-2/3 flex flex-col">
+//               <div className="flex-1 border-2 bg-white rounded-lg shadow-xl mt-4 p-8">
+             
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default BrandProfile;
+
+
+
+
+
+
+
+// import React, { useEffect, useState } from "react";
+// import { AiFillTwitterCircle } from "react-icons/ai";
+// import { BsFacebook, BsInstagram } from "react-icons/bs";
+// import { FaUserEdit } from "react-icons/fa";
+// import { useNavigate } from "react-router-dom";
+// import BrandHeader from "./BrandHeader";
+// import Navbar from "./Navbar";
+
+// import "react-slideshow-image/dist/styles.css";
+// import "slick-carousel/slick/slick-theme.css";
+// import "slick-carousel/slick/slick.css";
+
+// const BrandProfile = () => {
+//   const navigate = useNavigate();
+//   const [brandData, setBrandData] = useState({});
+//   const [loading, setLoading] = useState(true);
+
+//   const getBrandData = async () => {
+//     try {
+//       const brandId = localStorage.getItem("brandID");
+
+//       if (!brandId) {
+//         console.log("Brand ID not found in localStorage");
+//         return;
+//       }
+
+//       const response = await fetch(`https://server-side-influencer.vercel.app/brand/getBrandData/${brandId}`);
+//       const data = await response.json();
+//       setBrandData(data.data);
+//       console.log("Logged in brand is data:- ", data.data);
+//     } catch (err) {
+//       console.log(err);
+//       if (err.response.status === 422) {
+//         navigate('/');
+//       }
+//     }
+//   };
+
+//   useEffect(() => {
+//     getBrandData();
+//   }, []);
+
+//   const editProfile = () => {
+//     navigate('/BrandProfileEdit', { state: brandData });
+//   };
+
+//   return (
+//     <div className="flex">
+//       <Navbar />
+
+//       <div className="ml-14 w-screen max-sm:ml-0 h-screen">
+//         <BrandHeader page="Profile" />
+//         <div className="h-full py-8 w-5/6 m-auto">
+//           <div className="bg-white border-2 w-5/6 m-auto rounded-lg shadow-xl pb-8">
+//             {/* Background Image */}
+//             <div className="w-full h-[250px]">
+//               <img
+//                 src={brandData.brandbackgroundimage2}
+//                 className="w-full h-full object-cover rounded-tl-lg rounded-tr-lg"
+//                 alt="Brand Background"
+//               />
+//             </div>
+
+//             {/* Profile Info */}
+//             <div className="flex flex-col items-center -mt-16 relative z-10">
+//               <img
+//                 src={brandData.brandbackgroundimage}
+//                 className="w-32 h-32 border-4 border-white bg-gray-50 rounded-full"
+//                 alt="Profile"
+//               />
+//               <div className="flex items-center space-x-2 mt-2">
+//                 <p className="text-2xl">{brandData.uname}</p>
+//                 <span className="bg-blue-500 rounded-full p-1" title="Verified">
+//                   <svg
+//                     xmlns="http://www.w3.org/2000/svg"
+//                     className="text-gray-100 h-2.5 w-2.5"
+//                     fill="none"
+//                     viewBox="0 0 24 24"
+//                     stroke="currentColor"
+//                   >
+//                     <path
+//                       strokeLinecap="round"
+//                       strokeLinejoin="round"
+//                       strokeWidth="4"
+//                       d="M5 13l4 4L19 7"
+//                     ></path>
+//                   </svg>
+//                 </span>
+//               </div>
+//               <p className="text-gray-700">Brand</p>
+//               <p className="text-sm text-gray-500">{brandData.city + " , " + brandData.country}</p>
+
+//               <button
+//                 onClick={editProfile}
+//                 className="mt-5 flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+//                 <FaUserEdit size={17} />
+//                 <span>Edit Profile</span>
+//               </button>
+//             </div>
+//           </div>
+
+//           <div className="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
+//             <div className="w-full flex flex-col 2xl:w-1/3">
+//               <div className="flex-1 border-2 bg-white rounded-lg shadow-xl p-8">
+//                 <h4 className="text-xl text-gray-900 font-bold">Brand Information</h4>
+//                 <ul className="mt-2 text-gray-700">
+//                   <li className="flex border-y py-2">
+//                     <span className="font-bold w-54">Brand name:</span>
+//                     <span className="text-gray-700">{brandData.shopName}</span>
+//                   </li>
+//                   <li className="flex border-b py-2">
+//                     <span className="font-bold w-24">Brand Type:</span>
+//                     <span className="text-gray-700">{brandData.brandType}</span>
+//                   </li>
+//                   <li className="flex border-b py-2">
+//                     <span className="font-bold w-24">Mobile:</span>
+//                     <span className="text-gray-700">{brandData.phone}</span>
+//                   </li>
+//                   <li className="flex border-b py-2">
+//                     <span className="font-bold w-24">Email:</span>
+//                     <span className="text-gray-700">{brandData.email}</span>
+//                   </li>
+//                   <li className="flex border-b py-2">
+//                     <span className="font-bold w-24">Location:</span>
+//                     <a href={brandData.location} className="text-gray-700">Click here...</a>
+//                   </li>
+//                   <li className="flex border-b py-2">
+//                     <span className="font-bold w-24">Languages:</span>
+//                     <span className="text-gray-700">English, Hindi</span>
+//                   </li>
+//                   <li className="flex items-center border-b py-2 space-x-2">
+//                     <span className="font-bold w-24">Elsewhere:</span>
+//                     <a
+//                       target="_blank"
+//                       href={brandData.facebookUrl}
+//                       title="Facebook"
+//                     >
+//                       <BsFacebook size={20} color="#3b5998" />
+//                     </a>
+//                     <a
+//                       target="_blank"
+//                       href={brandData.twitterUrl}
+//                       title="Twitter"
+//                     >
+//                       <AiFillTwitterCircle size={24} color="#1da1f2" />
+//                     </a>
+//                     <a href="#" title="LinkedIn">
+//                       <svg
+//                         className="w-5 h-5"
+//                         xmlns="http://www.w3.org/2000/svg"
+//                         viewBox="0 0 333333 333333"
+//                         shapeRendering="geometricPrecision"
+//                         textRendering="geometricPrecision"
+//                         imageRendering="optimizeQuality"
+//                         fillRule="evenodd"
+//                         clipRule="evenodd"
+//                       >
+//                         <path
+//                           d="M166667 0c92048 0 166667 74619 166667 166667s-74619 166667-166667 166667S0 258715 0 166667 74619 0 166667 0zm-18220 138885h28897v14814l418 1c4024-7220 13865-14814 28538-14814 30514-1 36157 18989 36157 43691v50320l-30136 1v-44607c0-10634-221-24322-15670-24322-15691 0-18096 11575-18096 23548v45382h-30109v-94013zm-20892-26114c0 8650-7020 15670-15670 15670s-15672-7020-15672-15670 7022-15670 15672-15670 15670 7020 15670 15670zm-31342 26114h31342v94013H96213v-94013z"
+//                           fill="#0077b5"
+//                         ></path>
+//                       </svg>
+//                     </a>
+//                     <a
+//                       target="_blank"
+//                       href={brandData.instagramUrl}
+//                       title="Instagram"
+//                     >
+//                       <BsInstagram size={20} color="#E1306C" />
+//                     </a>
+//                   </li>
+//                 </ul>
+//               </div>
+
+//               <div className="flex-1 border-2 bg-white rounded-lg shadow-xl mt-4 p-8">
+//                 <h4 className="text-xl text-gray-900 font-bold">About</h4>
+//                 <p className="mt-4 text-gray-700">{brandData.about}</p>
+//               </div>
+//             </div>
+
+//             <div className="w-full 2xl:w-2/3 flex flex-col">
+//               <div className="flex-1 border-2 bg-white rounded-lg shadow-xl mt-4 p-8">
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default BrandProfile;
+
+
+
+
+
+
+
 import React, { useEffect, useState } from "react";
-import { AiFillTwitterCircle } from "react-icons/ai";
-import { BsFacebook, BsInstagram } from "react-icons/bs";
+import { BsFacebook, BsInstagram, BsYoutube } from "react-icons/bs";
 import { FaUserEdit } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import BrandHeader from "./BrandHeader";
 import Navbar from "./Navbar";
-
-import "react-slideshow-image/dist/styles.css";
-import "slick-carousel/slick/slick-theme.css";
-import "slick-carousel/slick/slick.css";
+import BrandHeader from "./BrandHeader"; // Assuming BrandHeader is the header component
 
 const BrandProfile = () => {
   const navigate = useNavigate();
@@ -415,30 +830,19 @@ const BrandProfile = () => {
 
   const getBrandData = async () => {
     try {
-      // Retrieve the brandId from localStorage
       const brandId = localStorage.getItem("brandID");
-
       if (!brandId) {
         console.log("Brand ID not found in localStorage");
         return;
       }
-
-      // Make the API call with the brandId from localStorage
       const response = await fetch(`https://server-side-influencer.vercel.app/brand/getBrandData/${brandId}`);
       const data = await response.json();
-      
-      // Set the response data to the state
       setBrandData(data.data);
-      console.log("Logged in brand is data:- ", data.data);
     } catch (err) {
       console.log(err);
-      if (err.response.status === 422) {
-        navigate('/');
-      }
     }
   };
 
-  // Call getBrandData when the component mounts
   useEffect(() => {
     getBrandData();
   }, []);
@@ -447,178 +851,72 @@ const BrandProfile = () => {
     navigate('/BrandProfileEdit', { state: brandData });
   };
 
-  const images = brandData.images;
-  const divStyle = {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundSize: "cover",
-    height: "200px",
-    borderRadius: "12px",
-    margin: "10px",
-  };
-
-  let settings = {
-    infinite: true,
-    speed: 600,
-    slidesToShow: 2,
-    slidesToScroll: 1,
-    autoplay: true,
-  };
-
   return (
-    <div className="flex">
+    <div className="flex h-screen">
+      {/* Navbar */}
       <Navbar />
 
-      <div className="ml-14 w-screen max-sm:ml-0 h-screen">
+      <div className="ml-14 w-full flex flex-col flex-grow">
+        {/* BrandHeader stays at the top */}
         <BrandHeader page="Profile" />
-        <div className="h-full py-8 w-5/6 m-auto">
-          <div className="bg-white border-2 w-5/6 m-auto rounded-lg shadow-xl pb-8">
-            <div className="w-full h-[300px]">
-              <img
-                src={brandData.brandbackgroundimage2}
-                className="w-full h-full rounded-tl-lg rounded-tr-lg"
-              />
-            </div>
-            <div className="flex flex-col items-center -mt-20">
-              <img
-                src={brandData.brandbackgroundimage}
-                className="w-40 h-40 border-4 border-white bg-gray-50 rounded-sm "
-              />
-              <div className="flex items-center space-x-2 mt-2">
-                <p className="text-2xl">{brandData.uname}</p>
-                <span className="bg-blue-500 rounded-full p-1" title="Verified">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="text-gray-100 h-2.5 w-2.5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="4"
-                      d="M5 13l4 4L19 7"
-                    ></path>
-                  </svg>
-                </span>
-              </div>
-              <p className="text-gray-700">Brand</p>
-              <p className="text-sm text-gray-500">
-                {brandData.city + " , " + brandData.country}
-              </p>
 
-              <button
-                onClick={editProfile}
-                className="mt-5 flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
-                <FaUserEdit size={17} />
-                <span>Edit Profile</span>
-              </button>
+        <div className="flex flex-col items-center justify-center w-full mt-16">
+          {/* Dynamically set background image */}
+          <div className="w-full h-64 bg-cover bg-center relative" style={{ backgroundImage: `url(${brandData.brandbackgroundimage2 || 'https://i.postimg.cc/rwYFBbkT/agency.jpg'})` }}>
+            {/* Dynamically set profile picture */}
+            <img 
+              src={brandData.brandbackgroundimage || "https://i.postimg.cc/rwYFBbkT/agency.jpg"} 
+              alt="Profile" 
+              className="w-24 h-24 rounded-full border-4 border-white absolute left-1/2 transform -translate-x-1/2 bottom-[-40px]" 
+            />
+            <div 
+              onClick={editProfile}
+              className="bg-black cursor-pointer text-white p-2 rounded-full shadow-lg absolute bottom-[-30px] left-[calc(52%-15px)]"
+              title="Edit Profile"
+            >
+              <FaUserEdit size={20} />
             </div>
           </div>
 
-          <div className="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
-            <div className="w-full flex flex-col 2xl:w-1/3">
-              <div className="flex-1 border-2 bg-white rounded-lg shadow-xl p-8">
-                <h4 className="text-xl text-gray-900 font-bold">Brand Information</h4>
-                <ul className="mt-2 text-gray-700">
-                  <li className="flex border-y py-2">
-                    <span className="font-bold w-54">Brand name:</span>
-                    <span className="text-gray-700">{brandData.shopName}</span>
-                  </li>
-                  <li className="flex border-b py-2">
-                    <span className="font-bold w-24">Brand Type:</span>
-                    <span className="text-gray-700">{brandData.brandType}</span>
-                  </li>
-                  <li className="flex border-b py-2">
-                    <span className="font-bold w-24">Mobile:</span>
-                    <span className="text-gray-700">{brandData.phone}</span>
-                  </li>
-                  <li className="flex border-b py-2">
-                    <span className="font-bold w-24">Email:</span>
-                    <span className="text-gray-700">{brandData.email}</span>
-                  </li>
-                  <li className="flex border-b py-2">
-                    <span className="font-bold w-24">Location:</span>
-                    <a href={brandData.location} className="text-gray-700">Click here...</a>
-                  </li>
-                  <li className="flex border-b py-2">
-                    <span className="font-bold w-24">Languages:</span>
-                    <span className="text-gray-700">English, Hindi</span>
-                  </li>
-                  <li className="flex items-center border-b py-2 space-x-2">
-                    <span className="font-bold w-24">Elsewhere:</span>
-                    <a
-                      target="_blank"
-                      href={brandData.facebookUrl}
-                      title="Facebook"
-                    >
-                      <BsFacebook size={20} color="#3b5998" />
-                    </a>
-                    <a
-                      target="_blank"
-                      href={brandData.twitterUrl}
-                      title="Twitter"
-                    >
-                      <AiFillTwitterCircle size={24} color="#1da1f2" />
-                    </a>
-                    <a href="#" title="LinkedIn">
-                      <svg
-                        className="w-5 h-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 333333 333333"
-                        shapeRendering="geometricPrecision"
-                        textRendering="geometricPrecision"
-                        imageRendering="optimizeQuality"
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                      >
-                        <path
-                          d="M166667 0c92048 0 166667 74619 166667 166667s-74619 166667-166667 166667S0 258715 0 166667 74619 0 166667 0zm-18220 138885h28897v14814l418 1c4024-7220 13865-14814 28538-14814 30514-1 36157 18989 36157 43691v50320l-30136 1v-44607c0-10634-221-24322-15670-24322-15691 0-18096 11575-18096 23548v45382h-30109v-94013zm-20892-26114c0 8650-7020 15670-15670 15670s-15672-7020-15672-15670 7022-15670 15672-15670 15670 7020 15670 15670zm-31342 26114h31342v94013H96213v-94013z"
-                          fill="#0077b5"
-                        ></path>
-                      </svg>
-                    </a>
-                    <a
-                      target="_blank"
-                      href={brandData.instagramUrl}
-                      title="Instagram"
-                    >
-                      <BsInstagram size={20} color="#E1306C" />
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="flex-1 border-2 bg-white rounded-lg shadow-xl mt-4 p-8">
-                <h4 className="text-xl text-gray-900 font-bold">About</h4>
-                <p className="mt-4 text-gray-700">{brandData.about}</p>
-              </div>
-            </div>
-
-            <div className="w-full 2xl:w-2/3 flex flex-col">
-              <div className="flex-1 border-2 bg-white rounded-lg shadow-xl mt-4 p-8">
-                {/* <h4 className="text-xl text-gray-900 font-bold">Images</h4>
-
-                <div className="flex flex-wrap mt-4 justify-start">
-                  {images ? (
-                    images.map((image, index) => (
-                      <div
-                        key={index}
-                        style={{
-                          ...divStyle,
-                          backgroundImage: `url(${image})`,
-                        }}
-                        className="w-1/3 h-[200px] bg-cover rounded-lg m-2"
-                      ></div>
-                    ))
-                  ) : (
-                    <img className="w-full h-[250px]" src={loader} />
-                  )}
-                </div> */}
-              </div>
-            </div>
+          {/* Brand Information Card */}
+          <div className="w-full max-w-3xl bg-white rounded-lg border-2 shadow-xl p-6 mt-16 mx-4">
+            <h4 className="text-xl text-gray-900 font-bold mb-4 text-center">Brand Information</h4>
+            <ul className="text-gray-700 space-y-2">
+              <li className="flex justify-between border-b pb-2">
+                <span className="font-semibold">Brand Name:</span>
+                <span>{brandData.shopName}</span>
+              </li>
+              <li className="flex justify-between border-b pb-2">
+                <span className="font-semibold">Brand Type:</span>
+                <span>{brandData.brandType}</span>
+              </li>
+              <li className="flex justify-between border-b pb-2">
+                <span className="font-semibold">Phone:</span>
+                <span>{brandData.phone}</span>
+              </li>
+              <li className="flex justify-between border-b pb-2">
+                <span className="font-semibold">Email:</span>
+                <span>{brandData.email}</span>
+              </li>
+              <li className="flex justify-between border-b pb-2">
+                <span className="font-semibold">Location:</span>
+                <a href={brandData.location} className="text-blue-500">Click here...</a>
+              </li>
+              <li className="flex justify-between pb-2">
+                <span className="font-semibold">Socials:</span>
+                <div className="flex space-x-2">
+                  <a href={brandData.facebookUrl} target="_blank" title="Facebook">
+                    <BsFacebook size={20} color="#3b5998" />
+                  </a>
+                  <a href={brandData.instagramUrl} target="_blank" title="Instagram">
+                    <BsInstagram size={20} color="#E1306C" />
+                  </a>
+                  <a href={brandData.twitterUrl} target="_blank" title="Twitter">
+                    <BsYoutube size={20} color="#FF0000" />
+                  </a>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -627,4 +925,3 @@ const BrandProfile = () => {
 };
 
 export default BrandProfile;
-

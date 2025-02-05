@@ -672,6 +672,7 @@
 
 
 
+
 import React, { useEffect, useState } from "react";
 import { FaTrashAlt } from "react-icons/fa"; // Trash icon for delete button
 import { toast, ToastContainer } from "react-toastify"; // Toastify for notifications
@@ -777,116 +778,116 @@ const MyCampaigns = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white-100 flex flex-col">
+    <div className="flex">
       {/* Navbar */}
-      <div style={{ position: 'fixed', top: 0, left: 0, zIndex: 10 }}>
-        <Navbar />
-      </div>
+      <Navbar />
 
-      {/* Main content */}
-      <div className="ml-[20px] p-4"> {/* Adding margin to the left for the navbar */}
-        <h2 className="text-2xl font-bold mb-8 text-center text-blue-600">My Campaigns</h2>
-        {loading ? (
-          <p className="text-center">Loading...</p>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {myCampaigns.length === 0 ? (
-              <p className="text-center text-gray-500">No campaigns found!</p>
+      <div className="ml-14 w-screen max-sm:ml-0 h-screen">
+        <div className="min-h-screen bg-white-100 flex flex-col">
+          {/* Main content */}
+          <div className="ml-[20px] p-4"> {/* Adding margin to the left for the navbar */}
+            <h2 className="text-2xl font-bold mb-8 text-center text-blue-600">My Campaigns</h2>
+            {loading ? (
+              <p className="text-center">Loading...</p>
             ) : (
-              myCampaigns.map((campaign) => (
-                <div
-                  key={campaign._id}
-                  className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out relative"
-                >
-                  {/* Container for images */}
-                  <div className="absolute inset-0 z-0">
-                    {/* Background image */}
-                    <img
-                      src={campaign.backgroundImage}
-                      alt="Background"
-                      className="w-full h-32 object-cover rounded-t-lg absolute top-0 left-0"
-                    />
-                    {/* Profile image */}
-                    <img
-                      src={campaign.logo}
-                      alt="Profile"
-                      className="w-16 h-16 object-cover rounded-full absolute top-4 left-4 z-10 border-4 border-white"
-                    />
-                  </div>
-
-                  <h3 className="text-xl font-semibold text-blue-600 mt-20">
-                    {campaign.campaignName}
-                  </h3>
-                  <p className="mt-2 text-sm text-gray-700">
-                    <strong>Brand Name:</strong> {campaign.brandName}
-                  </p>
-
-                  <div className="mt-4">
-                    <p className="text-sm text-gray-700">
-                      <strong>Campaign Type:</strong> {campaign.campaignType}
-                    </p>
-                    <p className="text-sm text-gray-700">
-                      <strong>Description:</strong> {campaign.description}
-                    </p>
-                    <p className="text-sm text-gray-700">
-                      <strong>Budget:</strong> {campaign.budget}
-                    </p>
-                    <p className="text-sm text-gray-700">
-                      <strong>Start Date:</strong> {campaign.startDate.slice(0, 10)}
-                    </p>
-                    <p className="text-sm text-gray-700">
-                      <strong>End Date:</strong> {campaign.endDate.slice(0, 10)}
-                    </p>
-
-                    <p className="text-sm text-gray-700">
-                      <strong>Follower Range:</strong>
-                      {campaign.followerRange
-                        ? `${campaign.followerRange[0]} - ${campaign.followerRange[1]}`
-                        : "Not available"}
-                    </p>
-
-                    <p className="text-sm text-gray-700">
-                      <strong>Tags:</strong>
-                      <span className="ml-2 text-blue-500">
-                        {campaign.tags && campaign.tags.length > 0 ? (
-                          campaign.tags.map((tag, index) => (
-                            <span key={index} className="mr-2">{tag}</span>
-                          ))
-                        ) : (
-                          "No tags available"
-                        )}
-                      </span>
-                    </p>
-                  </div>
-
-                  {/* Buttons in bottom-right corner of the card */}
-                  <div className="absolute bottom-4 right-4 flex space-x-4 z-10">
-                    <span
-                      className="bg-blue-600 text-white px-4 py-2 rounded-full cursor-pointer text-xs"
-                      onClick={() => handleViewApplicants(campaign._id)}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {myCampaigns.length === 0 ? (
+                  <p className="text-center text-gray-500">No campaigns found!</p>
+                ) : (
+                  myCampaigns.map((campaign) => (
+                    <div
+                      key={campaign._id}
+                      className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out relative"
                     >
-                      View Applicants
-                    </span>
-                    <button
-                      onClick={() => handleDeleteCampaign(campaign._id)}
-                      className="text-red-500 hover:text-red-700"
-                    >
-                      <FaTrashAlt />
-                    </button>
-                  </div>
-                </div>
-              ))
+                      {/* Container for images */}
+                      <div className="absolute inset-0 z-0">
+                        {/* Background image */}
+                        <img
+                          src={campaign.backgroundImage}
+                          alt="Background"
+                          className="w-full h-32 object-cover rounded-t-lg absolute top-0 left-0"
+                        />
+                        {/* Profile image */}
+                        <img
+                          src={campaign.logo}
+                          alt="Profile"
+                          className="w-16 h-16 object-cover rounded-full absolute top-4 left-4 z-10 border-4 border-white"
+                        />
+                      </div>
+
+                      <h3 className="text-xl font-semibold text-blue-600 mt-20">
+                        {campaign.campaignName}
+                      </h3>
+                      <p className="mt-2 text-sm text-gray-700">
+                        <strong>Brand Name:</strong> {campaign.brandName}
+                      </p>
+
+                      <div className="mt-4">
+                        <p className="text-sm text-gray-700">
+                          <strong>Campaign Type:</strong> {campaign.campaignType}
+                        </p>
+                        <p className="text-sm text-gray-700">
+                          <strong>Description:</strong> {campaign.description}
+                        </p>
+                        <p className="text-sm text-gray-700">
+                          <strong>Budget:</strong> {campaign.budget}
+                        </p>
+                        <p className="text-sm text-gray-700">
+                          <strong>Start Date:</strong> {campaign.startDate.slice(0, 10)}
+                        </p>
+                        <p className="text-sm text-gray-700">
+                          <strong>End Date:</strong> {campaign.endDate.slice(0, 10)}
+                        </p>
+
+                        <p className="text-sm text-gray-700">
+                          <strong>Follower Range:</strong>
+                          {campaign.followerRange
+                            ? `${campaign.followerRange[0]} - ${campaign.followerRange[1]}`
+                            : "Not available"}
+                        </p>
+
+                        <p className="text-sm text-gray-700">
+                          <strong>Tags:</strong>
+                          <span className="ml-2 text-blue-500">
+                            {campaign.tags && campaign.tags.length > 0 ? (
+                              campaign.tags.map((tag, index) => (
+                                <span key={index} className="mr-2">{tag}</span>
+                              ))
+                            ) : (
+                              "No tags available"
+                            )}
+                          </span>
+                        </p>
+                      </div>
+
+                      {/* Buttons in bottom-right corner of the card */}
+                      <div className="absolute bottom-4 right-4 flex space-x-4 z-10">
+                        <span
+                          className="bg-blue-600 text-white px-4 py-2 rounded-full cursor-pointer text-xs"
+                          onClick={() => handleViewApplicants(campaign._id)}
+                        >
+                          View Applicants
+                        </span>
+                        <button
+                          onClick={() => handleDeleteCampaign(campaign._id)}
+                          className="text-red-500 hover:text-red-700"
+                        >
+                          <FaTrashAlt />
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
             )}
           </div>
-        )}
-      </div>
 
-      {/* Toast Container for Notifications */}
-      <ToastContainer position="bottom-center" autoClose={3000} />
+          {/* Toast Container for Notifications */}
+          <ToastContainer position="bottom-center" autoClose={3000} />
+        </div>
+      </div>
     </div>
   );
 };
 
 export default MyCampaigns;
-
-
