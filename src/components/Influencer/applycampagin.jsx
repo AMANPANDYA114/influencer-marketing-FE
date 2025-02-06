@@ -71,7 +71,7 @@ const ApplyToCampaign = () => {
     }
 
     try {
-      const response = await fetch('https://server-side-influencer-1.onrender.com/influencer/apply-to-campaign', {
+      const response = await fetch('https://server-side-influencer.onrender.com/influencer/apply-to-campaign', {
         method: 'PUT',
         body: formData,
       });

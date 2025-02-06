@@ -1,87 +1,131 @@
 
 
 
-import React from "react";
 
+import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import 'react-circular-progressbar/dist/styles.css';
 
 const InfluencerHistory = () => {
+  const [campaignData, setCampaignData] = useState(null);
+
+  // Fetch data on component mount
+  useEffect(() => {
+    fetch("https://server-side-influencer.onrender.com/brand/getCampaignAnalytics/67a49891318f14e56795d3f0 ")
+      .then((response) => response.json())
+      .then((data) => setCampaignData(data.data))
+      .catch((error) => console.error('Error fetching data:', error));
+  }, []);
+
+  if (!campaignData) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="flex h-screen">
       <Navbar />
       <div className="h-screen ml-14 max-sm:ml-0 w-screen">
-        {/* <InfluencerHeader page="History" /> */}
-        
-        {/* Added section for Monitor Your Campaign Performance */}
-        <div className="text-center font-bold text-2xl mt-4">
-          Monitor Your Campaign Performance
+        <div className="text-center font-bold text-3xl mt-4">
+          Campaign Analytics
         </div>
-        <div className="text-center text-gray-600 mt-2">
-          Track influencer performance in real-time, measure campaign success, and instantly monitor individual influencer results.
+        <div className="text-center text-gray-600 mt-2 mb-10">
+          View your campaign data in real-time and analyze performance.
         </div>
-        <div className="flex justify-center space-x-4 mt-4" style={{ marginBottom: '70px' }}>
-          <button className="bg-blue-500 text-white font-bold py-2 px-4 rounded">
-            Create Plan
-          </button>
-          <button className="border border-blue-500 text-blue-500 font-bold py-2 px-4 rounded">
-            Watch Demo
+
+        {/* View Detailed Report Button - Positioned to the top-right */}
+        <div className="absolute top-10 right-10 z-10">
+          <button className="bg-blue-500 text-white font-bold py-2 px-6 rounded-lg shadow-md hover:bg-blue-600 transition">
+            View Detailed Report
           </button>
         </div>
-        
-        {/* Cards Section */}
-        <div className="flex flex-wrap justify-center mt-8">
-          {/* Card 1 */}
-          <div className="max-w-sm p-6 bg-white rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-2 flex flex-col items-center text-center">
-            <img src="https://app.qoruz.com/b38bd5ef0b0d187ef88c80c61af92017.svg" alt="Card 1" className="w-50 h-100 mx-auto mb-4" />
-            <h5 className="mb-2 text-1xl font-bold tracking-tight text-gray-900 dark:text-white">Measure Campaign Success</h5>
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-          </div>
 
-          {/* Card 2 */}
-          <div className="max-w-sm p-6 bg-white rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-2 flex flex-col items-center text-center">
-            <img src="https://app.qoruz.com/86cf8cb4e4b7f6ccae5e9d9d7392bfdd.svg" alt="Card 2" className="w-50 h-100 mx-auto mb-4" />
-            <h5 className="mb-2 text-1xl font-bold tracking-tight text-gray-900 dark:text-white">Track Link Clicks</h5>
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Explore the latest trends shaping influencer marketing in 2023.</p>
-          </div>
+        {/* Day-wise Analytics Section - Moved Below the View Detailed Report Button */}
+        <div className="flex flex-wrap justify-start gap-8 mt-16 mb-8 px-8">
+          {campaignData.dayWiseAnalytics.map((dayData, index) => (
+            <div key={index} className="max-w-xs p-6 bg-white rounded-lg shadow-lg flex flex-col items-center text-center">
+              <div className="text-2xl font-bold text-gray-800">{`Day ${dayData.day}`}</div>
+              <div className="text-lg font-semibold text-gray-600">{new Date(dayData.date).toLocaleDateString()}</div>
 
-          {/* Card 3 */}
-          <div className="max-w-sm p-6 bg-white rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-2 flex flex-col items-center text-center">
-            <img src="https://app.qoruz.com/1074b23a496fb8cc05abfca161f97818.svg" alt="Card 3" className="w-50 h-100 mx-auto mb-4" />
-            <h5 className="mb-2 text-1xl font-bold tracking-tight text-gray-900 dark:text-white">Top Influencers & Posts</h5>
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Learn how to forge successful partnerships with influencers.</p>
-          </div>
-        </div>
-
-        <img src="https://i.postimg.cc/QNKVMpJk/landing-page.png" alt="Landing Page" className="w-full h-80 object-cover mt-16" />
-
-        {/* Additional Card with Margin Top */}
-        <div 
-          className="w-11/12 sm:w-9/12 mx-auto p-6 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mt-10" 
-          style={{ backgroundColor: '#E6E6FA', marginBottom: '50px' }} // Added margin-bottom here
-        >
-          <div className="flex flex-col sm:flex-row sm:items-start">
-            <div className="flex-grow">
-              <h5 className="mb-2 text-2xl font-bold text-gray-900 dark:text-white">Need set-up advice, help with onboarding?</h5>
-              <p className="mb-5 text-sm text-gray-500 sm:text-base dark:text-gray-400">Stay up to date and move work forward with Flowbite on iOS & Android. Download the app today.</p>
-            </div>
-            <div className="mt-4 sm:mt-0 sm:ml-4 w-1/2"> {/* Set to 50% width */}
-              <div className="p-4 bg-gray-100 border border-gray-300 rounded-lg shadow dark:bg-gray-700 dark:border-gray-600 flex items-center w-full">
-                <img src="https://app.qoruz.com/9c8c73c495e8e2677e52cd51ab1ee23e.svg" alt="Quick Access Icon" className="w-8 h-8 rounded-full mr-2" />
-                <div className="flex flex-col">
-                  <h6 className="text-lg font-semibold text-gray-900 dark:text-white">Eswaran Sundareshwaran</h6>
-                  <p className="text-sm text-gray-700 dark:text-gray-400">Customer Success Manager</p>
-                </div>
+              {/* Day-wise Data */}
+              <div className="mt-4 text-lg">
+                <p>Total Applicants: {dayData.totalApplicants}</p>
+                <p>Total Reach: {dayData.totalReach}</p>
+                <p>Selected Users: {dayData.selectedUsers}</p>
               </div>
             </div>
-          </div>
-          <div className="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4 rtl:space-x-reverse mt-4">
-            {/* Other items can be added here if needed */}
+          ))}
+        </div>
+
+        {/* Animated Line Chart Section */}
+        <div className="flex flex-col items-center mt-8">
+          <div className="w-full h-96">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={campaignData.dayWiseAnalytics}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="date" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Line
+                  type="monotone"
+                  dataKey="totalApplicants"
+                  stroke="#8884d8"
+                  activeDot={{ r: 8 }}
+                  animationDuration={1000} // Animation duration for line
+                />
+                <Line
+                  type="monotone"
+                  dataKey="totalReach"
+                  stroke="#82ca9d"
+                  animationDuration={1000} // Animation duration for line
+                />
+                <Line
+                  type="monotone"
+                  dataKey="selectedUsers"
+                  stroke="#ffc658"
+                  animationDuration={1000} // Animation duration for line
+                />
+              </LineChart>
+            </ResponsiveContainer>
           </div>
         </div>
-        {/* Card end */}
+
+        {/* Analytics Cards Section */}
+        <div className="flex flex-wrap justify-center gap-8 mt-8">
+          {/* Total Applicants Card */}
+          <div className="max-w-xs p-6 bg-white rounded-lg shadow-lg flex flex-col items-center text-center">
+            <div className="text-4xl font-bold text-purple-500">{campaignData.totalApplicants}</div>
+            <h5 className="mt-2 text-xl font-semibold text-gray-900">Total Applicants</h5>
+          </div>
+
+          {/* Active Campaigns Card */}
+          <div className="max-w-xs p-6 bg-white rounded-lg shadow-lg flex flex-col items-center text-center">
+            <div className="text-4xl font-bold text-green-500">{campaignData.activeCampaigns}</div>
+            <h5 className="mt-2 text-xl font-semibold text-gray-900">Active Campaigns</h5>
+          </div>
+
+          {/* Total Reach Card */}
+          <div className="max-w-xs p-6 bg-white rounded-lg shadow-lg flex flex-col items-center text-center">
+            <div className="text-4xl font-bold text-orange-500">{campaignData.totalReach}</div>
+            <h5 className="mt-2 text-xl font-semibold text-gray-900">Total Reach</h5>
+          </div>
+
+          {/* Users Selected for Campaign Card */}
+          <div className="max-w-xs p-6 bg-white rounded-lg shadow-lg flex flex-col items-center text-center">
+            <div className="text-4xl font-bold text-blue-500">{campaignData.usersSelectedForCampaign}</div>
+            <h5 className="mt-2 text-xl font-semibold text-gray-900">
+              Users Selected for Campaign
+              {/* Added "Based on followers criteria" text with proper JSX syntax */}
+              <p className="mt-2 text-sm text-gray-600">Based on followers criteria</p>
+            </h5>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
 export default InfluencerHistory;
+
+
