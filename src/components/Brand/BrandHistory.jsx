@@ -244,13 +244,12 @@
 
 
 
-import React, { useState, useEffect } from "react";
-import Navbar from "./Navbar";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import InstagramIcon from '@mui/icons-material/Instagram'; // Import MUI Instagram icon
+import React, { useEffect, useState } from "react";
 import 'react-circular-progressbar/dist/styles.css';
-import { toast } from "react-toastify";  // Assuming you're using react-toastify for error messages
-import { Link } from "react-router-dom";  // Import Link for routing
-import InstagramIcon from '@mui/icons-material/Instagram';  // Import MUI Instagram icon
+import { toast } from "react-toastify"; // Assuming you're using react-toastify for error messages
+import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import Navbar from "./Navbar";
 
 const InfluencerHistory = () => {
   const [myCampaigns, setMyCampaigns] = useState([]);  // All campaigns data fetched for the brand
@@ -435,7 +434,7 @@ const InfluencerHistory = () => {
                   <th className="border px-4 py-2">Followers</th>
                   <th className="border px-4 py-2">Email</th> {/* Email Column */}
                   <th className="border px-4 py-2">Status</th> {/* Status Column */}
-                  <th className="border px-4 py-2">Approved Budget</th> {/* Approved Budget Column */}
+                  <th className="border px-4 py-2">Approved Budget</th> {/* Approved Budget Columnsss */}
                   <th className="border px-4 py-2">Instagram</th>
                   <th className="border px-4 py-2">Task Link</th>
                 </tr>
