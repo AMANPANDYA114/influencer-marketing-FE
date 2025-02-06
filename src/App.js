@@ -83,7 +83,7 @@ const App = () => {
         <Route path="/campaigndetails" element={<CampaignDetailsPage />} />
 
         <Route path="/notify" element={<Notifications />} />
-        <Route path="/allinfluencer" element={<AllInfluencerDetails />} />
+        <Route path="/allinfluencer1" element={<AllInfluencerDetails />} />
         <Route path="/allinfluencer2" element={<AllInfluencerDetails2 />} />
 
 

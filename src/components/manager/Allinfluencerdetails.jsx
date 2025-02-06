@@ -22,12 +22,11 @@ const  AllInfluencerDetails = () => {
   }
 
   return (
-    <div className="flex h-screen">
-      {/* Left Section - Navbar */}
-      <div style={{ width: "170px", backgroundColor: "white" }}>
-  <Navbar />
-</div>
+    
 
+
+    <div className="flex h-screen">
+      <Navbar /> {/* Sidebar/Navbar component */}
       {/* Right Section - Main Content */}
       <div className="w-3/4 p-8 overflow-y-auto">
         <div className="flex flex-col lg:flex-row justify-between gap-16 lg:items-center">
