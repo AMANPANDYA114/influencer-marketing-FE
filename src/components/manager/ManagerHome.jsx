@@ -252,9 +252,48 @@ const  ManagerHome= () => {
     setFile(event.target.files[0]);
   };
   
+  // const handleDelete = async (_id) => {
+  //   console.log("Item ID to delete:", _id);
+
+  //   try {
+  //     const response = await fetch(`https://server-side-influencer.onrender.com/manager/deletecsv/${_id}`, {
+  //       method: 'DELETE',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //     });
+
+  //     if (response.ok) {
+  //       Swal.fire({
+  //         title: "Success",
+  //         text: "Deleted successfully!",
+  //         icon: "success",
+  //         confirmButtonText: "OK",
+  //       });
+  //       fetchData(); // After successful deletion, fetch the updated data
+  //     } else {
+  //       const errorData = await response.json();
+  //       Swal.fire({
+  //         title: "Error",
+  //         text: `Failed to delete item: ${errorData.message}`,
+  //         icon: "error",
+  //         confirmButtonText: "OK",
+  //       });
+  //     }
+  //   } catch (error) {
+  //     Swal.fire({
+  //       title: "Error",
+  //       text: "An error occurred while deleting the item.",
+  //       icon: "error",
+  //       confirmButtonText: "OK",
+  //     });
+  //   }
+  // };
+
+
   const handleDelete = async (_id) => {
     console.log("Item ID to delete:", _id);
-
+  
     try {
       const response = await fetch(`https://server-side-influencer.onrender.com/manager/deletecsv/${_id}`, {
         method: 'DELETE',
@@ -262,34 +301,25 @@ const  ManagerHome= () => {
           'Content-Type': 'application/json',
         },
       });
-
+  
       if (response.ok) {
-        Swal.fire({
-          title: "Success",
-          text: "Deleted successfully!",
-          icon: "success",
-          confirmButtonText: "OK",
+        toast.success('Deleted successfully!', {
+          position: toast.POSITION.TOP_RIGHT,
         });
         fetchData(); // After successful deletion, fetch the updated data
       } else {
         const errorData = await response.json();
-        Swal.fire({
-          title: "Error",
-          text: `Failed to delete item: ${errorData.message}`,
-          icon: "error",
-          confirmButtonText: "OK",
+        toast.error(`Failed to delete item: ${errorData.message}`, {
+          position: toast.POSITION.TOP_RIGHT,
         });
       }
     } catch (error) {
-      Swal.fire({
-        title: "Error",
-        text: "An error occurred while deleting the item.",
-        icon: "error",
-        confirmButtonText: "OK",
+      console.error('Error occurred:', error);
+      toast.error('An error occurred while deleting the item.', {
+        position: toast.POSITION.TOP_RIGHT,
       });
     }
   };
-
   const handleRowSelect = (index) => {
     setSelectedRows((prevSelected) =>
       prevSelected.includes(index)
@@ -314,44 +344,41 @@ const  ManagerHome= () => {
     navigate('/edit', { state: { item } });
   };
 
+  
+
+
   const handleAddItem = async (_id) => {
     try {
       const managerId = localStorage.getItem('managerID');
       if (!managerId) {
-        Swal.fire({
-          title: "Error",
-          text: 'brand ID not found in localStorage',
-          icon: "error",
-          confirmButtonText: "OK",
+        toast.error('Brand ID not found in localStorage', {
+          position: toast.POSITION.TOP_RIGHT,
         });
         return;
       }
-
+  
       const response = await fetch(`https://server-side-influencer.onrender.com/manager/influencer/add/${managerId}/${_id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
       });
-
+  
       if (response.ok) {
-        Swal.fire({
-          title: "Success",
-          text: 'Added successfully!',
-          icon: "success",
-          confirmButtonText: "OK",
+        toast.success('Added successfully!', {
+          position: toast.POSITION.TOP_RIGHT,
         });
       } else {
         const errorData = await response.json();
-        Swal.fire({
-          title: "Error",
-          text: `${errorData.message}`,
-          icon: "error",
-          confirmButtonText: "OK",
+        toast.error(`${errorData.message}`, {
+          position: toast.POSITION.TOP_RIGHT,
         });
       }
     } catch (error) {
       console.error('Error occurred:', error);
+      toast.error('Something went wrong!', {
+        position: toast.POSITION.TOP_RIGHT,
+      });
     }
   };
 
