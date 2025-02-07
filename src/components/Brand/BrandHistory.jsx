@@ -254,6 +254,8 @@
 
 
 
+
+
 import InstagramIcon from '@mui/icons-material/Instagram'; 
 import EmailIcon from '@mui/icons-material/Email'; 
 import React, { useEffect, useState } from "react";
@@ -329,6 +331,7 @@ const InfluencerHistory = () => {
   const dataToRender = campaignData?.dayWiseAnalytics?.map((entry) => ({
     ...entry,
     selectedUsers: entry.usersSelectedForCampaign || 0,
+    date: new Date(entry.date).toLocaleDateString(), // Format date
   })) || fallbackData;
 
   return (
@@ -376,36 +379,31 @@ const InfluencerHistory = () => {
           </div>
         </div>
 
+        {/* Applicant Analytics Cards */}
+        <div className="flex flex-wrap justify-center gap-12 mt-8">
+          <div className="w-80 p-8 bg-white rounded-lg shadow-lg flex flex-col items-center text-center">
+            <div className="text-5xl font-bold text-purple-500">{campaignData ? campaignData.totalApplicants : 0}</div>
+            <h5 className="mt-2 text-xl font-semibold text-gray-900">Total Applicants for this campaign</h5>
+          </div>
 
+          <div className="w-80 p-8 bg-white rounded-lg shadow-lg flex flex-col items-center text-center">
+            <div className="text-5xl font-bold text-green-500">{campaignData ? campaignData.activeCampaigns : 0}</div>
+            <h5 className="mt-2 text-xl font-semibold text-gray-900">Active Campaigns</h5>
+          </div>
 
-{/* appliacnt analtics cards  */}
+          <div className="w-80 p-8 bg-white rounded-lg shadow-lg flex flex-col items-center text-center">
+            <div className="text-5xl font-bold text-orange-500">{campaignData ? campaignData.totalReach : 0}</div>
+            <h5 className="mt-2 text-xl font-semibold text-gray-900">Total Reach on this campaign</h5>
+          </div>
 
-
-
-<div className="flex flex-wrap justify-center gap-12 mt-8">
-  <div className="w-80 p-8 bg-white rounded-lg shadow-lg flex flex-col items-center text-center">
-    <div className="text-5xl font-bold text-purple-500">{campaignData ? campaignData.totalApplicants : 0}</div>
-    <h5 className="mt-2 text-xl font-semibold text-gray-900">Total Applicants for this campaign</h5>
-  </div>
-
-  <div className="w-80 p-8 bg-white rounded-lg shadow-lg flex flex-col items-center text-center">
-    <div className="text-5xl font-bold text-green-500">{campaignData ? campaignData.activeCampaigns : 0}</div>
-    <h5 className="mt-2 text-xl font-semibold text-gray-900">Active Campaigns</h5>
-  </div>
-
-  <div className="w-80 p-8 bg-white rounded-lg shadow-lg flex flex-col items-center text-center">
-    <div className="text-5xl font-bold text-orange-500">{campaignData ? campaignData.totalReach : 0}</div>
-    <h5 className="mt-2 text-xl font-semibold text-gray-900">Total Reach on this campaign</h5>
-  </div>
-
-  <div className="w-80 p-8 bg-white rounded-lg shadow-lg flex flex-col items-center text-center">
-    <div className="text-5xl font-bold text-blue-500">{campaignData ? campaignData.usersSelectedForCampaign : 0}</div>
-    <h5 className="mt-2 text-xl font-semibold text-gray-900">
-      Users Selected for this Campaign
-      <p className="mt-2 text-sm text-gray-600">Based on followers criteria</p>
-    </h5>
-  </div>
-</div>
+          <div className="w-80 p-8 bg-white rounded-lg shadow-lg flex flex-col items-center text-center">
+            <div className="text-5xl font-bold text-blue-500">{campaignData ? campaignData.usersSelectedForCampaign : 0}</div>
+            <h5 className="mt-2 text-xl font-semibold text-gray-900">
+              Users Selected for this Campaign
+              <p className="mt-2 text-sm text-gray-600">Based on followers criteria</p>
+            </h5>
+          </div>
+        </div>
 
         {/* Applicant Details Table */}
         <div
