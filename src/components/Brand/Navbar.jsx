@@ -789,7 +789,7 @@ const Sidebar = () => {
     { name: "Plan and List", link: "/BrandConsignments", icon: HandshakeIcon },
     { name: "Create Campaign", link: "/create", icon: HistoryIcon },
     { name: "My Campaigns", link: "/MyCampaigns", icon: HistoryIcon },
-    { name: "Campaign Reports", link: "/BrandHistory", icon: HistoryIcon },
+    { name: "Campaign Analytics", link: "/BrandHistory", icon: HistoryIcon },
     { name: "Messages", link: "/messagebrand", icon: MailIcon },
     { name: "Profile", link: "/BrandProfile", icon: AccountCircleIcon },
     { name: "Logout", link: "#", icon: LogoutIcon, action: "logout" },
