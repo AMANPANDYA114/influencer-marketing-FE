@@ -820,8 +820,8 @@ import React, { useEffect, useState } from "react";
 import { BsFacebook, BsInstagram, BsYoutube } from "react-icons/bs";
 import { FaUserEdit } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import Navbar from "./Navbar";
 import BrandHeader from "./BrandHeader"; // Assuming BrandHeader is the header component
+import Navbar from "./Navbar";
 
 const BrandProfile = () => {
   const navigate = useNavigate();
@@ -835,7 +835,7 @@ const BrandProfile = () => {
         console.log("Brand ID not found in localStorage");
         return;
       }
-      const response = await fetch(`https://server-side-influencer.vercel.app/brand/getBrandData/${brandId}`);
+      const response = await fetch(`https://server-side-influencer.onrender.com/brand/getBrandData/${brandId}`);
       const data = await response.json();
       setBrandData(data.data);
     } catch (err) {
