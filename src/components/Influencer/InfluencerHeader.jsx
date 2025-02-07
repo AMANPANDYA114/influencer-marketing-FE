@@ -134,7 +134,7 @@ const InfluencerHeader = ({ page, getCampaigns }) => {  // Access getCampaigns f
       return;
     }
 
-    fetch(`https://server-side-influencer.vercel.app/influencer/getInfluencer/${influencerId}`)
+    fetch(`https://server-side-influencer.onrender.com/influencer/getInfluencer/${influencerId}`)
       .then(response => response.json())
       .then(data => {
         setuserdata(data.data);
