@@ -478,7 +478,7 @@ const CreateCampaign = () => {
         return;
       }
 
-      const response = await fetch(`https://server-side-influencer.vercel.app/brand/getBrandData/${brandId}`);
+      const response = await fetch(`https://server-side-influencer-1.onrender.com/brand/getBrandData/${brandId}`);
       const data = await response.json();
 
       setBrandData(data.data);
