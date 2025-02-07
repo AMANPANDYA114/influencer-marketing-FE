@@ -1,48 +1,52 @@
 
 
-
+// import axios from 'axios';
 // import React, { useEffect, useState } from 'react';
-// import Swal from 'sweetalert2'; // For showing alerts
-// import axios from 'axios'; // For making HTTP requests
-// import Navbar from './Navbar'; // Ensure this import exists in your code
-// import ManagerHeader from './ManagerHeader'; // Ensure this import exists in your code
-// import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirecting
+// import { useNavigate } from 'react-router-dom';
+// import Swal from 'sweetalert2';
+// import ManagerHeader from './ManagerHeader';
+// import Navbar from './Navbar';
+// import ArrowBackIcon from '@mui/icons-material/ArrowBack'; // Import the ArrowBack icon
+// import { IconButton, CircularProgress } from '@mui/material'; // Import CircularProgress for the spinner
 
 // const UpdateProfile = () => {
-//   const navigate = useNavigate(); // Initialize useNavigate hook
+//   const navigate = useNavigate();
 //   const [manager, setManager] = useState({
 //     name: '',
 //     email: '',
 //     phone: '',
 //     bio: '',
-//     about: ''
+//     about: '',
+//     profilePic: '',
+//     backgroundImage: '',
 //   });
-//   const [loading, setLoading] = useState(true); // Loading state for the initial fetch
-//   const [error, setError] = useState(null); // Error state for handling errors
-//   const [isSubmitting, setIsSubmitting] = useState(false); // To handle form submission state
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState(null);
+//   const [isSubmitting, setIsSubmitting] = useState(false);
+//   const [profilePic, setProfilePic] = useState(null);
+//   const [backgroundImage, setBackgroundImage] = useState(null);
+//   const [uploadStatus, setUploadStatus] = useState('');
+//   const [loadingUpload, setLoadingUpload] = useState(false); // Add loadingUpload state
 
-//   const managerId = localStorage.getItem('managerID'); // Get manager ID from localStorage
+//   const managerId = localStorage.getItem('managerID');
 
-//   // Token check and redirect if no token
 //   useEffect(() => {
 //     const token = localStorage.getItem("mangertoken");
 //     if (!token) {
-//       // Redirect to login page if no token is found
 //       navigate("/ManagerLogin");
 //     } else {
-//       // Fetch manager data if token is present
 //       const fetchManagerData = async () => {
 //         try {
 //           const response = await axios.get(`https://server-side-influencer-1.onrender.com/manager/managers/${managerId}`);
 //           if (response.data.success) {
-//             setManager(response.data.data); // Set the manager's profile data
+//             setManager(response.data.data);
 //           } else {
 //             setError('Manager not found');
 //           }
 //         } catch (err) {
 //           setError('Error fetching manager data');
 //         } finally {
-//           setLoading(false); // Set loading state to false after fetching data
+//           setLoading(false);
 //         }
 //       };
 
@@ -50,12 +54,9 @@
 //     }
 //   }, [managerId, navigate]);
 
-//   // Handle form submission
 //   const handleSubmit = async (e) => {
 //     e.preventDefault();
-
-//     setIsSubmitting(true); // Set submitting state to true
-
+//     setIsSubmitting(true);
 //     try {
 //       const response = await axios.put(`https://server-side-influencer-1.onrender.com/manager/managers/${managerId}`, {
 //         name: manager.name,
@@ -88,11 +89,10 @@
 //         confirmButtonText: 'OK',
 //       });
 //     } finally {
-//       setIsSubmitting(false); // Reset the submitting state
+//       setIsSubmitting(false);
 //     }
 //   };
 
-//   // Handle input change
 //   const handleChange = (e) => {
 //     const { name, value } = e.target;
 //     setManager((prevState) => ({
@@ -101,109 +101,234 @@
 //     }));
 //   };
 
+//   const handleProfilePicChange = (e) => {
+//     const file = e.target.files[0];
+//     setProfilePic(file);
+//     handleProfilePicUpload(file); 
+//   };
+
+//   const handleProfilePicUpload = async (file) => {
+//     if (!file) {
+//       setUploadStatus('No file selected');
+//       return;
+//     }
+
+//     setUploadStatus('Uploading... Please wait');
+//     setLoadingUpload(true); // Show loading text
+
+//     const formData = new FormData();
+//     formData.append('profilePic', file);
+
+//     try {
+//       const response = await axios.post(
+//         `https://server-side-influencer.onrender.com/manager/${managerId}/upload-profile-pic`,
+//         formData,
+//         {
+//           headers: {
+//             "Content-Type": "multipart/form-data",
+//           },
+//         }
+//       );
+
+//       if (response.data.success) {
+//         setUploadStatus('Upload successful!');
+//         setManager((prevState) => ({
+//           ...prevState,
+//           profilePic: response.data.data.profilePic,
+//         }));
+//       } else {
+//         setUploadStatus('Upload failed.');
+//       }
+//     } catch (error) {
+//       setUploadStatus('Upload failed.');
+//       console.error('Error uploading profile picture:', error);
+//     } finally {
+//       setLoadingUpload(false); // Hide loading text
+//     }
+//   };
+
+//   const handleBackgroundImageChange = (e) => {
+//     const file = e.target.files[0];
+//     setBackgroundImage(file);
+//     handleBackgroundImageUpload(file); 
+//   };
+
+//   const handleBackgroundImageUpload = async (file) => {
+//     if (!file) {
+//       setUploadStatus('No file selected');
+//       return;
+//     }
+
+//     setUploadStatus('Uploading... Please wait');
+//     setLoadingUpload(true); // Show loading text
+
+//     const formData = new FormData();
+//     formData.append('backgroundImage', file);
+
+//     try {
+//       const response = await axios.post(
+//         `https://server-side-influencer.onrender.com/manager/${managerId}/upload-background-image`,
+//         formData,
+//         {
+//           headers: {
+//             "Content-Type": "multipart/form-data",
+//           },
+//         }
+//       );
+
+//       if (response.data.success) {
+//         setUploadStatus('Upload successful!');
+//         setManager((prevState) => ({
+//           ...prevState,
+//           backgroundImage: response.data.data.backgroundImage,
+//         }));
+//       } else {
+//         setUploadStatus('Upload failed.');
+//       }
+//     } catch (error) {
+//       setUploadStatus('Upload failed.');
+//       console.error('Error uploading background image:', error);
+//     } finally {
+//       setLoadingUpload(false); // Hide loading text
+//     }
+//   };
+
 //   if (loading) {
-//     return <div>Loading...</div>; // Show loading state
+//     return (
+//       <div className="h-screen flex justify-center items-center">
+//         {/* Full Screen Spinner */}
+//         <CircularProgress size={100} color="primary" />
+//       </div>
+//     );
 //   }
 
 //   if (error) {
-//     return <div>Error: {error}</div>; // Show error if fetching fails
+//     return <div>Error: {error}</div>; 
 //   }
 
 //   return (
 //     <div className="h-screen flex">
-//       {/* Navbar positioned on the left */}
-//       <div className="w-1/6 bg--800 text-white">
-//         <Navbar />
-//       </div>
-      
-//       {/* Main content area */}
 //       <div className="flex-1 bg-white flex flex-col justify-center items-center">
-//         {/* ManagerHeader with 100% width */}
-//         <div className="w-full flex justify-center mb-4">
+//         <div className="w-full flex justify-start mb-4 p-4">
+//           {/* Back Button */}
+//           <IconButton onClick={() => navigate(-1)} className="absolute left-4 top-4">
+//             <ArrowBackIcon style={{ color: 'black' }} />
+//           </IconButton>
 //           <div className="w-full bg-white-800 text-black p-4">
 //             <ManagerHeader page="Update Profile" />
 //           </div>
 //         </div>
 
-//         {/* Main content (form) */}
-//         <div className="flex justify-center items-center w-full h-full px-4">
-//           <div className="w-full max-w-4xl p-8 bg-white shadow-lg rounded-lg">
-//             <h1 className="text-3xl font-bold text-center mb-6">Update Profile</h1>
-//             <form onSubmit={handleSubmit}>
-//               <div className="mb-4">
-//                 <label htmlFor="name" className="block text-sm font-semibold text-gray-700">Name</label>
-//                 <input
-//                   type="text"
-//                   id="name"
-//                   name="name"
-//                   value={manager.name}
-//                   onChange={handleChange}
-//                   className="w-full p-2 border border-gray-300 rounded-md"
-//                   required
-//                 />
-//               </div>
+//         <div className="w-full max-w-4xl p-8 bg-white shadow-lg rounded-lg mt-6">
+//           <h1 className="text-3xl font-bold text-center mb-6">Update Profile</h1>
+//           <form onSubmit={handleSubmit}>
+//             {/* Name Input */}
+//             <div className="mb-4">
+//               <label htmlFor="name" className="block text-sm font-semibold text-gray-700">Name</label>
+//               <input
+//                 type="text"
+//                 id="name"
+//                 name="name"
+//                 value={manager.name}
+//                 onChange={handleChange}
+//                 className="w-full p-2 border border-gray-300 rounded-md"
+//                 required
+//               />
+//             </div>
 
-//               <div className="mb-4">
-//                 <label htmlFor="email" className="block text-sm font-semibold text-gray-700">Email</label>
-//                 <input
-//                   type="email"
-//                   id="email"
-//                   name="email"
-//                   value={manager.email}
-//                   onChange={handleChange}
-//                   className="w-full p-2 border border-gray-300 rounded-md"
-//                   required
-//                 />
-//               </div>
+//             {/* Email Input */}
+//             <div className="mb-4">
+//               <label htmlFor="email" className="block text-sm font-semibold text-gray-700">Email</label>
+//               <input
+//                 type="email"
+//                 id="email"
+//                 name="email"
+//                 value={manager.email}
+//                 onChange={handleChange}
+//                 className="w-full p-2 border border-gray-300 rounded-md"
+//                 required
+//               />
+//             </div>
 
-//               <div className="mb-4">
-//                 <label htmlFor="phone" className="block text-sm font-semibold text-gray-700">Phone</label>
-//                 <input
-//                   type="text"
-//                   id="phone"
-//                   name="phone"
-//                   value={manager.phone}
-//                   onChange={handleChange}
-//                   className="w-full p-2 border border-gray-300 rounded-md"
-//                   required
-//                 />
-//               </div>
+//             {/* Phone Input */}
+//             <div className="mb-4">
+//               <label htmlFor="phone" className="block text-sm font-semibold text-gray-700">Phone</label>
+//               <input
+//                 type="text"
+//                 id="phone"
+//                 name="phone"
+//                 value={manager.phone}
+//                 onChange={handleChange}
+//                 className="w-full p-2 border border-gray-300 rounded-md"
+//                 required
+//               />
+//             </div>
 
-//               <div className="mb-4">
-//                 <label htmlFor="bio" className="block text-sm font-semibold text-gray-700">Bio</label>
-//                 <textarea
-//                   id="bio"
-//                   name="bio"
-//                   value={manager.bio}
-//                   onChange={handleChange}
-//                   className="w-full p-2 border border-gray-300 rounded-md"
-//                   rows="4"
-//                 />
-//               </div>
+//             {/* Bio Input */}
+//             <div className="mb-4">
+//               <label htmlFor="bio" className="block text-sm font-semibold text-gray-700">Bio</label>
+//               <textarea
+//                 id="bio"
+//                 name="bio"
+//                 value={manager.bio}
+//                 onChange={handleChange}
+//                 className="w-full p-2 border border-gray-300 rounded-md"
+//                 rows="4"
+//               />
+//             </div>
 
-//               <div className="mb-4">
-//                 <label htmlFor="about" className="block text-sm font-semibold text-gray-700">About</label>
-//                 <textarea
-//                   id="about"
-//                   name="about"
-//                   value={manager.about}
-//                   onChange={handleChange}
-//                   className="w-full p-2 border border-gray-300 rounded-md"
-//                   rows="4"
-//                 />
-//               </div>
+//             {/* About Input */}
+//             <div className="mb-4">
+//               <label htmlFor="about" className="block text-sm font-semibold text-gray-700">About</label>
+//               <textarea
+//                 id="about"
+//                 name="about"
+//                 value={manager.about}
+//                 onChange={handleChange}
+//                 className="w-full p-2 border border-gray-300 rounded-md"
+//                 rows="4"
+//               />
+//             </div>
 
-//               <div className="text-center">
-//                 <button
-//                   type="submit"
-//                   disabled={isSubmitting}
-//                   className="bg-blue-500 text-white p-2 rounded-md w-full mt-4"
-//                 >
-//                   {isSubmitting ? 'Updating...' : 'Update Profile'}
-//                 </button>
-//               </div>
-//             </form>
-//           </div>
+//             {/* Profile Picture Upload */}
+//             <div className="mb-4">
+//               <label htmlFor="profilePic" className="block text-sm font-semibold text-gray-700">Upload Profile Picture</label>
+//               <input
+//                 type="file"
+//                 id="profilePic"
+//                 name="profilePic"
+//                 accept="image/*"
+//                 onChange={handleProfilePicChange}
+//                 className="w-full p-2 border border-gray-300 rounded-md"
+//               />
+//               {loadingUpload && <p className="mt-2 text-sm text-blue-500">{uploadStatus}</p>}
+//             </div>
+
+//             {/* Background Image Upload */}
+//             <div className="mb-4">
+//               <label htmlFor="backgroundImage" className="block text-sm font-semibold text-gray-700">Upload Background Image</label>
+//               <input
+//                 type="file"
+//                 id="backgroundImage"
+//                 name="backgroundImage"
+//                 accept="image/*"
+//                 onChange={handleBackgroundImageChange}
+//                 className="w-full p-2 border border-gray-300 rounded-md"
+//               />
+//               {loadingUpload && <p className="mt-2 text-sm text-blue-500">{uploadStatus}</p>}
+//             </div>
+
+//             {/* Submit Button */}
+//             <div className="text-center">
+//               <button
+//                 type="submit"
+//                 disabled={isSubmitting}
+//                 className="bg-blue-500 text-white p-2 rounded-md w-full mt-4"
+//               >
+//                 {isSubmitting ? 'Updating...' : 'Update Profile'}
+//               </button>
+//             </div>
+//           </form>
 //         </div>
 //       </div>
 //     </div>
@@ -215,56 +340,53 @@
 
 
 
-
-
-
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import ManagerHeader from './ManagerHeader'; // Ensure this import exists in your code
-import Navbar from './Navbar'; // Ensure this import exists in your code
+import ManagerHeader from './ManagerHeader';
+import Navbar from './Navbar';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'; // Import the ArrowBack icon
+import { IconButton, CircularProgress } from '@mui/material'; // Import CircularProgress for the spinner
 
 const UpdateProfile = () => {
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const navigate = useNavigate();
   const [manager, setManager] = useState({
     name: '',
     email: '',
     phone: '',
     bio: '',
     about: '',
-    profilePic: '', // Add a field for the profile picture URL
-    backgroundImage: '', // Add a field for the background image URL
+    profilePic: '',
+    backgroundImage: '',
   });
-  const [loading, setLoading] = useState(true); // Loading state for the initial fetch
-  const [error, setError] = useState(null); // Error state for handling errors
-  const [isSubmitting, setIsSubmitting] = useState(false); // To handle form submission state
-  const [profilePic, setProfilePic] = useState(null); // State for profile picture file
-  const [backgroundImage, setBackgroundImage] = useState(null); // State for background image file
-  const [uploadStatus, setUploadStatus] = useState(''); // State for upload status
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [profilePic, setProfilePic] = useState(null);
+  const [backgroundImage, setBackgroundImage] = useState(null);
+  const [uploadStatus, setUploadStatus] = useState('');
+  const [loadingUpload, setLoadingUpload] = useState(false); // Add loadingUpload state
 
-  const managerId = localStorage.getItem('managerID'); // Get manager ID from localStorage
+  const managerId = localStorage.getItem('managerID');
 
-  // Token check and redirect if no token
   useEffect(() => {
     const token = localStorage.getItem("mangertoken");
     if (!token) {
-      // Redirect to login page if no token is found
       navigate("/ManagerLogin");
     } else {
-      // Fetch manager data if token is present
       const fetchManagerData = async () => {
         try {
           const response = await axios.get(`https://server-side-influencer-1.onrender.com/manager/managers/${managerId}`);
           if (response.data.success) {
-            setManager(response.data.data); // Set the manager's profile data
+            setManager(response.data.data);
           } else {
             setError('Manager not found');
           }
         } catch (err) {
           setError('Error fetching manager data');
         } finally {
-          setLoading(false); // Set loading state to false after fetching data
+          setLoading(false);
         }
       };
 
@@ -272,12 +394,9 @@ const UpdateProfile = () => {
     }
   }, [managerId, navigate]);
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    setIsSubmitting(true); // Set submitting state to true
-
+    setIsSubmitting(true);
     try {
       const response = await axios.put(`https://server-side-influencer-1.onrender.com/manager/managers/${managerId}`, {
         name: manager.name,
@@ -310,11 +429,10 @@ const UpdateProfile = () => {
         confirmButtonText: 'OK',
       });
     } finally {
-      setIsSubmitting(false); // Reset the submitting state
+      setIsSubmitting(false);
     }
   };
 
-  // Handle input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setManager((prevState) => ({
@@ -323,21 +441,20 @@ const UpdateProfile = () => {
     }));
   };
 
-  // Handle Profile Picture Change
   const handleProfilePicChange = (e) => {
     const file = e.target.files[0];
     setProfilePic(file);
-    handleProfilePicUpload(file); // Automatically upload the image when selected
+    handleProfilePicUpload(file); 
   };
 
-  // Handle Profile Picture Upload
   const handleProfilePicUpload = async (file) => {
     if (!file) {
       setUploadStatus('No file selected');
       return;
     }
 
-    setUploadStatus('Uploading... Please wait'); // Set the status to "Uploading..."
+    setUploadStatus('Uploading... Please wait');
+    setLoadingUpload(true); // Show loading text
 
     const formData = new FormData();
     formData.append('profilePic', file);
@@ -354,43 +471,43 @@ const UpdateProfile = () => {
       );
 
       if (response.data.success) {
-        setUploadStatus('Upload successful!'); // If upload is successful
-        // Optionally, update the profile picture URL in the manager's profile
+        setUploadStatus('Upload successful!');
         setManager((prevState) => ({
           ...prevState,
           profilePic: response.data.data.profilePic,
         }));
       } else {
-        setUploadStatus('Upload failed.'); // If upload failed
+        setUploadStatus('Upload failed.');
       }
     } catch (error) {
-      setUploadStatus('Upload failed.'); // If there is an error
+      setUploadStatus('Upload failed.');
       console.error('Error uploading profile picture:', error);
+    } finally {
+      setLoadingUpload(false); // Hide loading text
     }
   };
 
-  // Handle Background Image Change
   const handleBackgroundImageChange = (e) => {
     const file = e.target.files[0];
     setBackgroundImage(file);
-    handleBackgroundImageUpload(file); // Automatically upload the background image when selected
+    handleBackgroundImageUpload(file); 
   };
 
-  // Handle Background Image Upload
   const handleBackgroundImageUpload = async (file) => {
     if (!file) {
       setUploadStatus('No file selected');
       return;
     }
 
-    setUploadStatus('Uploading... Please wait'); // Set the status to "Uploading..."
+    setUploadStatus('Uploading... Please wait');
+    setLoadingUpload(true); // Show loading text
 
     const formData = new FormData();
     formData.append('backgroundImage', file);
 
     try {
       const response = await axios.post(
-        `https://server-side-influencer.onrender.com/manager/${managerId}/upload-background-image`,
+        `https://server-side-influencer-1.onrender.com/manager/${managerId}/upload-background-image`,
         formData,
         {
           headers: {
@@ -400,49 +517,56 @@ const UpdateProfile = () => {
       );
 
       if (response.data.success) {
-        setUploadStatus('Upload successful!'); // If upload is successful
-        // Optionally, update the background image URL in the manager's profile
+        setUploadStatus('Upload successful!');
         setManager((prevState) => ({
           ...prevState,
           backgroundImage: response.data.data.backgroundImage,
         }));
       } else {
-        setUploadStatus('Upload failed.'); // If upload failed
+        setUploadStatus('Upload failed.');
       }
     } catch (error) {
-      setUploadStatus('Upload failed.'); // If there is an error
+      setUploadStatus('Upload failed.');
       console.error('Error uploading background image:', error);
+    } finally {
+      setLoadingUpload(false); // Hide loading text
     }
   };
 
   if (loading) {
-    return <div>Loading...</div>; // Show loading state
+    return (
+      <div className="h-screen flex justify-center items-center">
+        {/* Full Screen Spinner */}
+        <CircularProgress size={100} color="primary" />
+      </div>
+    );
   }
 
   if (error) {
-    return <div>Error: {error}</div>; // Show error if fetching failsssssssssss
+    return <div>Error: {error}</div>; 
   }
 
   return (
     <div className="h-screen flex">
-      {/* Navbar positioned on the left */}
-      {/* <div className="w-1/6 bg--800 text-white">
-        <Navbar />
-      </div> */}
-
-      {/* Main content area */}
       <div className="flex-1 bg-white flex flex-col justify-center items-center">
-        <div className="w-full flex justify-center mb-4">
+        <div className="w-full flex justify-start mb-4 p-4 relative">
+          {/* Back Button inside a white background button */}
+          <button 
+            onClick={() => navigate(-1)} 
+            className="bg-white border border-gray-300 p-2 rounded-full shadow-md flex items-center justify-center space-x-2"
+          >
+            <ArrowBackIcon style={{ color: '#003366' }} /> {/* Very Dark Blue Color */}
+            <span className="text-black">Back</span>
+          </button>
           <div className="w-full bg-white-800 text-black p-4">
             <ManagerHeader page="Update Profile" />
           </div>
         </div>
 
-        {/* Form to update profile information */}
         <div className="w-full max-w-4xl p-8 bg-white shadow-lg rounded-lg mt-6">
           <h1 className="text-3xl font-bold text-center mb-6">Update Profile</h1>
           <form onSubmit={handleSubmit}>
-            {/* Name */}
+            {/* Name Input */}
             <div className="mb-4">
               <label htmlFor="name" className="block text-sm font-semibold text-gray-700">Name</label>
               <input
@@ -456,7 +580,7 @@ const UpdateProfile = () => {
               />
             </div>
 
-            {/* Email */}
+            {/* Email Input */}
             <div className="mb-4">
               <label htmlFor="email" className="block text-sm font-semibold text-gray-700">Email</label>
               <input
@@ -470,7 +594,7 @@ const UpdateProfile = () => {
               />
             </div>
 
-            {/* Phone */}
+            {/* Phone Input */}
             <div className="mb-4">
               <label htmlFor="phone" className="block text-sm font-semibold text-gray-700">Phone</label>
               <input
@@ -484,7 +608,7 @@ const UpdateProfile = () => {
               />
             </div>
 
-            {/* Bio */}
+            {/* Bio Input */}
             <div className="mb-4">
               <label htmlFor="bio" className="block text-sm font-semibold text-gray-700">Bio</label>
               <textarea
@@ -497,7 +621,7 @@ const UpdateProfile = () => {
               />
             </div>
 
-            {/* About */}
+            {/* About Input */}
             <div className="mb-4">
               <label htmlFor="about" className="block text-sm font-semibold text-gray-700">About</label>
               <textarea
@@ -521,7 +645,7 @@ const UpdateProfile = () => {
                 onChange={handleProfilePicChange}
                 className="w-full p-2 border border-gray-300 rounded-md"
               />
-              {uploadStatus && <p className="mt-2 text-sm">{uploadStatus}</p>}
+              {loadingUpload && <p className="mt-2 text-sm text-blue-500">{uploadStatus}</p>}
             </div>
 
             {/* Background Image Upload */}
@@ -535,7 +659,7 @@ const UpdateProfile = () => {
                 onChange={handleBackgroundImageChange}
                 className="w-full p-2 border border-gray-300 rounded-md"
               />
-              {uploadStatus && <p className="mt-2 text-sm">{uploadStatus}</p>}
+              {loadingUpload && <p className="mt-2 text-sm text-blue-500">{uploadStatus}</p>}
             </div>
 
             {/* Submit Button */}
