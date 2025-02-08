@@ -154,7 +154,24 @@ const InfluencerHome = () => {
             {/* When no cards are present, show a "No Data" message */}
             {brandCard.length === 0 && (
               <p className="text-center text-xl text-gray-500">No Data Available</p>
+
+
+
             )}
+
+
+
+
+
+{/* appliacnt analaytic    :    http://localhost:8000/influencer/influencersgetCampaignAnalytics
+
+
+
+
+{
+  "applicantRealId": "67a76fa89e394e69b9907742",
+  "campaignId": "67a49891318f14e56795d3f0"
+} */}
           </div>
         )}
       </div>
