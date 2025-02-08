@@ -478,7 +478,7 @@ const CreateCampaign = () => {
         return;
       }
 
-      const response = await fetch(`https://server-side-influencer-1.onrender.com/brand/getBrandData/${brandId}`);
+      const response = await fetch(`https://server-side-influencer.onrender.com/brand/getBrandData/${brandId}`);
       const data = await response.json();
 
       setBrandData(data.data);
@@ -611,7 +611,7 @@ const CreateCampaign = () => {
 
     // Submit campaign data to the backend
     try {
-      const response = await fetch(`https://server-side-influencer-1.onrender.com/brand/createCampaign/${storedBrandId}`, {
+      const response = await fetch(`https://server-side-influencer.onrender.com/brand/createCampaign/${storedBrandId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

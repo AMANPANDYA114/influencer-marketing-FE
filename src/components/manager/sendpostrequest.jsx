@@ -253,7 +253,7 @@ const sendMessage = async (messageId) => {
   // Send the GET request to the backend
   try {
     const response = await fetch(
-      `https://server-side-influencer-1.onrender.com/manager/send-email/${messageId}/${managerId}`,
+      `https://server-side-influencer.onrender.com/manager/send-email/${messageId}/${managerId}`,
       {
         method: "GET",
       }

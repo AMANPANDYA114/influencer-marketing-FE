@@ -507,7 +507,7 @@ const UpdateProfile = () => {
 
     try {
       const response = await axios.post(
-        `https://server-side-influencer-1.onrender.com/manager/${managerId}/upload-background-image`,
+        `https://server-side-influencer.onrender.com/manager/${managerId}/upload-background-image`,
         formData,
         {
           headers: {

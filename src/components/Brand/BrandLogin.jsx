@@ -209,7 +209,7 @@ const BrandLogin = () => {
     e.preventDefault();
 
     const { email, password } = userdata; // Use 'email' here instead of 'username'
-    const res = await fetch('https://server-side-influencer-1.onrender.com/brand/brandlogin', {
+    const res = await fetch('https://server-side-influencer.onrender.com/brand/brandlogin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -219,7 +219,8 @@ const BrandLogin = () => {
         password,
       }),
     });
-
+    
+    
     const data = await res.json();
     if (res.status === 200) {
       toast.success(data.message);

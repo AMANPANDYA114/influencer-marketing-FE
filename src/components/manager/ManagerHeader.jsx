@@ -213,7 +213,7 @@ const ManagerHeader = (props) => {
 
     requestNotificationPermission();
 
-    const socket = io("https://server-side-influencer-1.onrender.com");
+    const socket = io("https://server-side-influencer.onrender.com");
 
     socket.on("newMessage", (data) => {
       console.log("Notification received:", data);

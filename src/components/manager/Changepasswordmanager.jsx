@@ -141,7 +141,7 @@ const ChangePasswordManage = () => {
 
     try {
       // Send the password change request using PUT method
-      const response = await fetch('https://server-side-influencer-1.onrender.com/manager/change-password', {
+      const response = await fetch('https://server-side-influencer.onrender.com/manager/change-password', {
         method: 'PUT', // Changed to PUT method
         headers: {
           'Content-Type': 'application/json',

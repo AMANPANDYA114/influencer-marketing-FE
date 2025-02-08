@@ -99,11 +99,8 @@ const NotificationInfluencer = () => {
   }, [location.state]);
 
   return (
-    <div className="flex relative">
-      {/* Navbar positioned on the left side of the screen */}
-      <div className="fixed top-0 left-0 h-full text-white p-4">
-        <Navbar /> {/* Display the Navbar on the left */}
-      </div>
+    <div className="flex h-screen">
+      <Navbar /> {/* Navbar stays fixed on the left */}
 
       {/* Notification content with space on the left to avoid overlap with Navbar */}
       <div className="ml-1/4 p-4 w-full">

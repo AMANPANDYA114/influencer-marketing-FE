@@ -198,7 +198,7 @@ const Applicant = () => {
   useEffect(() => {
     const fetchApplicants = async () => {
       try {
-        const response = await fetch(`https://server-side-influencer-1.onrender.com/brand/applicants/${campaignId}`);
+        const response = await fetch(`https://server-side-influencer.onrender.com/brand/applicants/${campaignId}`);
         const data = await response.json();
         if (data.success) {
           setApplicants(data.data);

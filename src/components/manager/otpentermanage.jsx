@@ -32,7 +32,7 @@ const OtpEnterManage = () => {
     setError('');
 
     try {
-      const response = await fetch('https://server-side-influencer-1.onrender.com/manager/verify-otp', {
+      const response = await fetch('https://server-side-influencer.onrender.com/manager/verify-otp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

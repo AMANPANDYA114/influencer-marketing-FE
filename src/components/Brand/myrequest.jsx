@@ -133,7 +133,7 @@ const MyRequest = () => {
     const fetchMessages = async () => {
       try {
         const brandId = localStorage.getItem("brandID");
-        const response = await fetch(`https://server-side-influencer-1.onrender.com/brand/${brandId}/messages`);
+        const response = await fetch(`https://server-side-influencer.onrender.com/brand/${brandId}/messages`);
         const result = await response.json();
 
         if (result.success) {

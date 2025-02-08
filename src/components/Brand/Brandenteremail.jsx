@@ -23,7 +23,7 @@ const BrandEnterEmail = () => {
     setError('');
 
     try {
-      const response = await fetch('https://server-side-influencer-1.onrender.com/brand/generate-otp', {
+      const response = await fetch('https://server-side-influencer.onrender.com/brand/generate-otp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

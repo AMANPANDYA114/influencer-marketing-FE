@@ -23,7 +23,7 @@ const fetchInfluencers = async () => {
       toast.error('brand ID not found in localStorage');
       return;
     }
-    const response = await fetch(`https://server-side-influencer-1.onrender.com/brand/getInfluencers/${brandId}`);
+    const response = await fetch(`https://server-side-influencer.onrender.com/brand/getInfluencers/${brandId}`);
     const data = await response.json();
     setInfluencers(data.influencers || []); // Ensure influencers is always an array
   } catch (error) {

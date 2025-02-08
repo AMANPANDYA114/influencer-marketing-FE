@@ -216,7 +216,7 @@ const PendingRequest = () => {
 
   // Fetch data to display in the profile cards
   useEffect(() => {
-    fetch("https://server-side-influencer-1.onrender.com/brand/messages")
+    fetch("https://server-side-influencer.onrender.com/brand/messages")
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {

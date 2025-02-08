@@ -30,7 +30,7 @@ const fetchInfluencers = async () => {
       toast.error('Manager ID not found in localStorage');
       return;
     }
-    const response = await fetch(`https://server-side-influencer-1.onrender.com/manager/influencers/${managerId}`);
+    const response = await fetch(`https://server-side-influencer.onrender.com/manager/influencers/${managerId}`);
     const data = await response.json();
     setInfluencers(data.influencers || []); // Ensure influencers is always an array
   } catch (error) {
@@ -81,7 +81,7 @@ const fetchInfluencers = async () => {
         toast.error('Manager ID not found in localStorage');
         return;
       }
-      const response = await fetch(`https://server-side-influencer-1.onrender.com/manager/influencers/${managerId }/${influencerId}`, {
+      const response = await fetch(`https://server-side-influencer.onrender.com/manager/influencers/${managerId }/${influencerId}`, {
         method: "DELETE",
       });
       if (response.ok) {

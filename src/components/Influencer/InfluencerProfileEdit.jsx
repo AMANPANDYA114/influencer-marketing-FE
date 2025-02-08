@@ -110,7 +110,7 @@ const InfluencerProfileEdit = () => {
   // Fetch Influencer Data on Component Mount
   useEffect(() => {
     if (influencerId) {
-      fetch(`https://server-side-influencer.vercel.app/influencer/getInfluencer/${influencerId}`)
+      fetch(`https://server-side-influencer.onrender.com/influencer/getInfluencer/${influencerId}`)
         .then((response) => response.json())
         .then((data) => {
           if (data && data.data) {

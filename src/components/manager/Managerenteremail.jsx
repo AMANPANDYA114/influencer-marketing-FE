@@ -23,7 +23,7 @@ const ManageEnterEmail = () => {
     setError('');
 
     try {
-      const response = await fetch('https://server-side-influencer-1.onrender.com/manager/generate-otp', {
+      const response = await fetch('https://server-side-influencer.onrender.com/manager/generate-otp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

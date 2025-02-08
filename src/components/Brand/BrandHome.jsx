@@ -704,7 +704,7 @@ const  BrandHome= () => {
   // Fetch API data
   const fetchData = async () => {
     try {
-      const response = await fetch('https://server-side-influencer-1.onrender.com/brand/allcsvinfluencers');
+      const response = await fetch('https://server-side-influencer.onrender.com/brand/allcsvinfluencers');
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }
@@ -924,7 +924,7 @@ const  BrandHome= () => {
         return;
       }
 
-      const response = await fetch(`https://server-side-influencer-1.onrender.com/brand/addInfluencer/${brandId}/${_id}`, {
+      const response = await fetch(`https://server-side-influencer.onrender.com/brand/addInfluencer/${brandId}/${_id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
