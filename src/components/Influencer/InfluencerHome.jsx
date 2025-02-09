@@ -135,7 +135,7 @@ const InfluencerHome = () => {
     <div className="flex h-screen">
       <Navbar /> {/* Navbar stays fixed on the left */}
       <div className="ml-14 w-full flex flex-col flex-grow">
-        <InfluencerHeader page="Home" /> {/* InfluencerHeader for page title */}
+        <InfluencerHeader page="analytics" /> {/* InfluencerHeader for page title */}
 
         {/* Show loader when fetching data */}
         {loading ? (

@@ -250,7 +250,7 @@ const Sidebar = ({ notificationCount }) => {
   };
 
   const menus = [
-    { name: "Home", link: "/InfluencerHome", icon: <FaHome className="w-5 h-5 text-blue-600" /> },
+    { name: "veiw analytics", link: "/InfluencerHome", icon: <FaHome className="w-5 h-5 text-blue-600" /> },
     { name: "Live campaigns", link: "/InfluencerHistory", icon: <FaBullhorn className="w-5 h-5 text-blue-600" /> },
     { name: "My campaigns", link: "/myapplications", icon: <FaBullhorn className="w-5 h-5 text-blue-600" /> },
     { name: "Messages", link: "/influenecermessage", icon: <FaEnvelope className="w-5 h-5 text-blue-600" /> },
