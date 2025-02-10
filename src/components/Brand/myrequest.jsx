@@ -495,7 +495,7 @@ const MyRequest = () => {
 
       <div className="flex-1 ml-10 p-6">
         <ToastContainer />
-        <h1 className="text-center mb-6 text-3xl font-bold">My REQUESTS</h1>
+        <h1 className="text-center mb-6 text-3xl font-bold">My Requirements</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {currentCards.length > 0 ? (
@@ -585,7 +585,7 @@ const MyRequest = () => {
 
       {/* Modal Form for Editing Message */}
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Edit Request</DialogTitle>
+        <DialogTitle>Edit your requirement</DialogTitle>
         <DialogContent>
           <TextField
             label="Message"

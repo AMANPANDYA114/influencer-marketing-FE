@@ -355,7 +355,7 @@ const BrandPendingRequest = () => {
           onClick={() => navigate('/myrequest')} // Navigate to a specific page, replace '/my-request' with the desired route
           className="absolute top-[12%] right-5 bg-blue-500 text-white py-2 px-4 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
-          My Request
+          My Requirements
         </button>
 
         {/* Form Section */}
