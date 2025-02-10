@@ -154,10 +154,10 @@ const ManagerProfile = () => {
 
         <div className="flex flex-col items-center justify-center w-full mt-16">
           {/* Dynamically set background image */}
-          <div className="w-full h-64 bg-cover bg-center relative" style={{ backgroundImage: `url(${manager?.backgroundImage || 'https://i.postimg.cc/rwYFBbkT/agency.jpg'})` }}>
+          <div className="w-full h-64 bg-cover bg-center relative" style={{ backgroundImage: `url(${manager?.backgroundImage || 'https://i.postimg.cc/QM0NNSx2/dummyd.png'})` }}>
             {/* Dynamically set profile picture */}
             <img 
-              src={manager?.profilePic || "https://i.postimg.cc/rwYFBbkT/agency.jpg"} 
+              src={manager?.profilePic || "https://i.postimg.cc/brqZVdrP/dummypic.jpg"} 
               alt="Profile" 
               className="w-24 h-24 rounded-full border-4 border-white absolute left-1/2 transform -translate-x-1/2 bottom-[-40px]" 
             />
@@ -169,7 +169,8 @@ const ManagerProfile = () => {
               <Edit />
             </div>
           </div>
-          <div className="w-full max-w-3xl bg-white rounded-lg border-2 shadow-xl p-6 mt-16 mx-4">
+          <div className="w-full max-w-3xl bg-white rounded-lg border-2 shadow-xl p-6 mx-4" style={{ marginTop: '70px' }}>
+
             <h4 className="text-xl text-gray-900 font-bold mb-4 text-center">Personal Information</h4>
             <ul className="text-gray-700 space-y-2">
               <li className="flex justify-between border-b pb-2">

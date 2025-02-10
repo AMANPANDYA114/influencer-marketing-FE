@@ -253,7 +253,7 @@ const Sidebar = ({ notificationCount }) => {
     { name: "veiw analytics", link: "/InfluencerHome", icon: <FaHome className="w-5 h-5 text-blue-600" /> },
     { name: "Live campaigns", link: "/InfluencerHistory", icon: <FaBullhorn className="w-5 h-5 text-blue-600" /> },
     { name: "My campaigns", link: "/myapplications", icon: <FaBullhorn className="w-5 h-5 text-blue-600" /> },
-    { name: "Messages", link: "/influenecermessage", icon: <FaEnvelope className="w-5 h-5 text-blue-600" /> },
+    { name: "Invitations", link: "/influenecermessage", icon: <FaEnvelope className="w-5 h-5 text-blue-600" /> },
     { name: "Notifications", link: "/notifyinflueencers", icon: <FaBell className="w-5 h-5 text-blue-600" /> },
     { name: "Profile", link: "/InfluencerProfile", icon: <FaUserCircle className="w-5 h-5 text-blue-600" /> },
   ];

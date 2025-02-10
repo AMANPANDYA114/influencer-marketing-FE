@@ -262,7 +262,14 @@ const ManagerHeader = (props) => {
         <div className="flex items-center space-x-4">
           <div className="">
             {/* Display profile picture dynamically, with a fallback to a dummy image */}
-            <img className="w-10 h-10 rounded-full group" src={managerProfilePic} alt="DP" />
+            {/* <img className="w-10 h-10 rounded-full group" src={managerProfilePic} alt="DP" /> */}
+
+            <img 
+  className="w-10 h-10 rounded-full group" 
+  src={managerProfilePic ? managerProfilePic : "https://i.postimg.cc/brqZVdrP/dummypic.jpg"} 
+  alt="DP" 
+/>
+
           </div>
           <div className="font-medium">
             <div>Hi, {managerName || 'Agency'}</div>

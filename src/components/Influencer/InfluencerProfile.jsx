@@ -354,10 +354,15 @@ const InfluencerProfile = () => {
         <InfluencerHeader page="Profile" />
 
         <div className="relative h-96 w-full bg-gray-200 flex justify-center items-center">
-          <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${userdata.profilepicinfluet2})` }}></div>
+          <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${userdata.profilepicinfluet2 || "https://i.postimg.cc/QM0NNSx2/dummyd.png"})` }}></div>
           <div className="absolute inset-0 bg-black bg-opacity-30"></div>
           <div className="absolute bottom-[-50px] flex flex-col items-center relative">
-            <img className="w-28 h-28 rounded-full border-4 border-white shadow-lg object-cover" src={userdata.profilepicinfluet} alt="Profile" />
+          <img 
+      className="w-28 h-28 rounded-full border-4 border-white shadow-lg object-cover" 
+      src={userdata.profilepicinfluet || "https://i.postimg.cc/brqZVdrP/dummypic.jpg"} 
+      alt="Profile"
+    />
+
           <a href="/InfluencerProfileEdit" className="absolute bottom-0 right-0 bg-white p-1 rounded-full shadow-md cursor-pointer">
             <EditIcon className="text-gray-600" />
           </a>
@@ -367,7 +372,7 @@ const InfluencerProfile = () => {
 
    {/*p */}
    <div 
-  style={{ marginTop: '200px' }}   
+  style={{ marginTop: '80px' }}   
   className="px-8 py-12 bg-white rounded-t-2xl shadow-lg text-center w-3/4 mx-auto"
 >
           <div className="grid grid-cols-2 gap-4 text-left justify-center mx-auto w-full max-w-lg">
