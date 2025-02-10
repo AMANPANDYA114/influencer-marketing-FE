@@ -141,7 +141,9 @@
 
 
 
-import React from 'react';
+
+
+import React, { useState } from 'react';
 import Navbar from "./Navbar"; // Assuming Navbar is a separate component
 import BrandHeader from "./BrandHeader"; // Assuming BrandHeader is a separate component
 
@@ -150,29 +152,81 @@ const MessageBox = () => {
     {
       profileImage: 'https://randomuser.me/api/portraits/men/1.jpg',
       name: 'John Doe',
-      message: 'Hello, how are you?',
     },
     {
       profileImage: 'https://randomuser.me/api/portraits/women/2.jpg',
       name: 'Jane Smith',
-      message: 'Hi, I hope you are doing well!',
     },
     {
       profileImage: 'https://randomuser.me/api/portraits/men/3.jpg',
       name: 'Alex Johnson',
-      message: 'Good morning! How’s everything?',
     },
     {
       profileImage: 'https://randomuser.me/api/portraits/women/4.jpg',
       name: 'Emily Davis',
-      message: 'It’s great to see you!',
     },
     {
       profileImage: 'https://randomuser.me/api/portraits/men/5.jpg',
       name: 'Michael Brown',
-      message: 'What’s up? Long time no see!',
+    },
+    {
+      profileImage: 'https://randomuser.me/api/portraits/men/6.jpg',
+      name: 'David Wilson',
+    },
+    {
+      profileImage: 'https://randomuser.me/api/portraits/women/7.jpg',
+      name: 'Sarah Lee',
+    },
+    {
+      profileImage: 'https://randomuser.me/api/portraits/men/8.jpg',
+      name: 'James Parker',
+    },
+    {
+      profileImage: 'https://randomuser.me/api/portraits/women/9.jpg',
+      name: 'Linda Adams',
+    },
+    {
+      profileImage: 'https://randomuser.me/api/portraits/men/10.jpg',
+      name: 'Robert Green',
     },
   ];
+
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 5;
+
+  // Calculate the indexes of the users to be shown on the current page
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+
+  // Calculate total number of pages
+  const totalPages = Math.ceil(users.length / usersPerPage);
+
+  // Handle page changes
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const goToPage = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
+
+  // Generate page numbers
+  const pageNumbers = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(i);
+  }
 
   return (
     <div className="flex">
@@ -185,10 +239,7 @@ const MessageBox = () => {
         <BrandHeader page="Messages" />
 
         {/* Heading for Influencers to Connect with Brands */}
-        <div style={{
-          textAlign: 'center',
-          marginBottom: '30px',
-        }}>
+        <div style={{ textAlign: 'center', marginBottom: '30px' }}>
           <h1 style={{
             fontSize: '17px',
             fontWeight: '700',
@@ -197,7 +248,7 @@ const MessageBox = () => {
             letterSpacing: '2px',
             padding: '20px 0',
           }}>
-            Launch Your Powerful Brand Campaign and Connect with Influencers!
+            Start Building Your Brand Campaign and Invite Influencers for Maximum Impact!
           </h1>
         </div>
 
@@ -207,7 +258,7 @@ const MessageBox = () => {
           flexDirection: 'column',
           gap: '15px',
         }}>
-          {users.map((user, index) => (
+          {currentUsers.map((user, index) => (
             <div key={index} style={{
               display: 'flex',
               flexDirection: 'column',
@@ -250,10 +301,52 @@ const MessageBox = () => {
                   border: 'none',
                   borderRadius: '4px',
                   cursor: 'pointer',
-                }}>Message</button>
+                }}>Invite</button>
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Pagination Controls */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+          <button onClick={prevPage} style={{
+            padding: '10px 20px',
+            backgroundColor: '#007BFF',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            marginRight: '10px',
+          }} disabled={currentPage === 1}>Previous</button>
+
+          {/* Page Numbers */}
+          {pageNumbers.map((number) => (
+            <button
+              key={number}
+              onClick={() => goToPage(number)}
+              style={{
+                padding: '10px 20px',
+                backgroundColor: currentPage === number ? '#0056b3' : '#007BFF',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                margin: '0 5px',
+              }}
+            >
+              {number}
+            </button>
+          ))}
+
+          <button onClick={nextPage} style={{
+            padding: '10px 20px',
+            backgroundColor: '#007BFF',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            marginLeft: '10px',
+          }} disabled={currentPage === totalPages}>Next</button>
         </div>
       </div>
     </div>

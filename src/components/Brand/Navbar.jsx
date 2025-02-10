@@ -785,12 +785,12 @@ const Sidebar = () => {
   const menus = [
     { name: "Home", link: "/BrandHome", icon: HomeIcon },
     { name: "Add Requirements", link: "/BrandPendingRequest", icon: HourglassEmptyIcon },
-    { name: "Influencers Comparison", link: "/compare", icon: ImportExportIcon },
-    { name: "Plan and List", link: "/BrandConsignments", icon: HandshakeIcon },
+    // { name: "Influencers Comparison", link: "/compare", icon: ImportExportIcon },
+    // { name: "Plan and List", link: "/BrandConsignments", icon: HandshakeIcon },
     { name: "Create Campaign", link: "/create", icon: HistoryIcon },
     { name: "My Campaigns", link: "/MyCampaigns", icon: HistoryIcon },
     { name: "Campaign Analytics", link: "/BrandHistory", icon: HistoryIcon },
-    { name: "Messages", link: "/messagebrand", icon: MailIcon },
+    { name: "Invite", link: "/messagebrand", icon: MailIcon },
     { name: "Profile", link: "/BrandProfile", icon: AccountCircleIcon },
     { name: "Logout", link: "#", icon: LogoutIcon, action: "logout" },
   ];
